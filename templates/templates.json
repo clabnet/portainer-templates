@@ -178,8 +178,8 @@
             "platform": "linux",
             "logo": "https://cdn.adguard.com/website/github.com/AdguardTeam/AdguardHome/adg-logo-darkbg.svg",
             "repository": {
-                "url": "https://github.com/clabnet/portainer-templates/templates/stacks/homestack",
-                "stackfile": "docker-compose.yml"
+                "url": "https://github.com/clabnet/portainer-templates",
+                "stackfile": "templates/stacks/homestack/docker-compose.yml"
             },
             "env": [
                 {
@@ -192,7 +192,7 @@
                     "name": "ADGUARD_HTTP_PORT",
                     "label": "AdGuard HTTP Port",
                     "description": "HTTP port for AdGuard Home web interface",
-                    "default": "80"
+                    "default": "8090"
                 },
                 {
                     "name": "ADGUARD_HTTPS_PORT",
