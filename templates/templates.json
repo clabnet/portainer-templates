@@ -192,7 +192,7 @@
                     "name": "ADGUARD_HTTP_PORT",
                     "label": "AdGuard HTTP Port",
                     "description": "HTTP port for AdGuard Home web interface",
-                    "default": "80"
+                    "default": "8090"
                 },
                 {
                     "name": "ADGUARD_HTTPS_PORT",
