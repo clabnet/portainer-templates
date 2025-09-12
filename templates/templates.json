@@ -225,6 +225,12 @@
                     "default": "81"
                 },
                 {
+                    "name": "DOZZLE_HTTP_PORT",
+                    "label": "Dozzle HTTP Port",
+                    "description": "HTTP port for Dozzle",
+                    "default": "9999"
+                },
+                {
                     "name": "DISABLE_IPV6",
                     "label": "Disable IPv6",
                     "description": "Disable IPv6 support (recommended for most home networks)",
