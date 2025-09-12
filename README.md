@@ -9,3 +9,11 @@ Please keep the following in mind.
 
 Detailed information about installing and using the templates and more can be found [here](https://www.technorabilia.com/portainer-app-templates-for-linuxserver-io-docker-containers/).
 
+
+
+### Tips
+
+Create network
+```
+docker network create --subnet=192.168.1.0/24 home_network
+```
