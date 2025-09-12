@@ -1,2 +1,12 @@
-# portainer-templates
-Portainer template list
+# Portainer App Templates
+
+These [Portainer App Templates](https://documentation.portainer.io/v2.0/settings/apps/) can be used to easily deploy Docker containers with predefined settings.
+
+Please keep the following in mind.
+* The templates are being generated so I cannot accept requests to add/change templates
+
+Detailed information about installing and using the templates and more can be found [here](https://www.technorabilia.com/portainer-app-templates-for-linuxserver-io-docker-containers).
+
+### Credits
+
+- [Technorabilia](https://www.technorabilia.com)
