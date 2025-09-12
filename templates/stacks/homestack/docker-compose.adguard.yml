@@ -8,7 +8,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
     ports:
       - 53:53 # DNS
-      - ${ADGUARD_HTTP_PORT:-80}:80 # Web interface (HTTP)
+      - ${ADGUARD_HTTP_PORT:-8090}:80 # Web interface (HTTP)
       - ${ADGUARD_HTTPS_PORT:-443}:443 # Web interface (HTTPS)
       - ${ADGUARD_SETUP_PORT:-3000}:3000 # Initial setup web interface
       - 853:853 # DNS over TLS
@@ -21,9 +21,9 @@ services:
       - ./adguardhome/work:/opt/adguardhome/work
       - ./adguardhome/conf:/opt/adguardhome/conf
 
-    # Environment variables (optional)
+    # Environment variables
     environment:
-      - TZ=${TZ:-Europe/Rome} # Set your timezone
+      - TZ=${TZ:-Europe/Rome}
 
     # Security options
     cap_add:
