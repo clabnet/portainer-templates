@@ -21,9 +21,9 @@ services:
       - ./adguardhome/work:/opt/adguardhome/work
       - ./adguardhome/conf:/opt/adguardhome/conf
 
-    # Environment variables (optional)
+    # Environment variables
     environment:
-      - TZ=${TZ:-Europe/Rome} # Set your timezone
+      - TZ=${TZ:-Europe/Rome}
 
     # Security options
     cap_add:
