@@ -15,5 +15,8 @@ Detailed information about installing and using the templates and more can be fo
 
 Create network
 ```
+questa crea IP statici 
 docker network create --subnet=192.168.1.0/24 home_network
+
+docker network create home_network
 ```
