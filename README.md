@@ -5,8 +5,7 @@ These [Portainer App Templates](https://documentation.portainer.io/v2.0/settings
 Please keep the following in mind.
 * The templates are being generated so I cannot accept requests to add/change templates
 
-Detailed information about installing and using the templates and more can be found [here](https://www.technorabilia.com/portainer-app-templates-for-linuxserver-io-docker-containers).
-
 ### Credits
 
-- [Technorabilia](https://www.technorabilia.com)
+Detailed information about installing and using the templates and more can be found [here](https://www.technorabilia.com/portainer-app-templates-for-linuxserver-io-docker-containers/).
+

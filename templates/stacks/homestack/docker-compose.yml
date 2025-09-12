@@ -1,0 +1,58 @@
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    hostname: adguard
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    ports:
+      - 53:53 # DNS
+      - ${ADGUARD_HTTP_PORT:-80}:80 # Web interface (HTTP)
+      - ${ADGUARD_HTTPS_PORT:-443}:443 # Web interface (HTTPS)
+      - ${ADGUARD_SETUP_PORT:-3000}:3000 # Initial setup web interface
+      - 853:853 # DNS over TLS
+      - 784:784 # DNS over QUIC
+      - 8853:8853 # DNS over QUIC
+      - 5443:5443 # DNSCrypt
+
+    # Volume mounts for persistent data
+    volumes:
+      - ./adguardhome/work:/opt/adguardhome/work
+      - ./adguardhome/conf:/opt/adguardhome/conf
+
+    # Environment variables (optional)
+    environment:
+      - TZ=${TZ:-Europe/Rome} # Set your timezone
+
+    # Security options
+    cap_add:
+      - NET_BIND_SERVICE # Allow binding to ports < 1024
+
+  nginxpm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginxpm
+    hostname: nginxpm
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    volumes:
+      - nginxpm_data:/data
+      - nginxpm_letsencrypt:/etc/letsencrypt
+    ports:
+      - ${NPM_HTTP_PORT:-8080}:80
+      - ${NPM_HTTPS_PORT:-6443}:443
+      - ${NPM_ADMIN_PORT:-81}:81
+    environment:
+      DISABLE_IPV6: ${DISABLE_IPV6:-true}
+
+networks:
+  default:
+    external: true
+    name: ${EXTERNAL_NETWORK_NAME:-home_network}
+
+volumes:
+  adguard_work:
+  adguard_conf:
+  nginxpm_data:
+  nginxpm_letsencrypt:

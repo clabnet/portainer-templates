@@ -2,7 +2,6 @@
     "version": "3",
     "templates": [
         {
-            "id": 1,
             "categories": [
                 "Proxy",
                 "Tools"
@@ -49,6 +48,205 @@
             ],
             "note": "<b>Template created by Pi-Hosted Series</b><br><b>Check our Github page: <a href=\"https://github.com/pi-hosted/pi-hosted\" target=\"_blank\">https://github.com/pi-hosted/pi-hosted</a></b><br><br><b>Official Webpage: </b><a href=\"https://nginxproxymanager.com/\" target=\"_blank\">https://nginxproxymanager.com/</a><br><b>Official Docker Documentation: </b><a href=\"https://nginxproxymanager.com/setup/\" target=\"_blank\">https://nginxproxymanager.com/setup/</a><br><h3><b>Pi-Hosted dedicated documentation: </b><a href=\"https://github.com/pi-hosted/pi-hosted/blob/master/docs/nginx_proxy_manager.md\" target=\"_blank\">nginx_proxy_manager.md</a></h3><br><br><br><b>Youtube Video: </b><a href=https://www.youtube.com/watch?v=yl2Laxbqvo8&list=PL846hFPMqg3jwkxcScD1xw2bKXrJVvarc&index=10 target=\"_blank\">Novaspirit Tech - Installing Nginx Proxy Manager on Docker</a><br><br>",
             "maintainer": " https://github.com/novaspirit/pi-hosted/"
+        },
+        {
+            "type": 3,
+            "title": "WordPress Stack",
+            "description": "A complete WordPress stack with MySQL database and phpMyAdmin for easy management",
+            "note": "This template will deploy WordPress with MySQL database. Default credentials - Username: admin, Password: change_me_please",
+            "categories": [
+                "CMS",
+                "Blog"
+            ],
+            "platform": "linux",
+            "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/wordpress.png",
+            "repository": {
+                "url": "https://github.com/portainer/templates",
+                "stackfile": "stacks/wordpress/docker-compose.yml"
+            },
+            "env": [
+                {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "label": "MySQL root password",
+                    "description": "Password for the MySQL root user",
+                    "default": "somewordpress"
+                },
+                {
+                    "name": "MYSQL_PASSWORD",
+                    "label": "MySQL user password",
+                    "description": "Password for the WordPress MySQL user",
+                    "default": "wordpress"
+                },
+                {
+                    "name": "WORDPRESS_DB_PASSWORD",
+                    "label": "WordPress database password",
+                    "description": "Password for WordPress to connect to MySQL (should match MYSQL_PASSWORD)",
+                    "default": "wordpress"
+                },
+                {
+                    "name": "WORDPRESS_PORT",
+                    "label": "WordPress port",
+                    "description": "Public port for WordPress",
+                    "default": "8000"
+                },
+                {
+                    "name": "PHPMYADMIN_PORT",
+                    "label": "phpMyAdmin port",
+                    "description": "Public port for phpMyAdmin",
+                    "default": "8080"
+                }
+            ],
+            "volumes": [
+                {
+                    "container": "/var/www/html",
+                    "bind": "wordpress_data"
+                },
+                {
+                    "container": "/var/lib/mysql",
+                    "bind": "mysql_data"
+                }
+            ],
+            "ports": [
+                "8000:80/tcp",
+                "8080:80/tcp"
+            ],
+            "restart_policy": "unless-stopped"
+        },
+        {
+            "type": 3,
+            "title": "NGINX Proxy Manager",
+            "description": "Easy to use reverse proxy with SSL certificate management",
+            "note": "Default login: admin@example.com / changeme",
+            "categories": [
+                "Proxy",
+                "Security"
+            ],
+            "platform": "linux",
+            "logo": "https://nginxproxymanager.com/icon.png",
+            "repository": {
+                "url": "https://github.com/portainer/templates",
+                "stackfile": "stacks/nginx-proxy-manager/docker-compose.yml"
+            },
+            "env": [
+                {
+                    "name": "HTTP_PORT",
+                    "label": "HTTP Port",
+                    "description": "Public HTTP port",
+                    "default": "80"
+                },
+                {
+                    "name": "HTTPS_PORT",
+                    "label": "HTTPS Port",
+                    "description": "Public HTTPS port",
+                    "default": "443"
+                },
+                {
+                    "name": "ADMIN_PORT",
+                    "label": "Admin Port",
+                    "description": "Admin interface port",
+                    "default": "81"
+                }
+            ],
+            "volumes": [
+                {
+                    "container": "/data",
+                    "bind": "npm_data"
+                },
+                {
+                    "container": "/etc/letsencrypt",
+                    "bind": "npm_ssl"
+                }
+            ],
+            "ports": [
+                "80:80/tcp",
+                "443:443/tcp",
+                "81:81/tcp"
+            ],
+            "restart_policy": "unless-stopped"
+        },
+        {
+            "type": 3,
+            "title": "Homestack - AdGuard Home + Nginx Proxy Manager",
+            "description": "Complete stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
+            "note": "Requires external network 'home_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
+            "categories": [
+                "Networking",
+                "Security",
+                "DNS",
+                "Proxy"
+            ],
+            "platform": "linux",
+            "logo": "https://cdn.adguard.com/website/github.com/AdguardTeam/AdguardHome/adg-logo-darkbg.svg",
+            "repository": {
+                "url": "https://github.com/clabnet/portainer-templates/templates/stacks/homestack",
+                "stackfile": "docker-compose.yml"
+            },
+            "env": [
+                {
+                    "name": "TZ",
+                    "label": "Timezone",
+                    "description": "Set your local timezone (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
+                    "default": "Europe/Rome"
+                },
+                {
+                    "name": "ADGUARD_HTTP_PORT",
+                    "label": "AdGuard HTTP Port",
+                    "description": "HTTP port for AdGuard Home web interface",
+                    "default": "80"
+                },
+                {
+                    "name": "ADGUARD_HTTPS_PORT",
+                    "label": "AdGuard HTTPS Port",
+                    "description": "HTTPS port for AdGuard Home web interface",
+                    "default": "443"
+                },
+                {
+                    "name": "ADGUARD_SETUP_PORT",
+                    "label": "AdGuard Setup Port",
+                    "description": "Port for initial AdGuard Home setup",
+                    "default": "3000"
+                },
+                {
+                    "name": "NPM_HTTP_PORT",
+                    "label": "Nginx Proxy Manager HTTP Port",
+                    "description": "HTTP port for Nginx Proxy Manager",
+                    "default": "8080"
+                },
+                {
+                    "name": "NPM_HTTPS_PORT",
+                    "label": "Nginx Proxy Manager HTTPS Port",
+                    "description": "HTTPS port for Nginx Proxy Manager",
+                    "default": "6443"
+                },
+                {
+                    "name": "NPM_ADMIN_PORT",
+                    "label": "Nginx Proxy Manager Admin Port",
+                    "description": "Admin interface port for Nginx Proxy Manager",
+                    "default": "81"
+                },
+                {
+                    "name": "DISABLE_IPV6",
+                    "label": "Disable IPv6",
+                    "description": "Disable IPv6 support (recommended for most home networks)",
+                    "default": "true",
+                    "select": [
+                        {
+                            "text": "Yes",
+                            "value": "true"
+                        },
+                        {
+                            "text": "No",
+                            "value": "false"
+                        }
+                    ]
+                },
+                {
+                    "name": "EXTERNAL_NETWORK_NAME",
+                    "label": "External Network Name",
+                    "description": "Name of the external Docker network to use",
+                    "default": "home_network"
+                }
+            ]
         }
     ]
 }
