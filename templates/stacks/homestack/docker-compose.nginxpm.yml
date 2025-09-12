@@ -4,6 +4,9 @@ services:
     container_name: nginxpm
     hostname: nginxpm
     restart: unless-stopped
+    networks:
+      default:
+        ipv4_address: 192.168.1.4
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     volumes:
