@@ -1,6 +1,7 @@
 include:
   - docker-compose.adguard.yml
   - docker-compose.nginxpm.yml
+  - docker-compose.dozzle.yml
 
 networks:
   default:
