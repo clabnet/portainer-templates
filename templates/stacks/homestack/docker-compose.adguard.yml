@@ -21,8 +21,8 @@ services:
       - "${ADGUARD_HTTP_PORT:-8090}:80/tcp"
 
       # Expose port 443 on TCP and UDP for HTTPS web interface
-      - "${ADGUARD_HTTPS_PORT:-443}/tcp"
-      - "${ADGUARD_HTTPS_PORT:-443}/udp"
+      - "${ADGUARD_HTTPS_PORT:-443}:443/tcp"
+      - "${ADGUARD_HTTPS_PORT:-443}:443/udp"
 
       # Expose port 3000 on TCP for AdGuard Home's API
       - "${ADGUARD_SETUP_PORT:-3000}:3000/tcp"
@@ -44,8 +44,8 @@ services:
       - "5443:5443/udp"
 
     volumes:
-      - ./adguardhome/work:/opt/adguardhome/work
-      - ./adguardhome/conf:/opt/adguardhome/conf
+      - ./config/adguardhome/work:/opt/adguardhome/work
+      - ./config/adguardhome/conf:/opt/adguardhome/conf
 
     environment:
       - TZ=${TZ:-Europe/Rome}
@@ -53,7 +53,3 @@ services:
     # Security options
     cap_add:
       - NET_BIND_SERVICE # Allow binding to ports < 1024
-
-# Named volumes - persists independently
-volumes:
-  adguardhome:
