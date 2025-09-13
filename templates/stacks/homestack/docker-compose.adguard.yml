@@ -47,6 +47,7 @@ services:
       - "5443:5443/udp"
 
     volumes:
+      # Named volumes - persists independently
       - ./adguardhome/work:/opt/adguardhome/work
       - ./adguardhome/conf:/opt/adguardhome/conf
 
@@ -56,3 +57,6 @@ services:
     # Security options
     cap_add:
       - NET_BIND_SERVICE # Allow binding to ports < 1024
+
+volumes:
+  adguardhome:
