@@ -168,7 +168,7 @@
             "type": 3,
             "title": "Homestack - AdGuard Home + Nginx Proxy Manager",
             "description": "Complete stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
-            "note": "Requires external network 'home_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
+            "note": "Requires external network 'homelab_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
             "categories": [
                 "Networking",
                 "Security",
@@ -250,7 +250,7 @@
                     "name": "EXTERNAL_NETWORK_NAME",
                     "label": "External Network Name",
                     "description": "Name of the external Docker network to use",
-                    "default": "home_network"
+                    "default": "homelab_network"
                 }
             ]
         }
