@@ -4,13 +4,9 @@ services:
     container_name: nginxpm
     hostname: nginxpm
     restart: unless-stopped
-    # networks:
-    #   default:
-    #     ipv4_address: 192.168.1.4
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     volumes:
-      # Named volumes - persists independently
       - nginxpm_data:/data
       - nginxpm_letsencrypt:/etc/letsencrypt
     ports:
@@ -21,7 +17,6 @@ services:
 
     environment:
       DISABLE_IPV6: ${DISABLE_IPV6:-true}
-      #####DB_SQLITE_FILE: "nginxpm_data/database.sqlite"
 
     healthcheck:
       test: [ "CMD", "curl", "localhost" ]
@@ -30,6 +25,7 @@ services:
       retries: 3
       start_period: 30s
 
+# Named volumes - persists independently
 volumes:
   nginxpm_data:
   nginxpm_letsencrypt:
