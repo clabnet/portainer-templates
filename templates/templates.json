@@ -210,13 +210,13 @@
                     "name": "NPM_HTTP_PORT",
                     "label": "Nginx Proxy Manager HTTP Port",
                     "description": "HTTP port for Nginx Proxy Manager",
-                    "default": "8080"
+                    "default": "80"
                 },
                 {
                     "name": "NPM_HTTPS_PORT",
                     "label": "Nginx Proxy Manager HTTPS Port",
                     "description": "HTTPS port for Nginx Proxy Manager",
-                    "default": "6443"
+                    "default": "443"
                 },
                 {
                     "name": "NPM_ADMIN_PORT",
