@@ -58,7 +58,7 @@ services:
       - NET_BIND_SERVICE # Allow binding to ports < 1024
 
     healthcheck:
-      test: [ "CMD", "curl", "localhost" ]
+      test: [ "CMD", "curl", "localhost:3000" ]
       interval: 30s
       timeout: 10s
       retries: 3

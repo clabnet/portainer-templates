@@ -11,7 +11,7 @@ services:
       - ${DOZZLE_HTTP_PORT:-9999}:8080
 
     healthcheck:
-      test: [ "CMD", "curl", "localhost" ]
+      test: [ "CMD", "curl", "localhost:8080" ]
       interval: 30s
       timeout: 10s
       retries: 3
