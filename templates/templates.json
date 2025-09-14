@@ -13,7 +13,7 @@
                 "Proxy"
             ],
             "platform": "linux",
-            "logo": "https://github.com/clabnet/portainer-templates/img/Adguard.png",
+            "logo": "https://raw.githubusercontent.com/clabnet/portainer-templates/main/img/Adguard.png",
             "repository": {
                 "url": "https://github.com/clabnet/portainer-templates",
                 "stackfile": "templates/stacks/homestack/docker-compose.stack.yml"
@@ -92,7 +92,7 @@
                 "Proxy"
             ],
             "platform": "linux",
-            "logo": "https://dozzle.dev/logo.svg",
+            "logo": "https://raw.githubusercontent.com/clabnet/portainer-templates/main/img/nginxpm.png",
             "repository": {
                 "url": "https://github.com/clabnet/portainer-templates",
                 "stackfile": "templates/stacks/homestack/dozzle/docker-compose.yml"
