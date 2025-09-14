@@ -3,7 +3,7 @@
     "templates": [
         {
             "type": 3,
-            "title": "Homelab",
+            "title": "Clabnet Homelab",
             "description": "Complete stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
             "note": "Requires external network 'homelab_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
             "categories": [

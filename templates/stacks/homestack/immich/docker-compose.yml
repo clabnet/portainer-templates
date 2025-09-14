@@ -17,8 +17,8 @@ services:
     #   file: hwaccel.transcoding.yml
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
-      # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
-      - ${UPLOAD_LOCATION}:/data
+      # Use external volume for uploads - better for production
+      - immich-uploads:/data
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -40,7 +40,7 @@ services:
     #   file: hwaccel.ml.yml
     #   service: cpu # set to one of [armnn, cuda, rocm, openvino, openvino-wsl, rknn] for accelerated inference - use the `-wsl` version for WSL2 where applicable
     volumes:
-      - model-cache:/cache
+      - immich-model-cache:/cache
     env_file:
       - .env
     restart: always
@@ -51,8 +51,7 @@ services:
     container_name: immich_redis
     image: docker.io/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571
     volumes:
-      # Persist Redis data to avoid losing cache and session data
-      - redis-data:/data
+      - immich-redis-data:/data
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
@@ -68,19 +67,31 @@ services:
       # Uncomment the DB_STORAGE_TYPE: 'HDD' var if your database isn't stored on SSDs
       DB_STORAGE_TYPE: 'HDD'
     volumes:
-      # Do not edit the next line. If you want to change the database storage location on your system, edit the value of DB_DATA_LOCATION in the .env file
-      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+      - immich-database:/var/lib/postgresql/data
     shm_size: 128mb
     restart: always
 
+# Define all external volumes
 volumes:
-  # Named volume for ML model cache - persists downloaded models
-  model-cache:
-    driver: local
+  # Media uploads - most important data
+  immich-uploads:
+    external: true
+    name: immich_uploads
 
-  # Named volume for Redis data - persists cache and session data
-  redis-data:
-    driver: local
+  # Database - critical data
+  immich-database:
+    external: true
+    name: immich_database
+
+  # ML model cache - can be recreated but saves time
+  immich-model-cache:
+    external: true
+    name: immich_model_cache
+
+  # Redis data - sessions and cache
+  immich-redis-data:
+    external: true
+    name: immich_redis_data
 
 networks:
   default:
