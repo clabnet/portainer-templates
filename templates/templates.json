@@ -13,7 +13,7 @@
                 "Proxy"
             ],
             "platform": "linux",
-            "logo": "https://cdn.adguard.com/website/github.com/AdguardTeam/AdguardHome/adg-logo-darkbg.svg",
+            "logo": "https://github.com/clabnet/portainer-templates/img/Adguard.png",
             "repository": {
                 "url": "https://github.com/clabnet/portainer-templates",
                 "stackfile": "templates/stacks/homestack/docker-compose.stack.yml"
@@ -81,7 +81,7 @@
             "restart_policy": "unless-stopped"
         },
         {
-            "type": 3,
+            "type": 1,
             "title": "Dozzle",
             "description": "Dozzle",
             "note": "Dozzle",
@@ -103,12 +103,6 @@
                     "label": "Dozzle HTTP Port",
                     "description": "HTTP port for Dozzle",
                     "default": "9999"
-                },
-                {
-                    "name": "EXTERNAL_NETWORK_NAME",
-                    "label": "External Network Name",
-                    "description": "Name of the external Docker network to use",
-                    "default": "homelab_network"
                 }
             ],
             "restart_policy": "unless-stopped"
