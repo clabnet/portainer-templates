@@ -83,8 +83,8 @@
         {
             "type": 1,
             "title": "Dozzle",
-            "description": "Dozzle",
-            "note": "Dozzle",
+            "description": "Simple Container Monitoring and Logging",
+            "note": "Don't open this container at public network.",
             "categories": [
                 "Networking",
                 "Security",
@@ -92,7 +92,7 @@
                 "Proxy"
             ],
             "platform": "linux",
-            "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/nginxpm.png&w=40",
+            "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/dozzle.png&w=30",
             "repository": {
                 "url": "https://github.com/clabnet/portainer-templates",
                 "stackfile": "templates/stacks/homestack/dozzle/docker-compose.yml"
