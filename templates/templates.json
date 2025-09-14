@@ -3,58 +3,6 @@
     "templates": [
         {
             "type": 3,
-            "title": "NGINX Proxy Manager",
-            "description": "Easy to use reverse proxy with SSL certificate management",
-            "note": "Default login: admin@example.com / changeme",
-            "categories": [
-                "Proxy",
-                "Security"
-            ],
-            "platform": "linux",
-            "logo": "https://nginxproxymanager.com/icon.png",
-            "repository": {
-                "url": "https://github.com/portainer/templates",
-                "stackfile": "stacks/nginx-proxy-manager/docker-compose.yml"
-            },
-            "env": [
-                {
-                    "name": "HTTP_PORT",
-                    "label": "HTTP Port",
-                    "description": "Public HTTP port",
-                    "default": "80"
-                },
-                {
-                    "name": "HTTPS_PORT",
-                    "label": "HTTPS Port",
-                    "description": "Public HTTPS port",
-                    "default": "443"
-                },
-                {
-                    "name": "ADMIN_PORT",
-                    "label": "Admin Port",
-                    "description": "Admin interface port",
-                    "default": "81"
-                }
-            ],
-            "volumes": [
-                {
-                    "container": "/data",
-                    "bind": "npm_data"
-                },
-                {
-                    "container": "/etc/letsencrypt",
-                    "bind": "npm_ssl"
-                }
-            ],
-            "ports": [
-                "80:80/tcp",
-                "443:443/tcp",
-                "81:81/tcp"
-            ],
-            "restart_policy": "unless-stopped"
-        },
-        {
-            "type": 3,
             "title": "Homelab",
             "description": "Complete stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
             "note": "Requires external network 'homelab_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
@@ -97,8 +45,8 @@
                 },
                 {
                     "name": "NPM_DISABLE_IPV6",
-                    "label": "Disable IPv6",
-                    "description": "Nginx Proxy Manager Disable IPv6 support (recommended for most home networks)",
+                    "label": "Nginx Proxy Manager Disable IPv6",
+                    "description": "Disable IPv6 support (recommended for most home networks)",
                     "default": "true",
                     "select": [
                         {
@@ -115,9 +63,8 @@
                     "name": "ADGUARD_IP_ADDRESS",
                     "label": "Adguard static IP address",
                     "description": "Adguard IP address",
-                    "default": "80"
+                    "default": "192.168.1.3"
                 },
-
                 {
                     "name": "DOZZLE_HTTP_PORT",
                     "label": "Dozzle HTTP Port",
@@ -130,7 +77,8 @@
                     "description": "Name of the external Docker network to use",
                     "default": "homelab_network"
                 }
-            ]
+            ],
+            "restart_policy": "unless-stopped"
         }
     ]
 }
