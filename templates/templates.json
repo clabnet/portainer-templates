@@ -13,7 +13,7 @@
                 "Proxy"
             ],
             "platform": "linux",
-            "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/Adguard.png&w=40",
+            "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/Adguard.png&w=30",
             "repository": {
                 "url": "https://github.com/clabnet/portainer-templates",
                 "stackfile": "templates/stacks/homestack/docker-compose.stack.yml"
