@@ -75,22 +75,22 @@ services:
 volumes:
   # Media uploads - most important data
   immich-uploads:
-    external: true
+    #external: true
     name: immich_uploads
 
   # Database - critical data
   immich-database:
-    external: true
+    #external: true
     name: immich_database
 
   # ML model cache - can be recreated but saves time
   immich-model-cache:
-    external: true
+    #external: true
     name: immich_model_cache
 
   # Redis data - sessions and cache
   immich-redis-data:
-    external: true
+    #external: true
     name: immich_redis_data
 
 networks:
