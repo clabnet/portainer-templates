@@ -57,6 +57,13 @@ services:
     cap_add:
       - NET_BIND_SERVICE # Allow binding to ports < 1024
 
+    healthcheck:
+      test: [ "CMD", "curl", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
 # Networks configuration
 networks:
   dockervlan:

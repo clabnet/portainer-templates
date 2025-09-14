@@ -9,3 +9,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - ${DOZZLE_HTTP_PORT:-9999}:8080
+
+    healthcheck:
+      test: [ "CMD", "curl", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
