@@ -3,9 +3,3 @@ include:
   - ./dozzle/docker-compose.yml
   - ./immich/docker-compose.yml
   - ./nginxpm/docker-compose.yml
-
-networks:
-  default:
-    driver: bridge
-    external: true
-    name: ${EXTERNAL_NETWORK_NAME:-homelab_network}

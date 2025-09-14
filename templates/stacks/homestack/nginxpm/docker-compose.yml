@@ -29,3 +29,10 @@ services:
 volumes:
   nginxpm_data:
   nginxpm_letsencrypt:
+
+
+networks:
+  default:
+    driver: bridge
+    external: true
+    name: ${EXTERNAL_NETWORK_NAME:-homelab_network}

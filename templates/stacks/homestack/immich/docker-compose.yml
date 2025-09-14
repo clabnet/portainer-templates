@@ -81,3 +81,9 @@ volumes:
   # Named volume for Redis data - persists cache and session data
   redis-data:
     driver: local
+
+networks:
+  default:
+    driver: bridge
+    external: true
+    name: ${EXTERNAL_NETWORK_NAME:-homelab_network}
