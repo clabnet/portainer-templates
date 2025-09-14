@@ -47,8 +47,8 @@ services:
     #   - "5443:5443/udp"
 
     volumes:
-      - ./config/adguardhome/work:/opt/adguardhome/work
-      - ./config/adguardhome/conf:/opt/adguardhome/conf
+      - adguard-work:/opt/adguardhome/work
+      - adguard-conf:/opt/adguardhome/conf
 
     environment:
       - TZ=${TZ:-Europe/Rome}
@@ -63,6 +63,12 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
+
+volumes:
+  adguard-work:
+    name: adguard_work
+  adguard-conf:
+    name: adguard_conf
 
 # Networks configuration
 networks:
