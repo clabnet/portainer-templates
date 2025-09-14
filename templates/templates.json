@@ -2,117 +2,6 @@
     "version": "3",
     "templates": [
         {
-            "categories": [
-                "Proxy",
-                "Tools"
-            ],
-            "description": "Nginx Proxy Manager with Sqlite enables you to easily forward to your websites running at home or otherwise, including free SSL, without having to know too much about Nginx or Letsencrypt. Please see the install document at https://github.com/pi-hosted/pi-hosted/tree/master/docs installing the template",
-            "env": [
-                {
-                    "default": "1000",
-                    "label": "PUID",
-                    "name": "PUID"
-                },
-                {
-                    "default": "1000",
-                    "label": "PGID",
-                    "name": "PGID"
-                },
-                {
-                    "default": "Europe/Rome",
-                    "label": "TZ",
-                    "name": "TZ"
-                }
-            ],
-            "image": "jc21/nginx-proxy-manager:latest",
-            "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/proxy_mgr.png",
-            "name": "nginx-proxy-manager-sqlite",
-            "platform": "linux",
-            "ports": [
-                "80:80/tcp",
-                "81:81/tcp",
-                "443:443/tcp"
-            ],
-            "restart_policy": "unless-stopped",
-            "title": "Nginx Proxy Manager with Sqllite",
-            "type": 1,
-            "volumes": [
-                {
-                    "bind": "/portainer/Files/AppData/Config/nginx-proxy-manager/data",
-                    "container": "/data"
-                },
-                {
-                    "bind": "/portainer/Files/AppData/Config/nginx-proxy-manager/letsencrypt",
-                    "container": "/etc/letsencrypt"
-                }
-            ],
-            "note": "<b>Template created by Pi-Hosted Series</b><br><b>Check our Github page: <a href=\"https://github.com/pi-hosted/pi-hosted\" target=\"_blank\">https://github.com/pi-hosted/pi-hosted</a></b><br><br><b>Official Webpage: </b><a href=\"https://nginxproxymanager.com/\" target=\"_blank\">https://nginxproxymanager.com/</a><br><b>Official Docker Documentation: </b><a href=\"https://nginxproxymanager.com/setup/\" target=\"_blank\">https://nginxproxymanager.com/setup/</a><br><h3><b>Pi-Hosted dedicated documentation: </b><a href=\"https://github.com/pi-hosted/pi-hosted/blob/master/docs/nginx_proxy_manager.md\" target=\"_blank\">nginx_proxy_manager.md</a></h3><br><br><br><b>Youtube Video: </b><a href=https://www.youtube.com/watch?v=yl2Laxbqvo8&list=PL846hFPMqg3jwkxcScD1xw2bKXrJVvarc&index=10 target=\"_blank\">Novaspirit Tech - Installing Nginx Proxy Manager on Docker</a><br><br>",
-            "maintainer": " https://github.com/novaspirit/pi-hosted/"
-        },
-        {
-            "type": 3,
-            "title": "WordPress Stack",
-            "description": "A complete WordPress stack with MySQL database and phpMyAdmin for easy management",
-            "note": "This template will deploy WordPress with MySQL database. Default credentials - Username: admin, Password: change_me_please",
-            "categories": [
-                "CMS",
-                "Blog"
-            ],
-            "platform": "linux",
-            "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/wordpress.png",
-            "repository": {
-                "url": "https://github.com/portainer/templates",
-                "stackfile": "stacks/wordpress/docker-compose.yml"
-            },
-            "env": [
-                {
-                    "name": "MYSQL_ROOT_PASSWORD",
-                    "label": "MySQL root password",
-                    "description": "Password for the MySQL root user",
-                    "default": "somewordpress"
-                },
-                {
-                    "name": "MYSQL_PASSWORD",
-                    "label": "MySQL user password",
-                    "description": "Password for the WordPress MySQL user",
-                    "default": "wordpress"
-                },
-                {
-                    "name": "WORDPRESS_DB_PASSWORD",
-                    "label": "WordPress database password",
-                    "description": "Password for WordPress to connect to MySQL (should match MYSQL_PASSWORD)",
-                    "default": "wordpress"
-                },
-                {
-                    "name": "WORDPRESS_PORT",
-                    "label": "WordPress port",
-                    "description": "Public port for WordPress",
-                    "default": "8000"
-                },
-                {
-                    "name": "PHPMYADMIN_PORT",
-                    "label": "phpMyAdmin port",
-                    "description": "Public port for phpMyAdmin",
-                    "default": "8080"
-                }
-            ],
-            "volumes": [
-                {
-                    "container": "/var/www/html",
-                    "bind": "wordpress_data"
-                },
-                {
-                    "container": "/var/lib/mysql",
-                    "bind": "mysql_data"
-                }
-            ],
-            "ports": [
-                "8000:80/tcp",
-                "8080:80/tcp"
-            ],
-            "restart_policy": "unless-stopped"
-        },
-        {
             "type": 3,
             "title": "NGINX Proxy Manager",
             "description": "Easy to use reverse proxy with SSL certificate management",
@@ -166,7 +55,7 @@
         },
         {
             "type": 3,
-            "title": "Homestack - AdGuard Home + Nginx Proxy Manager",
+            "title": "Homelab",
             "description": "Complete stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
             "note": "Requires external network 'homelab_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
             "categories": [
@@ -189,24 +78,6 @@
                     "default": "Europe/Rome"
                 },
                 {
-                    "name": "ADGUARD_HTTP_PORT",
-                    "label": "AdGuard HTTP Port",
-                    "description": "HTTP port for AdGuard Home web interface",
-                    "default": "8090"
-                },
-                {
-                    "name": "ADGUARD_HTTPS_PORT",
-                    "label": "AdGuard HTTPS Port",
-                    "description": "HTTPS port for AdGuard Home web interface",
-                    "default": "443"
-                },
-                {
-                    "name": "ADGUARD_SETUP_PORT",
-                    "label": "AdGuard Setup Port",
-                    "description": "Port for initial AdGuard Home setup",
-                    "default": "3000"
-                },
-                {
                     "name": "NPM_HTTP_PORT",
                     "label": "Nginx Proxy Manager HTTP Port",
                     "description": "HTTP port for Nginx Proxy Manager",
@@ -225,15 +96,9 @@
                     "default": "81"
                 },
                 {
-                    "name": "DOZZLE_HTTP_PORT",
-                    "label": "Dozzle HTTP Port",
-                    "description": "HTTP port for Dozzle",
-                    "default": "9999"
-                },
-                {
-                    "name": "DISABLE_IPV6",
+                    "name": "NPM_DISABLE_IPV6",
                     "label": "Disable IPv6",
-                    "description": "Disable IPv6 support (recommended for most home networks)",
+                    "description": "Nginx Proxy Manager Disable IPv6 support (recommended for most home networks)",
                     "default": "true",
                     "select": [
                         {
@@ -245,6 +110,19 @@
                             "value": "false"
                         }
                     ]
+                },
+                {
+                    "name": "ADGUARD_IP_ADDRESS",
+                    "label": "Adguard static IP address",
+                    "description": "Adguard IP address",
+                    "default": "80"
+                },
+
+                {
+                    "name": "DOZZLE_HTTP_PORT",
+                    "label": "Dozzle HTTP Port",
+                    "description": "HTTP port for Dozzle",
+                    "default": "9999"
                 },
                 {
                     "name": "EXTERNAL_NETWORK_NAME",

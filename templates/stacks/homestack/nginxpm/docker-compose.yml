@@ -16,7 +16,7 @@ services:
       # '127.0.0.1:81:81' # Admin Web Port
 
     environment:
-      DISABLE_IPV6: ${DISABLE_IPV6:-true}
+      DISABLE_IPV6: ${NPM_DISABLE_IPV6:-true}
 
     healthcheck:
       test: [ "CMD", "curl", "localhost" ]
