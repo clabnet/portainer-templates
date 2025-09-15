@@ -4,9 +4,9 @@ services:
     container_name: homepage
     restart: unless-stopped
     networks:
-      - default
-      - dockervlan:
-          ipv4_address: ${HOMEPAGE_IP_ADDRESS:-192.168.1.4}
+      default:
+      dockervlan:
+        ipv4_address: ${HOMEPAGE_IP_ADDRESS:-192.168.1.4}
     volumes:
       - ${HOMEPAGE_CONFIG_DIR:-./config}:/app/config
       - ${HOMEPAGE_ENV_FILE:-./config/.env}:/app/.env
