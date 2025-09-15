@@ -85,33 +85,6 @@
                 }
             ],
             "restart_policy": "unless-stopped"
-        },
-        {
-            "type": 1,
-            "title": "Dozzle",
-            "description": "Simple Container Monitoring and Logging",
-            "note": "Don't open this container at public network.",
-            "categories": [
-                "Networking",
-                "Security",
-                "DNS",
-                "Proxy"
-            ],
-            "platform": "linux",
-            "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/dozzle.png&w=40",
-            "repository": {
-                "url": "https://github.com/clabnet/portainer-templates",
-                "stackfile": "templates/stacks/homelab/dozzle/docker-compose.yml"
-            },
-            "env": [
-                {
-                    "name": "DOZZLE_HTTP_PORT",
-                    "label": "Dozzle HTTP Port",
-                    "description": "HTTP port for Dozzle",
-                    "default": "9999"
-                }
-            ],
-            "restart_policy": "unless-stopped"
         }
     ]
 }
