@@ -19,20 +19,16 @@ services:
       DISABLE_IPV6: ${NPM_DISABLE_IPV6:-true}
 
     healthcheck:
-      test: [ "CMD", "curl", "localhost" ]
+      test: ["CMD", "curl", "-f", "http://localhost/"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 30s
 
-# Named volumes - persists independently
 volumes:
   nginxpm_data:
+    name: nginxpm_data
   nginxpm_letsencrypt:
+    name: nginxpm_letsencrypt
 
 
-networks:
-  default:
-    driver: bridge
-    external: true
-    name: ${EXTERNAL_NETWORK_NAME:-homelab_network}

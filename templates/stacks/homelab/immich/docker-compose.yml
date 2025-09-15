@@ -88,8 +88,3 @@ volumes:
   immich-redis-data:
     name: immich_redis_data
 
-networks:
-  default:
-    driver: bridge
-    external: true
-    name: ${EXTERNAL_NETWORK_NAME:-homelab_network}
