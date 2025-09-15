@@ -3,16 +3,12 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     restart: unless-stopped
-    networks:
-      default:
-      dockervlan:
-        ipv4_address: ${HOMEPAGE_IP_ADDRESS:-192.168.1.4}
     volumes:
       - /Volume1/public/config/homepage:/app/config
       - /Volume1/public/config/homepage/.env:/app/.env
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
-      - "${HOMEPAGE_HTTP_PORT:-3000}:3000/tcp"
+      - "${HOMEPAGE_HTTP_PORT:-3000}:3000"
 
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/" ]
