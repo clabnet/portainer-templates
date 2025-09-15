@@ -5,9 +5,6 @@ include:
   - ./nginxpm/docker-compose.yml
   - ./homepage/docker-compose.yml
 
-env_file:
-  - .env
-
 networks:
 
   default:

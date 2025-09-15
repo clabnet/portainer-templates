@@ -9,8 +9,8 @@ A complete homelab setup with optimized Docker Compose configuration including:
 
 ## Quick Start
 
-1. Copy `.env.example` to `.env` and customize your settings
-2. Deploy the stack: `docker-compose -f docker-compose.homelab.yml up -d`
+1. Customize variables in `.env` file (already provided)
+2. Deploy the stack: `docker-compose -f docker-compose.homelab.yml --env-file .env up -d`
 
 ## Configuration
 
