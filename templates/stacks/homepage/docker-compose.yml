@@ -1,0 +1,15 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    networks:
+      - homepage-network
+      - dockervlan
+    volumes:
+      - /Volume1/public/config/homepage:/app/config
+      - /Volume1/public/config/homepage/.env:/app/.env
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    ports:
+      - "3015:3000/tcp"

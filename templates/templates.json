@@ -1,5 +1,5 @@
 {
-    "version": "3",
+    "version": "2",
     "templates": [
         {
             "type": 3,
@@ -16,7 +16,7 @@
             "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/Adguard.png&w=30",
             "repository": {
                 "url": "https://github.com/clabnet/portainer-templates",
-                "stackfile": "templates/stacks/homestack/docker-compose.stack.yml"
+                "stackfile": "templates/stacks/homelab/docker-compose.homelab.yml"
             },
             "env": [
                 {
@@ -95,7 +95,7 @@
             "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/dozzle.png&w=40",
             "repository": {
                 "url": "https://github.com/clabnet/portainer-templates",
-                "stackfile": "templates/stacks/homestack/dozzle/docker-compose.yml"
+                "stackfile": "templates/stacks/homelab/dozzle/docker-compose.yml"
             },
             "env": [
                 {
@@ -105,6 +105,21 @@
                     "default": "9999"
                 }
             ],
+            "restart_policy": "unless-stopped"
+        },
+        {
+            "type": 3,
+            "title": "Homepage",
+            "description": "Homepage helps you organize your self-hosted services by making them accessible from a single place",
+            "categories": [
+                "Dashboard"
+            ],
+            "platform": "linux",
+            "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homepage.png&w=30",
+            "repository": {
+                "url": "http://192.168.1.229:3000",
+                "stackfile": "templates/stacks/homepage/docker-compose.yml"
+            },
             "restart_policy": "unless-stopped"
         }
     ]
