@@ -3,9 +3,6 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     restart: unless-stopped
-    networks:
-      - homelab-network
-      - dockervlan
     volumes:
       - /Volume1/public/config/homepage:/app/config
       - /Volume1/public/config/homepage/.env:/app/.env
