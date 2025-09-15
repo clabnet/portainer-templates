@@ -12,7 +12,7 @@ services:
       - ${HOMEPAGE_ENV_FILE:-./config/.env}:/app/.env
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
-      - "${HOMEPAGE_HTTP_PORT:-3015}:3000/tcp"
+      - "${HOMEPAGE_HTTP_PORT:-3000}:3000/tcp"
 
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/" ]
