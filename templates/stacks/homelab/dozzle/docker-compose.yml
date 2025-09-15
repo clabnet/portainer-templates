@@ -3,8 +3,6 @@ services:
     image: amir20/dozzle:latest
     container_name: dozzle
     restart: unless-stopped
-    networks:
-      - homelab-network
     environment:
       DOZZLE_LEVEL: info
     volumes:
