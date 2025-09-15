@@ -5,7 +5,8 @@ services:
     restart: unless-stopped
     networks:
       - default
-      - dockervlan
+      - dockervlan:
+          ipv4_address: 192.168.1.4
     volumes:
       - ${HOMEPAGE_CONFIG_DIR:-./config}:/app/config
       - ${HOMEPAGE_ENV_FILE:-./config/.env}:/app/.env
