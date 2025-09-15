@@ -71,6 +71,3 @@ volumes:
   adguard-conf:
     name: adguard_conf
 
-networks:
-  dockervlan:
-    external: true
