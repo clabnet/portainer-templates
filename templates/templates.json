@@ -117,7 +117,7 @@
             "platform": "linux",
             "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homepage.png&w=30",
             "repository": {
-                "url": "http://192.168.1.229:3000",
+                "url": "https://github.com/clabnet/portainer-templates",
                 "stackfile": "templates/stacks/homepage/docker-compose.yml"
             },
             "restart_policy": "unless-stopped"

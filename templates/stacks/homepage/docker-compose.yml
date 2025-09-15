@@ -4,7 +4,7 @@ services:
     container_name: homepage
     restart: unless-stopped
     networks:
-      - homepage-network
+      - homelab-network
       - dockervlan
     volumes:
       - /Volume1/public/config/homepage:/app/config
