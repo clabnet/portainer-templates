@@ -23,12 +23,4 @@ services:
 
 networks:
   dockervlan:
-    name: dockervlan
-    driver: macvlan
-    driver_opts:
-      parent: ${MACVLAN_INTERFACE:-eth1}
-    ipam:
-      config:
-        - subnet: "${MACVLAN_SUBNET:-192.168.1.0/24}"
-          ip_range: "${MACVLAN_IP_RANGE:-192.168.1.0/29}"
-          gateway: "${MACVLAN_GATEWAY:-192.168.1.1}"
+    external: true
