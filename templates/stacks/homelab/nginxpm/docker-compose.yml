@@ -4,8 +4,6 @@ services:
     container_name: nginxpm
     hostname: nginxpm
     restart: unless-stopped
-    networks:
-      - homelab-network
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     volumes:
