@@ -22,7 +22,7 @@ Key variables to customize in `.env`:
 # Network Configuration
 MACVLAN_INTERFACE=eth1                    # Your network interface
 MACVLAN_SUBNET=192.168.1.0/24            # Your subnet
-MACVLAN_IP_RANGE=192.168.1.3/29          # IP range for containers
+MACVLAN_IP_RANGE=192.168.1.0/29          # IP range for containers
 
 # Security
 DB_PASSWORD=your_secure_password_here      # Change this!
