@@ -13,3 +13,9 @@ services:
 
     ports:
       - "3015:3000/tcp"
+
+networks:
+  default:
+    driver: bridge
+    external: true
+    name: ${EXTERNAL_NETWORK_NAME:-homelab_network}

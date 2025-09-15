@@ -4,6 +4,8 @@ services:
     container_name: nginxpm
     hostname: nginxpm
     restart: unless-stopped
+    networks:
+      - homelab-network
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     volumes:
@@ -31,8 +33,3 @@ volumes:
   nginxpm_letsencrypt:
 
 
-networks:
-  default:
-    driver: bridge
-    external: true
-    name: ${EXTERNAL_NETWORK_NAME:-homelab_network}

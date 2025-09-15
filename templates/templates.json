@@ -106,21 +106,6 @@
                 }
             ],
             "restart_policy": "unless-stopped"
-        },
-        {
-            "type": 3,
-            "title": "Homepage",
-            "description": "Homepage helps you organize your self-hosted services by making them accessible from a single place",
-            "categories": [
-                "Dashboard"
-            ],
-            "platform": "linux",
-            "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homepage.png&w=30",
-            "repository": {
-                "url": "https://github.com/clabnet/portainer-templates",
-                "stackfile": "templates/stacks/homepage/docker-compose.yml"
-            },
-            "restart_policy": "unless-stopped"
         }
     ]
 }
