@@ -64,7 +64,7 @@
                     "label": "Dozzle HTTP Port",
                     "description": "HTTP port for Dozzle",
                     "default": "9999"
-                },
+                }
             ],
             "restart_policy": "unless-stopped"
         }
