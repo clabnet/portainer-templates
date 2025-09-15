@@ -6,8 +6,18 @@ include:
   - ./homepage/docker-compose.yml
 
 networks:
-
   default:
     driver: bridge
     external: true
     name: ${EXTERNAL_NETWORK_NAME:-homelab_network}
+
+  dockervlan:
+    name: dockervlan
+    driver: macvlan
+    driver_opts:
+      parent: ${MACVLAN_INTERFACE:-eth0}
+    ipam:
+      config:
+        - subnet: "${MACVLAN_SUBNET:-192.168.1.0/24}"
+          ip_range: "${MACVLAN_IP_RANGE:-192.168.1.0/29}"
+          gateway: "${MACVLAN_GATEWAY:-192.168.1.1}"
