@@ -1,9 +1,9 @@
 include:
   - ./adguard/docker-compose.yml
-  - ./dozzle/docker-compose.yml
-  - ./immich/docker-compose.yml
-  - ./nginxpm/docker-compose.yml
   - ./homepage/docker-compose.yml
+  - ./nginxpm/docker-compose.yml
+#  - ./dozzle/docker-compose.yml
+#  - ./immich/docker-compose.yml
 
 networks:
   homelab_network:
