@@ -1,0 +1,90 @@
+{
+    "version": "2",
+    "templates": [
+        {
+            "type": 3,
+            "title": "Clabnet Homelab",
+            "description": "Complete stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
+            "note": "Requires external network 'homelab_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
+            "categories": [
+                "Networking",
+                "Security",
+                "DNS",
+                "Proxy"
+            ],
+            "platform": "linux",
+            "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/Adguard.png&w=30",
+            "repository": {
+                "url": "https://github.com/clabnet/portainer-templates",
+                "stackfile": "templates/stacks/homelab/docker-compose.homelab.yml"
+            },
+            "env": [
+                {
+                    "name": "TZ",
+                    "label": "Timezone",
+                    "description": "Set your local timezone (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
+                    "default": "Europe/Rome"
+                },
+                {
+                    "name": "NPM_HTTP_PORT",
+                    "label": "Nginx Proxy Manager HTTP Port",
+                    "description": "HTTP port for Nginx Proxy Manager",
+                    "default": "80"
+                },
+                {
+                    "name": "NPM_HTTPS_PORT",
+                    "label": "Nginx Proxy Manager HTTPS Port",
+                    "description": "HTTPS port for Nginx Proxy Manager",
+                    "default": "443"
+                },
+                {
+                    "name": "NPM_ADMIN_PORT",
+                    "label": "Nginx Proxy Manager Admin Port",
+                    "description": "Admin interface port for Nginx Proxy Manager",
+                    "default": "81"
+                },
+                {
+                    "name": "NPM_DISABLE_IPV6",
+                    "label": "Nginx Proxy Manager Disable IPv6",
+                    "description": "Disable IPv6 support (recommended for most home networks)",
+                    "default": "true",
+                    "select": [
+                        {
+                            "text": "Yes",
+                            "value": "true"
+                        },
+                        {
+                            "text": "No",
+                            "value": "false"
+                        }
+                    ]
+                },
+                {
+                    "name": "ADGUARD_IP_ADDRESS",
+                    "label": "Adguard static IP address",
+                    "description": "Adguard IP address",
+                    "default": "192.168.1.3"
+                },
+                {
+                    "name": "HOMEPAGE_IP_ADDRESS",
+                    "label": "Homepage static IP address",
+                    "description": "Homepage IP address",
+                    "default": "192.168.1.4"
+                },
+                {
+                    "name": "DOZZLE_HTTP_PORT",
+                    "label": "Dozzle HTTP Port",
+                    "description": "HTTP port for Dozzle",
+                    "default": "9999"
+                },
+                {
+                    "name": "EXTERNAL_NETWORK_NAME",
+                    "label": "External Network Name",
+                    "description": "Name of the external Docker network to use",
+                    "default": "homelab_network"
+                }
+            ],
+            "restart_policy": "unless-stopped"
+        }
+    ]
+}
