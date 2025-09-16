@@ -8,7 +8,7 @@ services:
     networks:
       - homelab_network
     ports:
-      - "${HOMEPAGE_HTTP_PORT:-3001}:3000"
+      - "${HOMEPAGE_HTTP_PORT:-3005}:3000"
     volumes:
       - /Volume1/public/config/homepage:/app/config
       - /Volume1/public/config/homepage/.env:/app/.env

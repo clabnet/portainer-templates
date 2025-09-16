@@ -1,0 +1,31 @@
+services:
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    hostname: uptime-kuma
+    restart: unless-stopped
+    networks:
+      - homelab_network
+    ports:
+      - "3001:3001" 
+    volumes:
+      - uptime_kuma_data:/app/data 
+    environment:
+      - TZ=Europe/Rome
+      - UMASK=0022 # Set your file permissions manually
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3001" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  uptime_kuma_data:
+    name: uptime_kuma_data
