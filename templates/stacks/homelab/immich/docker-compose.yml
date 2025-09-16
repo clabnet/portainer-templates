@@ -27,7 +27,9 @@ services:
     depends_on:
       - redis
       - database
-    restart: always
+    restart: unless-stopped
+    networks:
+      - homelab_network
     healthcheck:
       disable: false
 
@@ -43,7 +45,9 @@ services:
       - immich-model-cache:/cache
     env_file:
       - .env
-    restart: always
+    restart: unless-stopped
+    networks:
+      - homelab_network
     healthcheck:
       disable: false
 
@@ -54,7 +58,9 @@ services:
       - immich-redis-data:/data
     healthcheck:
       test: redis-cli ping || exit 1
-    restart: always
+    restart: unless-stopped
+    networks:
+      - homelab_network
 
   database:
     container_name: immich_postgres
@@ -69,7 +75,9 @@ services:
     volumes:
       - immich-database:/var/lib/postgresql/data
     shm_size: 128mb
-    restart: always
+    restart: unless-stopped
+    networks:
+      - homelab_network
 
 volumes:
   # Media uploads - most important data
@@ -87,4 +95,3 @@ volumes:
   # Redis data - sessions and cache
   immich-redis-data:
     name: immich_redis_data
-
