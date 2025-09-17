@@ -1,8 +1,8 @@
 services:
 
-  uptime-kuma:
+  uptimekuma:
     image: louislam/uptime-kuma:latest
-    container_name: uptime-kuma
+    container_name: uptimekuma
     hostname: uptimekuma
     restart: unless-stopped
     networks:
@@ -10,7 +10,7 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - uptime_kuma_data:/app/data
+      - uptimekuma_data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=${TZ:-Europe/Rome}
@@ -28,5 +28,5 @@ services:
         max-file: "3"
 
 volumes:
-  uptime_kuma_data:
-    name: uptime_kuma_data
+  uptimekuma_data:
+    name: uptimekuma_data
