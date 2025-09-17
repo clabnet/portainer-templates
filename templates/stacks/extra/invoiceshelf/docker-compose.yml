@@ -8,7 +8,10 @@ services:
   invoiceshelf:
     image: invoiceshelf/invoiceshelf:nightly
     container_name: invoiceshelf
+    hostname: invoiceshelf
     restart: unless-stopped
+    networks:
+      - homelab_network
     ports:
       - 8010:80
     volumes:
@@ -34,12 +37,7 @@ services:
       - MAIL_DRIVER=smtp
       - MAIL_HOST=smtp.mailtrap.io
       - MAIL_PORT=587
-      - MAIL_USERNAME=68bc0dd463dc5b
-      - MAIL_PASSWORD=d645ad8003f25a
+      - MAIL_USERNAME=${MAIL_USERNAME:-your_mail_username}
+      - MAIL_PASSWORD=${MAIL_PASSWORD:-your_mail_password}
       #- MAIL_PASSWORD_FILE=<filename>
       - MAIL_ENCRYPTION=null
-
-networks:
-  default:
-    name: horizon_network
-    external: true
