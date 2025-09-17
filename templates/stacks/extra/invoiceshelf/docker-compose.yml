@@ -16,7 +16,7 @@ services:
       - 8010:80
     volumes:
       - invoiceshelf_data:/data
-      - invoiceshelf_data/conf:/conf
+      - invoiceshelf_data:/conf
     environment:
       - PHP_TZ=Europe/Rome
       - TIMEZONE=Europe/Rome
