@@ -14,7 +14,7 @@ services:
     networks:
       - homelab_network
     ports:
-      - 8010:80
+      - 8010:8080
     volumes:
       - invoiceshelf_storage:/var/www/html/storage
     environment:
