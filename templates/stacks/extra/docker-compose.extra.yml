@@ -1,0 +1,7 @@
+include:
+  - ./invoiceshelf/docker-compose.yml
+
+networks:
+  homelab_network:
+    driver: bridge
+    external: true
