@@ -1,0 +1,31 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    user: 1002:1002
+    volumes:
+      - ./logs/:/config/log/
+      - jellyfin_config:/config
+      - jellyfin_cache:/cache
+      - /Volume1/media:/media
+      - /Volume1/public/config/jellyfin/config.json:/jellyfin/jellyfin-web/config.json
+    restart: unless-stopped
+    networks:
+      - horizon_network
+    environment:
+      - TZ=${TZ:-Europe/Rome}
+    ports:
+      - 8096:8096
+    logging:
+      driver: "local"
+      options:
+        max-size: "50m"
+        max-file: "10"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+volumes:
+  jellyfin_config:
+    name: jellyfin_config
+  jellyfin_cache:
+    name: jellyfin_cache

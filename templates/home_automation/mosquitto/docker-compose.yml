@@ -1,0 +1,20 @@
+services:
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    hostname: mqtt
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"  # WebSocket port (optional)
+    networks:
+      - horizon_network
+    volumes:
+      - /Volume1/public/config/mosquitto/config:/mosquitto/config
+      - /Volume1/public/config/mosquitto/data:/mosquitto/data
+      - /Volume1/public/config/mosquitto/log:/mosquitto/log
+      - /etc/localtime:/etc/localtime:ro
+    # environment:
+    #   <<: *env
+    labels:
+      - "com.centurylinklabs.watchtower.monitor-only=true"

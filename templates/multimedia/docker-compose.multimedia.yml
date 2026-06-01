@@ -1,0 +1,4 @@
+include:
+  - ../_shared/networks.yml
+  - ./immich/docker-compose.yml
+  #- ./jellyfin/docker-compose.yml

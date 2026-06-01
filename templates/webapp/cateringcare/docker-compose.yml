@@ -1,0 +1,30 @@
+services:
+  backend:
+    image: ghcr.io/clabnet/catering-care-backend:latest
+    container_name: catering-care-backend
+    restart: unless-stopped
+    environment:
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+    volumes:
+      - /Volume1/public/config/cateringcare/data:/app/data
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    networks:
+      - horizon_network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  frontend:
+    image: ghcr.io/clabnet/catering-care-frontend:latest
+    container_name: catering-care-frontend
+    restart: unless-stopped
+    environment:
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+    ports:
+      - "${FRONTEND_PORT}:80"
+    depends_on:
+      - backend
+    networks:
+      - horizon_network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"

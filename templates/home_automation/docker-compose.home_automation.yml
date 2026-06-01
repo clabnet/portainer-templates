@@ -1,0 +1,4 @@
+include:
+  - ../_shared/networks.yml
+  - ./homeassistant/docker-compose.yml
+  - ./mosquitto/docker-compose.yml

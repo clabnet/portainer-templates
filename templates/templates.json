@@ -1,0 +1,322 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "type": 3,
+      "title": "Infrastructure",
+      "description": "Complete network infrastructure stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
+      "note": "Requires external network 'horizon_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
+      "categories": [
+        "Networking",
+        "Security",
+        "DNS",
+        "Proxy",
+        "Infrastructure"
+      ],
+      "platform": "linux",
+      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "name": "infrastructure",
+      "repository": {
+        "url": "http://github.com/clabnet/portainer-templates",
+        "stackfile": "templates/infrastructure/docker-compose.infrastructure.yml"
+      },
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "description": "Set your local timezone (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "NPM_HTTP_PORT",
+          "label": "Nginx Proxy Manager HTTP Port",
+          "description": "HTTP port for Nginx Proxy Manager",
+          "default": "80"
+        },
+        {
+          "name": "NPM_HTTPS_PORT",
+          "label": "Nginx Proxy Manager HTTPS Port",
+          "description": "HTTPS port for Nginx Proxy Manager",
+          "default": "443"
+        },
+        {
+          "name": "NPM_ADMIN_PORT",
+          "label": "Nginx Proxy Manager Admin Port",
+          "description": "Admin interface port for Nginx Proxy Manager",
+          "default": "81"
+        },
+        {
+          "name": "NPM_DISABLE_IPV6",
+          "label": "Nginx Proxy Manager Disable IPv6",
+          "description": "Disable IPv6 support (recommended for most home networks)",
+          "default": "true",
+          "select": [
+            {
+              "text": "Yes",
+              "value": "true"
+            },
+            {
+              "text": "No",
+              "value": "false"
+            }
+          ]
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 3,
+      "title": "Database",
+      "description": "Database infrastructure stack with PostgreSQL, MySQL, Redis, and database administration tools for application data storage and management",
+      "note": "Requires external network 'horizon_network' to be created first. Provides multiple database engines and management interfaces for application backends.",
+      "categories": [
+        "Database",
+        "Storage",
+        "PostgreSQL",
+        "MySQL",
+        "Redis",
+        "Data Management"
+      ],
+      "platform": "linux",
+      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "name": "database",
+      "repository": {
+        "url": "http://192.168.1.2:8099/templates.json",
+        "stackfile": "database/docker-compose.database.yml"
+      },
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "description": "Set your local timezone for database timestamps and scheduling (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
+          "default": "Europe/Rome"
+        }
+      ],
+      "restart_policy": "always"
+    },
+
+    {
+      "type": 3,
+      "title": "Monitoring",
+      "description": "Comprehensive monitoring stack with Prometheus, Grafana, Node Exporter, and Dozzle for metrics collection, visualization, and real-time log monitoring",
+      "note": "Requires external network 'horizon_network' to be created first. Includes system metrics monitoring and Docker container log viewing.",
+      "categories": [
+        "Monitoring",
+        "Metrics",
+        "Logs",
+        "Observability",
+        "Analytics"
+      ],
+      "platform": "linux",
+      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "name": "monitoring",
+      "repository": {
+        "url": "https://github.com/clabnet/portainer-templates",
+        "stackfile": "templates/monitoring/docker-compose.monitoring.yml"
+      },
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "description": "Set your local timezone (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "DOZZLE_HTTP_PORT",
+          "label": "Dozzle HTTP Port",
+          "description": "HTTP port for Dozzle log viewer interface",
+          "default": "9999"
+        }
+      ],
+      "restart_policy": "always"
+    },
+
+    {
+      "type": 3,
+      "title": "Multimedia",
+      "description": "Complete multimedia management stack featuring Immich for photo/video management, Jellyfin media server, and supporting services with PostgreSQL database",
+      "note": "Requires external network 'horizon_network' to be created first. Includes photo backup, media streaming, and content organization tools.",
+      "categories": [
+        "Media",
+        "Photos",
+        "Videos",
+        "Streaming",
+        "Multimedia",
+        "Entertainment"
+      ],
+      "platform": "linux",
+      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "name": "multimedia",
+      "repository": {
+        "url": "https://github.com/clabnet/portainer-templates",
+        "stackfile": "templates/multimedia/docker-compose.multimedia.yml"
+      },
+      "env": [
+        {
+          "name": "DB_USERNAME",
+          "label": "PostgreSQL Database Username",
+          "description": "Username for the PostgreSQL database used by multimedia services",
+          "default": "postgres"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "label": "PostgreSQL Database Password",
+          "description": "Password for the PostgreSQL database (change from default for security)",
+          "default": "postgres"
+        },
+        {
+          "name": "DB_DATABASE_NAME",
+          "label": "Database Name",
+          "description": "Name of the database for multimedia services (primarily Immich)",
+          "default": "immich"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 3,
+      "title": "Home Automation",
+      "description": "Home Assistant Core deployment for comprehensive smart home automation, device integration, and IoT management",
+      "note": "Provides local control of smart home devices with support for hundreds of integrations. Access via web interface for configuration and automation setup.",
+      "categories": [
+        "Home Automation",
+        "IoT",
+        "Smart Home",
+        "Assistant",
+        "Automation"
+      ],
+      "platform": "linux",
+      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "name": "homeautomation",
+      "repository": {
+        "url": "https://github.com/clabnet/portainer-templates",
+        "stackfile": "templates/home_automation/docker-compose.home_automation.yml"
+      },
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "description": "Set your local timezone for accurate automation scheduling (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
+          "default": "Europe/Rome"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 3,
+      "title": "Tools",
+      "description": "Essential utility tools collection including file managers, system utilities, network tools, and development aids for homelab administration",
+      "note": "Requires external network 'horizon_network' to be created first. Provides various administrative and utility services for homelab management.",
+      "categories": [
+        "Tools",
+        "Utilities",
+        "Administration",
+        "File Management",
+        "System Tools"
+      ],
+      "platform": "linux",
+      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "name": "tools",
+      "repository": {
+        "url": "https://github.com/clabnet/portainer-templates",
+        "stackfile": "templates/tools/docker-compose.tools.yml"
+      },
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "description": "Set your local timezone for proper time-based functionality (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
+          "default": "Europe/Rome"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 3,
+      "title": "Web applications",
+      "description": "Frontend and backend components",
+      "note": "Requires external network 'horizon_network' to be created first.",
+      "categories": ["WEB APP"],
+      "platform": "linux",
+      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "name": "webapp",
+      "repository": {
+        "url": "https://github.com/clabnet/portainer-templates",
+        "stackfile": "templates/webapp/docker-compose.yml"
+      },
+      "env": [
+        {
+          "name": "NODE_ENV",
+          "label": "Environment",
+          "default": "production"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "WENDY backend",
+      "name": "wendy-backend",
+      "network": "horizon_network",
+      "description": "Event management platform backend",
+      "categories": ["webapp", "backend"],
+      "platform": "linux",
+      "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/solr.png",
+      "image": "ghcr.io/clabnet/wendy-backend:latest",
+      "registry": "ghcr.io",
+      "env": [
+        {
+          "name": "NODE_ENV",
+          "label": "Environment",
+          "default": "production"
+        },
+        {
+          "name": "HOST",
+          "label": "HOST",
+          "default": "0.0.0.0"
+        },
+        {
+          "name": "BACKEND_PORT",
+          "label": "BACKEND_PORT",
+          "default": "5454"
+        },
+        {
+          "name": "POSTGRES_HOST",
+          "label": "POSTGRES_HOST",
+          "default": "postgres"
+        },
+        {
+          "name": "POSTGRES_PORT",
+          "label": "POSTGRES_PORT",
+          "default": "5432"
+        },
+        {
+          "name": "POSTGRES_USER",
+          "label": "POSTGRES_USER",
+          "default": "postgres"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "POSTGRES_PASSWORD",
+          "default": "changeme"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "label": "POSTGRES_DB",
+          "default": "weddingeventsdb"
+        },
+        {
+          "name": "JWT_SECRET_KEY",
+          "label": "JWT_SECRET_KEY",
+          "default": "xxxxxxxxxx"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    }
+  ]
+}

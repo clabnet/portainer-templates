@@ -1,0 +1,5 @@
+include:
+  - ../_shared/networks.yml
+  - ./invoiceshelf/docker-compose.yml
+  #- ./invoicerr/docker-compose.yml
+  #- ./dokploy/docker-compose.yml

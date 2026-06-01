@@ -1,0 +1,21 @@
+services:
+  myspeed:
+    image: germannewsmaker/myspeed:latest
+    container_name: myspeed
+    ports:
+      - "5216:5216"
+    volumes:
+      - myspeed_data:/myspeed/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-Europe/Rome}
+    restart: unless-stopped
+    networks:
+      - horizon_network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+volumes:
+  myspeed_data:
+    name: myspeed_data

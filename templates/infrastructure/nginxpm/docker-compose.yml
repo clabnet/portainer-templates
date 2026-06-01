@@ -1,0 +1,28 @@
+services:
+  # Nginx Proxy Manager - Reverse Proxy
+  nginxpm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginxpm
+    hostname: nginxpm
+    restart: unless-stopped
+    networks:
+      - horizon_network
+    ports:
+      - "${NPM_HTTP_PORT:-80}:80"
+      - "${NPM_HTTPS_PORT:-443}:443"
+      - "${NPM_ADMIN_PORT:-81}:81"
+    volumes:
+      - /Volume1/public/config/nginxpm/data:/data
+      - /Volume1/public/config/nginxpm/letsencrypt:/etc/letsencrypt
+    environment:
+      - DISABLE_IPV6=${NPM_DISABLE_IPV6:-true}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    labels:
+    - "com.centurylinklabs.watchtower.monitor-only=true"

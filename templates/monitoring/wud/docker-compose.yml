@@ -1,0 +1,20 @@
+services:
+  wud:
+    image: "getwud/wud:${WUD_IMAGE_VERSION:-latest}"
+    container_name: wud
+    hostname: wud
+    restart: unless-stopped
+    networks:
+      - horizon_network
+    ports:
+      - "${WUD_HTTP_PORT:-3003}:3000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    environment:
+      TZ: Europe/Rome
+      WUD_WATCHER_LOCAL_SOCKET: /var/run/docker.sock
+      WUD_WATCHER_LOCAL_CRON: "${WUD_WATCHER_CRON:-0 * * * *}"
+      WUD_WATCHER_LOCAL_WATCHBYDEFAULT: "true"
+    env_file:
+      - path: ./.env
+        required: false

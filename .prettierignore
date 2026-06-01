@@ -1,0 +1,7 @@
+# Ignore YAML files
+*.yaml
+*.yml
+
+# Or specific files/folders
+config/*.yaml
+docker-compose.yml

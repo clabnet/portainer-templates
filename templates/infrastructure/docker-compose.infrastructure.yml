@@ -1,0 +1,5 @@
+include:
+  - ../_shared/networks.yml
+  - ./homepage/docker-compose.yml
+  - ./adguard/docker-compose.yml
+  - ./nginxpm/docker-compose.yml

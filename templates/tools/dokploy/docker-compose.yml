@@ -1,0 +1,19 @@
+services:
+  dokploy:
+    image: dokploy/dokploy:latest
+    container_name: dokploy
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "3002:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - dokploy-data:/app
+    environment:
+      - NODE_ENV=production
+    labels:
+      - "com.centurylinklabs.watchtower.monitor-only=true"
+
+volumes:
+  dokploy-data:
+    driver: local

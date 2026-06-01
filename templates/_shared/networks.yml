@@ -1,0 +1,4 @@
+networks:
+  horizon_network:
+    driver: bridge
+    external: true

@@ -1,0 +1,20 @@
+services:
+  # Homeassistant Core
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant
+    container_name: homeassistant
+    hostname: homeassistant
+    restart: unless-stopped
+    networks:
+      - horizon_network
+    privileged: true
+    ports:
+      - "8123:8123"
+    volumes:
+      - /Volume1/public/config/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    environment:
+      - TZ=${TZ:-Europe/Rome}
+    labels:
+      - "com.centurylinklabs.watchtower.monitor-only=true"

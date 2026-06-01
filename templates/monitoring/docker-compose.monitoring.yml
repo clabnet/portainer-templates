@@ -1,0 +1,6 @@
+include:
+  - ../_shared/networks.yml
+  - ./uptime/docker-compose.yml
+  - ./myspeed/docker-compose.yml
+  - ./dozzle/docker-compose.yml
+  - ./wud/docker-compose.yml

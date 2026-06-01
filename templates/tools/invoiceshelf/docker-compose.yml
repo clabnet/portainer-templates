@@ -1,0 +1,54 @@
+services:
+  app:
+    image: invoiceshelf/invoiceshelf:nightly
+    container_name: invoiceshelf-app
+    restart: unless-stopped
+    ports:
+      - "8090:8080"
+    volumes:
+      - invoiceshelf-storage:/var/www/html/storage
+    environment:
+      PHP_TZ: ${PHP_TZ:-Europe/Rome}
+      TIMEZONE: ${TIMEZONE:-Europe/Rome}
+      APP_NAME: ${APP_NAME:-InvoiceShelf}
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_URL: ${APP_URL:-http://localhost:8090}
+      APP_KEY: ${APP_KEY}
+      DB_CONNECTION: ${DB_CONNECTION:-pgsql}
+      DB_HOST: ${DB_HOST:-host.docker.internal}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_DATABASE: ${DB_DATABASE:-invoiceshelfdb}
+      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD}
+      CACHE_STORE: ${CACHE_STORE:-file}
+      SESSION_DRIVER: ${SESSION_DRIVER:-file}
+      SESSION_LIFETIME: ${SESSION_LIFETIME:-240}
+      SESSION_DOMAIN: ${SESSION_DOMAIN:-localhost}
+      SANCTUM_STATEFUL_DOMAINS: ${SANCTUM_STATEFUL_DOMAINS:-localhost:8090}
+      STARTUP_DELAY: ${STARTUP_DELAY:-10}
+    depends_on:
+      - mail
+
+  mail:
+    image: axllent/mailpit:latest
+    container_name: invoiceshelf-mailpit
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    ports:
+      - 8025:8025
+      - 1025:1025
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+networks:
+  default:
+    name: horizon_network
+    external: true
+
+volumes:
+  invoiceshelf-storage:

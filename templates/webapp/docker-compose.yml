@@ -1,0 +1,4 @@
+include:
+  - ../_shared/networks.yml
+  - ./wendy/docker-compose.yml
+  #####- ./cateringcare/docker-compose.yml
