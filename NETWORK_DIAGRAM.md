@@ -144,6 +144,7 @@ graph TB
 ## Network Flows
 
 ### 1. **DNS Traffic Flow**
+
 ```
 User Device → 192.168.1.2:53 (AdGuard Home)
                     ↓
@@ -153,6 +154,7 @@ User Device → 192.168.1.2:53 (AdGuard Home)
 ```
 
 ### 2. **Reverse Proxy Flow**
+
 ```
 External Request → 192.168.1.2:80/443 (Nginx Proxy Manager)
                             ↓
@@ -163,6 +165,7 @@ External Request → 192.168.1.2:80/443 (Nginx Proxy Manager)
 ```
 
 ### 3. **Dashboard Widget Flow**
+
 ```
 Browser → Homepage:3005
             ↓
@@ -178,6 +181,7 @@ Browser → Homepage:3005
 ```
 
 ### 4. **Database Access Pattern**
+
 ```
 Services (Immich, Home Assistant, Wendy)
             ↓
@@ -187,6 +191,7 @@ Services (Immich, Home Assistant, Wendy)
 ```
 
 ### 5. **File Access Pattern**
+
 ```
 NAS Volumes
 ├─ /Volume1/public/config/    ← Configuration files
@@ -205,6 +210,7 @@ NAS Volumes
 ## Service Dependencies
 
 ### Startup Order (Recommended)
+
 1. **Database Layer** - PostgreSQL (prerequisite)
 2. **Networking Layer** - horizon_network, AdGuard
 3. **Proxy Layer** - Nginx Proxy Manager
@@ -214,34 +220,35 @@ NAS Volumes
 
 ### Port Assignments
 
-| Service | Port | Type | Purpose |
-|---------|------|------|---------|
-| AdGuard | 53 | UDP/TCP | DNS queries |
-| AdGuard | 8090 | TCP | Admin panel |
-| Nginx PM | 80 | TCP | HTTP traffic |
-| Nginx PM | 443 | TCP | HTTPS traffic |
-| Nginx PM | 81 | TCP | Admin panel |
-| Homepage | 3005 | TCP | Dashboard |
-| Uptime Kuma | 3001 | TCP | Uptime monitoring |
-| Home Assistant | 8123 | TCP | Smart home |
-| Mosquitto | 1883 | TCP | MQTT broker |
-| Immich | 2283 | TCP | Photo library |
-| Plex | 32400 | TCP | Media server |
-| Jellyfin | 8096 | TCP | Media server |
-| Dozzle | 9999 | TCP | Log viewer |
-| Tugtainer | 9412 | TCP | Image monitor |
-| PostgreSQL | 5432 | TCP | Database |
-| MySpeed | 5216 | TCP | Speed test |
-| Wendy | 5454 | TCP | Wedding app backend |
-| Wendy Frontend | 3454 | TCP | Wedding app frontend |
-| InvoiceShelf | 8090 | TCP | Invoicing |
-| Mailpit | 8025 | TCP | Mail testing |
-| Dokploy | 3002 | TCP | Deployment |
-| Portainer Templates | 8099 | TCP | App templates |
+| Service             | Port  | Type    | Purpose              |
+| ------------------- | ----- | ------- | -------------------- |
+| AdGuard             | 53    | UDP/TCP | DNS queries          |
+| AdGuard             | 8090  | TCP     | Admin panel          |
+| Nginx PM            | 80    | TCP     | HTTP traffic         |
+| Nginx PM            | 443   | TCP     | HTTPS traffic        |
+| Nginx PM            | 81    | TCP     | Admin panel          |
+| Homepage            | 3005  | TCP     | Dashboard            |
+| Uptime Kuma         | 3001  | TCP     | Uptime monitoring    |
+| Home Assistant      | 8123  | TCP     | Smart home           |
+| Mosquitto           | 1883  | TCP     | MQTT broker          |
+| Immich              | 2283  | TCP     | Photo library        |
+| Plex                | 32400 | TCP     | Media server         |
+| Jellyfin            | 8096  | TCP     | Media server         |
+| Dozzle              | 9999  | TCP     | Log viewer           |
+| Tugtainer           | 9412  | TCP     | Image monitor        |
+| PostgreSQL          | 5432  | TCP     | Database             |
+| MySpeed             | 5216  | TCP     | Speed test           |
+| Wendy               | 5454  | TCP     | Wedding app backend  |
+| Wendy Frontend      | 3454  | TCP     | Wedding app frontend |
+| InvoiceShelf        | 8090  | TCP     | Invoicing            |
+| Mailpit             | 8025  | TCP     | Mail testing         |
+| Dokploy             | 3002  | TCP     | Deployment           |
+| Portainer Templates | 8099  | TCP     | App templates        |
 
 ## Network Configuration
 
 ### horizon_network Details
+
 - **Type**: Bridge network (internal Docker network)
 - **Driver**: bridge
 - **Scope**: Local (NAS host only)
@@ -254,12 +261,12 @@ Example: `http://tugtainer:9412` (instead of IP)
 
 ```
 ┌─────────────────────────────────────────┐
-│         External Network (Internet)      │
+│         External Network (Internet)     │
 └──────────────────┬──────────────────────┘
                    │
                    ↓ (Port 80/443 only)
          ┌─────────────────────┐
-         │  Nginx Proxy Manager │ (Reverse Proxy)
+         │ Nginx Proxy Manager │ (Reverse Proxy)
          └──────────┬──────────┘
                     │
     ┌───────────────┼───────────────┐
@@ -283,6 +290,7 @@ Example: `http://tugtainer:9412` (instead of IP)
 ```
 
 ### Security Layers
+
 1. **Firewall** - NAS firewall blocks direct access to services
 2. **Reverse Proxy** - Nginx PM validates and routes traffic
 3. **DNS Filtering** - AdGuard blocks malicious domains
@@ -292,12 +300,14 @@ Example: `http://tugtainer:9412` (instead of IP)
 ## Scaling Considerations
 
 ### Current Capacity
+
 - Single NAS host
 - Docker Compose (single engine)
 - Shared PostgreSQL instance
 - Centralized volume storage
 
 ### Future Expansion
+
 - Multi-host Docker Swarm or Kubernetes
 - Distributed PostgreSQL (primary/replica)
 - Separate storage volumes for high-I/O services (Immich)
