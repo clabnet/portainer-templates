@@ -1,0 +1,18 @@
+services:
+  tugtainer:
+    image: "ghcr.io/quenary/tugtainer:${TUGTAINER_IMAGE_VERSION:-latest}"
+    container_name: tugtainer
+    hostname: tugtainer
+    restart: unless-stopped
+    networks:
+      - horizon_network
+    ports:
+      - "${TUGTAINER_HTTP_PORT:-9412}:80"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "tugtainer_data:/tugtainer"
+    environment:
+      TZ: Europe/Rome
+    env_file:
+      - path: ./.env
+        required: false

@@ -3,4 +3,8 @@ include:
   - ./uptime/docker-compose.yml
   - ./myspeed/docker-compose.yml
   - ./dozzle/docker-compose.yml
-  - ./wud/docker-compose.yml
+  - ./tugtainer/docker-compose.yml
+
+
+
+# DEPRECATED - ./wud/docker-compose.yml
