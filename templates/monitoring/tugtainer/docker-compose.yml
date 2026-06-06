@@ -16,3 +16,7 @@ services:
     env_file:
       - path: ./.env
         required: false
+
+volumes:
+  tugtainer_data:
+    name: tugtainer_data
