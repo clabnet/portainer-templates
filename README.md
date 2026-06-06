@@ -57,6 +57,17 @@ All containers share the external `horizon_network` bridge network, declared onc
 
 ---
 
+## Network Architecture
+
+See [NETWORK_DIAGRAM.md](NETWORK_DIAGRAM.md) for a comprehensive visualization of the homelab network, including:
+- Service topology and connections
+- Data flow patterns
+- Port assignments
+- Security layers
+- Scaling considerations
+
+---
+
 ## Prerequisites
 
 - Docker Engine with Compose v2
