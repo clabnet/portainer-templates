@@ -7,7 +7,6 @@ services:
     restart: unless-stopped
     networks:
       - horizon_network
-    privileged: true
     ports:
       - "8123:8123"
     volumes:
@@ -16,5 +15,6 @@ services:
       - /run/dbus:/run/dbus:ro
     environment:
       - TZ=${TZ:-Europe/Rome}
+    privileged: true
     labels:
       - "com.centurylinklabs.watchtower.monitor-only=true"

@@ -3,7 +3,6 @@ services:
     image: dokploy/dokploy:latest
     container_name: dokploy
     restart: unless-stopped
-    privileged: true
     ports:
       - "3002:3000"
     volumes:
@@ -11,6 +10,7 @@ services:
       - dokploy-data:/app
     environment:
       - NODE_ENV=production
+    privileged: true
     labels:
       - "com.centurylinklabs.watchtower.monitor-only=true"
 

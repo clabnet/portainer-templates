@@ -3,6 +3,8 @@ services:
     image: ghcr.io/impre-visible/invoicerr:v1.3.0-debug
     container_name: invoicerr
     restart: unless-stopped
+    networks:
+      - horizon_network
     ports:
       - "8020:80"
     environment:
@@ -33,8 +35,6 @@ services:
       # - VITE_OIDC_ENDPOINT=${VITE_OIDC_ENDPOINT}
 
       - JWT_SECRET=${JWT_SECRET}
-    networks:
-      - horizon_network
 
   # invoicerr_db:
   #   image: postgres:latest
