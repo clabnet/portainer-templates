@@ -32,8 +32,9 @@ portainer-templates/
     │   ├── docker-compose.monitoring.yml
     │   ├── dozzle/
     │   ├── myspeed/
+    │   ├── tugtainer/
     │   ├── uptime/
-    │   └── wud/
+    │   └── wud/                        ← deprecated
     ├── multimedia/
     │   ├── docker-compose.multimedia.yml
     │   ├── immich/
@@ -129,11 +130,13 @@ docker compose -f templates/infrastructure/docker-compose.infrastructure.yml up 
 | UptimeKuma | 3001 | Uptime & availability monitoring   |
 | MySpeed    | 8080 | Scheduled internet speed tests     |
 | Dozzle     | 9999 | Real-time Docker log viewer        |
-| WUD        | 3003 | Docker image update monitor & email notifications |
+| Tugtainer  | 9412 | Docker image update monitor        |
 
 ```bash
 docker compose -f templates/monitoring/docker-compose.monitoring.yml up -d
 ```
+
+**Note:** Tugtainer replaces the deprecated WUD service for monitoring Docker image updates.
 
 ### Multimedia
 
@@ -210,3 +213,31 @@ All `.yml` files are normalized with `Format-YmlFiles.ps1` (LF line endings, no 
 # Apply
 .\Format-YmlFiles.ps1
 ```
+
+---
+
+## Homepage Dashboard
+
+The **Homepage** service provides a centralized dashboard for accessing all homelab services.
+
+### Setup
+
+1. Copy example configuration to NAS:
+   ```bash
+   cp templates/infrastructure/homepage/.env.example /Volume1/public/config/homepage/.env
+   cp templates/infrastructure/homepage/services.example.yaml /Volume1/public/config/homepage/config/services.yaml
+   ```
+
+2. Customize `.env` with your service URLs and API keys
+
+3. Configure widgets in `services.yaml` (see [Homepage Configuration Guide](templates/infrastructure/homepage/README.md))
+
+### Available Widgets
+
+- **Infrastructure**: Portainer, AdGuard Home, Nginx Proxy Manager
+- **Monitoring**: Uptime Kuma, MySpeed, Dozzle, **Tugtainer** (Docker updates)
+- **Multimedia**: Immich, Jellyfin (optional)
+- **Home Automation**: Home Assistant
+- **Other**: Custom links and services
+
+See [Homepage README](templates/infrastructure/homepage/README.md) for detailed configuration and widget options.
