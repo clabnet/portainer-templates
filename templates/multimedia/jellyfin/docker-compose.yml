@@ -17,12 +17,12 @@ services:
       - TZ=${TZ:-Europe/Rome}
     user: 1002:1002
     logging:
-      driver: "local"
+      driver: local
       options:
-        max-size: "50m"
+        max-size: 50m
         max-file: "10"
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - com.centurylinklabs.watchtower.enable=true
 
 volumes:
   jellyfin_config:

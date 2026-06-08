@@ -60,6 +60,7 @@ All containers share the external `horizon_network` bridge network, declared onc
 ## Network Architecture
 
 See [NETWORK_DIAGRAM.md](NETWORK_DIAGRAM.md) for a comprehensive visualization of the homelab network, including:
+
 - Service topology and connections
 - Data flow patterns
 - Port assignments
@@ -103,8 +104,8 @@ http://<nas-ip>:8099/templates.json
 
 ### Database
 
-| Service    | Port | Description      |
-|------------|------|------------------|
+| Service    | Port | Description                                 |
+| ---------- | ---- | ------------------------------------------- |
 | PostgreSQL | 5432 | Relational database, shared by other stacks |
 
 ```bash
@@ -113,10 +114,10 @@ docker compose -f templates/database/docker-compose.database.yml up -d
 
 ### Home Automation
 
-| Service       | Port | Description              |
-|---------------|------|--------------------------|
+| Service        | Port | Description              |
+| -------------- | ---- | ------------------------ |
 | Home Assistant | 8123 | Home automation platform |
-| Mosquitto     | 1883 | MQTT broker              |
+| Mosquitto      | 1883 | MQTT broker              |
 
 ```bash
 docker compose -f templates/home_automation/docker-compose.home_automation.yml up -d
@@ -124,10 +125,10 @@ docker compose -f templates/home_automation/docker-compose.home_automation.yml u
 
 ### Infrastructure
 
-| Service             | Port      | Description                  |
-|---------------------|-----------|------------------------------|
-| AdGuard Home        | 8090      | DNS filtering & ad blocking  |
-| Homepage            | 3005      | Homelab dashboard            |
+| Service             | Port      | Description                     |
+| ------------------- | --------- | ------------------------------- |
+| AdGuard Home        | 8090      | DNS filtering & ad blocking     |
+| Homepage            | 3005      | Homelab dashboard               |
 | Nginx Proxy Manager | 80/443/81 | Reverse proxy + SSL (admin: 81) |
 
 ```bash
@@ -136,12 +137,12 @@ docker compose -f templates/infrastructure/docker-compose.infrastructure.yml up 
 
 ### Monitoring
 
-| Service    | Port | Description                        |
-|------------|------|------------------------------------|
-| UptimeKuma | 3001 | Uptime & availability monitoring   |
-| MySpeed    | 8080 | Scheduled internet speed tests     |
-| Dozzle     | 9999 | Real-time Docker log viewer        |
-| Tugtainer  | 9412 | Docker image update monitor        |
+| Service    | Port | Description                      |
+| ---------- | ---- | -------------------------------- |
+| UptimeKuma | 3001 | Uptime & availability monitoring |
+| MySpeed    | 8080 | Scheduled internet speed tests   |
+| Dozzle     | 9999 | Real-time Docker log viewer      |
+| Tugtainer  | 9412 | Docker image update monitor      |
 
 ```bash
 docker compose -f templates/monitoring/docker-compose.monitoring.yml up -d
@@ -151,10 +152,10 @@ docker compose -f templates/monitoring/docker-compose.monitoring.yml up -d
 
 ### Multimedia
 
-| Service | Port | Description              |
-|---------|------|--------------------------|
-| Immich  | 2283 | Self-hosted photo library |
-| Plex    | 32400 | Media server            |
+| Service | Port  | Description               |
+| ------- | ----- | ------------------------- |
+| Immich  | 2283  | Self-hosted photo library |
+| Plex    | 32400 | Media server              |
 
 ```bash
 docker compose -f templates/multimedia/docker-compose.multimedia.yml up -d
@@ -162,8 +163,8 @@ docker compose -f templates/multimedia/docker-compose.multimedia.yml up -d
 
 ### Tools
 
-| Service      | Port | Description                          |
-|--------------|------|--------------------------------------|
+| Service      | Port | Description                                      |
+| ------------ | ---- | ------------------------------------------------ |
 | InvoiceShelf | 8090 | Invoicing & quote management (+ Mailpit on 8025) |
 
 ```bash
@@ -172,8 +173,8 @@ docker compose -f templates/tools/docker-compose.tools.yml up -d
 
 ### Web Apps
 
-| Service | Ports       | Description            |
-|---------|-------------|------------------------|
+| Service | Ports       | Description                                 |
+| ------- | ----------- | ------------------------------------------- |
 | Wendy   | 5454 / 3454 | Wedding events manager (backend / frontend) |
 
 ```bash
@@ -199,7 +200,7 @@ Port defaults are set via environment variables in each service file (e.g. `${HO
 
 ## Enabling Disabled Services
 
-Services marked *disabled* above have their `include:` line commented out in the aggregator. To enable one:
+Services marked _disabled_ above have their `include:` line commented out in the aggregator. To enable one:
 
 1. Uncomment the line in the aggregator file, e.g.:
    ```yaml
@@ -207,7 +208,7 @@ Services marked *disabled* above have their `include:` line commented out in the
    include:
      - ../_shared/networks.yml
      - ./immich/docker-compose.yml
-     - ./jellyfin/docker-compose.yml   # ← uncomment
+     - ./jellyfin/docker-compose.yml # ← uncomment
    ```
 2. Redeploy the category stack.
 
@@ -234,6 +235,7 @@ The **Homepage** service provides a centralized dashboard for accessing all home
 ### Setup
 
 1. Copy example configuration to NAS:
+
    ```bash
    cp templates/infrastructure/homepage/.env.example /Volume1/public/config/homepage/.env
    cp templates/infrastructure/homepage/services.example.yaml /Volume1/public/config/homepage/config/services.yaml

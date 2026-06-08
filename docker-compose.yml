@@ -2,9 +2,9 @@ services:
   portainer-templates:
     build: .
     container_name: portainer-templates
-    user: "0:0" # run as root nel container
+    user: 0:0 # run as root nel container
     ports:
-      - "8099:80"
+      - 8099:80
     volumes:
       - ./templates:/usr/share/nginx/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf

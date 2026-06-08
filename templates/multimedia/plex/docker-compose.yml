@@ -17,4 +17,4 @@ services:
       - VERSION=docker
       #- PLEX_CLAIM= #optional
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - com.centurylinklabs.watchtower.enable=true

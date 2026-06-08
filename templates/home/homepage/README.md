@@ -5,11 +5,13 @@ Homepage is a self-hosted dashboard that displays widgets for all your services.
 ## Quick Start
 
 1. Copy the example configuration file to the NAS config directory:
+
    ```bash
    cp services.example.yaml /Volume1/public/config/homepage/config/services.yaml
    ```
 
 2. Set up environment variables (copy and customize):
+
    ```bash
    cp .env.example .env
    # Edit .env with your actual service URLs and API keys
@@ -23,42 +25,49 @@ Homepage is a self-hosted dashboard that displays widgets for all your services.
 ## Available Widgets
 
 ### Infrastructure
+
 - **Portainer** - Container management interface
 - **AdGuard Home** - DNS filtering and ad blocking
 - **Nginx Proxy Manager** - Reverse proxy and SSL management
 
 ### Monitoring
+
 - **Uptime Kuma** - Uptime and availability monitoring
 - **Speed Test** - Network speed test results
 - **Tugtainer** - Docker image update monitoring (replaces deprecated WUD)
 
 ### Multimedia
+
 - **Immich** - Self-hosted photo library
 - **Jellyfin** - Media server (optional, commented out)
 
 ### Home Automation
+
 - **Home Assistant** - Smart home automation platform
 
 ### Other
+
 - **Dozzle** - Real-time Docker container logs
 
 ## Configuration Files
 
 ### services.yaml
+
 Main configuration file that defines all dashboard widgets and sections.
 
 **Structure:**
+
 ```yaml
 - Section Name:
     - Service Name:
         description: Brief description
-        icon: icon-name.png  # From https://github.com/walkxcode/dashboard-icons
-        href: http://service-url  # Direct link to service
-        container: container_name  # For status indicator
+        icon: icon-name.png # From https://github.com/walkxcode/dashboard-icons
+        href: http://service-url # Direct link to service
+        container: container_name # For status indicator
         widget:
-            type: widget_type  # portainer, adguard, npm, etc.
-            url: widget_url    # Often same as href
-            # Additional widget-specific options
+          type: widget_type # portainer, adguard, npm, etc.
+          url: widget_url # Often same as href
+          # Additional widget-specific options
 ```
 
 ### Environment Variables
@@ -79,6 +88,7 @@ HOMEPAGE_VAR_TUGTAINER_URL=http://192.168.1.2:9412
 Tugtainer replaces the deprecated "What's Up Docker" (WUD) service for monitoring Docker image updates.
 
 **Configuration:**
+
 ```yaml
 - Monitoring:
     - Tugtainer:
@@ -87,11 +97,12 @@ Tugtainer replaces the deprecated "What's Up Docker" (WUD) service for monitorin
         href: "{{HOMEPAGE_VAR_TUGTAINER_URL}}"
         container: tugtainer
         widget:
-            type: iframe
-            url: "{{HOMEPAGE_VAR_TUGTAINER_URL}}"
+          type: iframe
+          url: "{{HOMEPAGE_VAR_TUGTAINER_URL}}"
 ```
 
 **Setup:**
+
 1. Ensure tugtainer service is running: `docker ps | grep tugtainer`
 2. Set `HOMEPAGE_VAR_TUGTAINER_URL` in `.env` (e.g., `http://192.168.1.2:9412`)
 3. Reload homepage to see the widget
@@ -119,15 +130,18 @@ Tugtainer replaces the deprecated "What's Up Docker" (WUD) service for monitorin
 ## Troubleshooting
 
 **Widgets not loading:**
+
 - Check environment variables are set correctly in `.env`
 - Verify services are accessible from the homepage container
 - Check container logs: `docker logs homepage`
 
 **Icons not showing:**
+
 - Ensure icon filename matches exactly (case-sensitive)
 - Icons should be in `/app/config/icons/` or use URL from walkxcode/dashboard-icons
 
 **Service unavailable:**
+
 - Verify service is running: `docker ps`
 - Check network connectivity: `docker exec homepage ping service-name`
 - Verify URL in environment variables

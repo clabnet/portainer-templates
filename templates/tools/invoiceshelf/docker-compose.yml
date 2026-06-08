@@ -4,7 +4,7 @@ services:
     container_name: invoiceshelf-app
     restart: unless-stopped
     ports:
-      - "8090:8080"
+      - 8090:8080
     volumes:
       - invoiceshelf-storage:/var/www/html/storage
     environment:

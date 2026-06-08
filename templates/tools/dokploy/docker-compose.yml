@@ -4,7 +4,7 @@ services:
     container_name: dokploy
     restart: unless-stopped
     ports:
-      - "3002:3000"
+      - 3002:3000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - dokploy-data:/app
@@ -12,7 +12,7 @@ services:
       - NODE_ENV=production
     privileged: true
     labels:
-      - "com.centurylinklabs.watchtower.monitor-only=true"
+      - com.centurylinklabs.watchtower.monitor-only=true
 
 volumes:
   dokploy-data:

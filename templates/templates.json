@@ -6,13 +6,7 @@
       "title": "Infrastructure",
       "description": "Complete network infrastructure stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
       "note": "Requires external network 'horizon_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
-      "categories": [
-        "Networking",
-        "Security",
-        "DNS",
-        "Proxy",
-        "Infrastructure"
-      ],
+      "categories": ["Networking", "Security", "DNS", "Proxy", "Infrastructure"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "infrastructure",
@@ -70,14 +64,7 @@
       "title": "Database",
       "description": "Database infrastructure stack with PostgreSQL, MySQL, Redis, and database administration tools for application data storage and management",
       "note": "Requires external network 'horizon_network' to be created first. Provides multiple database engines and management interfaces for application backends.",
-      "categories": [
-        "Database",
-        "Storage",
-        "PostgreSQL",
-        "MySQL",
-        "Redis",
-        "Data Management"
-      ],
+      "categories": ["Database", "Storage", "PostgreSQL", "MySQL", "Redis", "Data Management"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "database",
@@ -101,13 +88,7 @@
       "title": "Monitoring",
       "description": "Comprehensive monitoring stack with Prometheus, Grafana, Node Exporter, and Dozzle for metrics collection, visualization, and real-time log monitoring",
       "note": "Requires external network 'horizon_network' to be created first. Includes system metrics monitoring and Docker container log viewing.",
-      "categories": [
-        "Monitoring",
-        "Metrics",
-        "Logs",
-        "Observability",
-        "Analytics"
-      ],
+      "categories": ["Monitoring", "Metrics", "Logs", "Observability", "Analytics"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "monitoring",
@@ -137,14 +118,7 @@
       "title": "Multimedia",
       "description": "Complete multimedia management stack featuring Immich for photo/video management, Jellyfin media server, and supporting services with PostgreSQL database",
       "note": "Requires external network 'horizon_network' to be created first. Includes photo backup, media streaming, and content organization tools.",
-      "categories": [
-        "Media",
-        "Photos",
-        "Videos",
-        "Streaming",
-        "Multimedia",
-        "Entertainment"
-      ],
+      "categories": ["Media", "Photos", "Videos", "Streaming", "Multimedia", "Entertainment"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "multimedia",
@@ -180,13 +154,7 @@
       "title": "Home Automation",
       "description": "Home Assistant Core deployment for comprehensive smart home automation, device integration, and IoT management",
       "note": "Provides local control of smart home devices with support for hundreds of integrations. Access via web interface for configuration and automation setup.",
-      "categories": [
-        "Home Automation",
-        "IoT",
-        "Smart Home",
-        "Assistant",
-        "Automation"
-      ],
+      "categories": ["Home Automation", "IoT", "Smart Home", "Assistant", "Automation"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "homeautomation",
@@ -210,13 +178,7 @@
       "title": "Tools",
       "description": "Essential utility tools collection including file managers, system utilities, network tools, and development aids for homelab administration",
       "note": "Requires external network 'horizon_network' to be created first. Provides various administrative and utility services for homelab management.",
-      "categories": [
-        "Tools",
-        "Utilities",
-        "Administration",
-        "File Management",
-        "System Tools"
-      ],
+      "categories": ["Tools", "Utilities", "Administration", "File Management", "System Tools"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "tools",

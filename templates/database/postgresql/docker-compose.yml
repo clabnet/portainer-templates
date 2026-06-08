@@ -7,7 +7,7 @@ services:
     networks:
       - horizon_network
     ports:
-      - "5432:5432"
+      - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data:rw
     environment:
@@ -17,12 +17,12 @@ services:
     security_opt:
       - no-new-privileges:true
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB:-postgres}", "-U", "${POSTGRES_USER:-postgres}"]
+      test: [CMD, pg_isready, -q, -d, "${POSTGRES_DB:-postgres}", -U, "${POSTGRES_USER:-postgres}"]
       timeout: 45s
       interval: 10s
       retries: 10
     labels:
-      - "com.centurylinklabs.watchtower.monitor-only=true"
+      - com.centurylinklabs.watchtower.monitor-only=true
 
 volumes:
   postgres_data:

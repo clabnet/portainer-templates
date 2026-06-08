@@ -7,8 +7,8 @@ services:
     networks:
       - horizon_network
     ports:
-      - "1883:1883"
-      - "9001:9001"  # WebSocket port (optional)
+      - 1883:1883
+      - 9001:9001 # WebSocket port (optional)
     volumes:
       - /Volume1/public/config/mosquitto/config:/mosquitto/config
       - /Volume1/public/config/mosquitto/data:/mosquitto/data
@@ -17,4 +17,4 @@ services:
     # environment:
     #   <<: *env
     labels:
-      - "com.centurylinklabs.watchtower.monitor-only=true"
+      - com.centurylinklabs.watchtower.monitor-only=true

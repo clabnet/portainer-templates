@@ -9,6 +9,7 @@ A complete infrastructure setup with optimized Docker Compose configuration incl
 ## Quick Start
 
 1. Copy example environment file:
+
    ```bash
    cp .env.example .env
    ```
@@ -16,6 +17,7 @@ A complete infrastructure setup with optimized Docker Compose configuration incl
 2. Customize variables in `.env` with your service URLs and credentials
 
 3. Deploy the infrastructure stack:
+
    ```bash
    docker compose -f docker-compose.infrastructure.yml up -d
    ```
@@ -65,11 +67,11 @@ See [Homepage README](homepage/README.md) for complete setup instructions.
 
 ### Services
 
-| Service             | Port      | Purpose                          |
-| ------------------- | --------- | -------------------------------- |
-| AdGuard Home        | 8090      | DNS filtering & ad blocking      |
-| Homepage            | 3005      | Centralized dashboard            |
-| Nginx Proxy Manager | 80/443/81 | Reverse proxy + SSL management   |
+| Service             | Port      | Purpose                        |
+| ------------------- | --------- | ------------------------------ |
+| AdGuard Home        | 8090      | DNS filtering & ad blocking    |
+| Homepage            | 3005      | Centralized dashboard          |
+| Nginx Proxy Manager | 80/443/81 | Reverse proxy + SSL management |
 
 ### Volumes
 

@@ -6,7 +6,7 @@ services:
     networks:
       - horizon_network
     ports:
-      - "8020:80"
+      - 8020:80
     environment:
       - DATABASE_URL=${DATABASE_URL}
 
@@ -35,7 +35,6 @@ services:
       # - VITE_OIDC_ENDPOINT=${VITE_OIDC_ENDPOINT}
 
       - JWT_SECRET=${JWT_SECRET}
-
   # invoicerr_db:
   #   image: postgres:latest
   #   environment:

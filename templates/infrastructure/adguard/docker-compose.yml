@@ -8,11 +8,11 @@ services:
     networks:
       - horizon_network
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "${ADGUARD_HTTP_PORT:-8090}:80/tcp"
-      - "${ADGUARD_HTTPS_PORT:-8443}:443/tcp"
-      - "${ADGUARD_SETUP_PORT:-3000}:3000/tcp"
+      - 53:53/tcp
+      - 53:53/udp
+      - ${ADGUARD_HTTP_PORT:-8090}:80/tcp
+      - ${ADGUARD_HTTPS_PORT:-8443}:443/tcp
+      - ${ADGUARD_SETUP_PORT:-3000}:3000/tcp
     volumes:
       - adguard_work:/opt/adguardhome/work
       - adguard_conf:/opt/adguardhome/conf
@@ -21,13 +21,13 @@ services:
     cap_add:
       - NET_BIND_SERVICE
     healthcheck:
-      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/" ]
+      test: [CMD, wget, --no-verbose, --tries=1, --spider, http://localhost/]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
     labels:
-      - "com.centurylinklabs.watchtower.monitor-only=true"
+      - com.centurylinklabs.watchtower.monitor-only=true
 
 volumes:
   adguard_work:

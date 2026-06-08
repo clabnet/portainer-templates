@@ -45,13 +45,14 @@ or you can append this to your .zshrc/.bashrc by running this command in your te
 ```
 grep -qxF 'export USRID=$(id -u) GRPID=$(id -g)' ~/.${SHELL##*/}rc || echo 'export USRID=$(id -u) GRPID=$(id -g)' >> ~/.${SHELL##*/}rc
 ```
+
 this will append the `export` line to your rc file and run it on each terminal session.
 
 ### 3. Clone the project
 
 Clone the InvoiceShelf project directly from InvoiceShelf git or your forked repository:
 
-```bash 
+```bash
 git clone git@github.com:InvoiceShelf/InvoiceShelf.git
 ```
 
@@ -59,10 +60,10 @@ git clone git@github.com:InvoiceShelf/InvoiceShelf.git
 
 We bundled separate docker-compose.yml file for each database: MySQL, PostgresSQL and SQLite, you can use any of those to spin up your development environment.
 
-| Database | Compose File              |
-|---------|---------------------------|
-| SQLite3 | docker-compose.sqlite.yml |
-| MariaDB | docker-compose.mysql.yml  |
+| Database    | Compose File              |
+| ----------- | ------------------------- |
+| SQLite3     | docker-compose.sqlite.yml |
+| MariaDB     | docker-compose.mysql.yml  |
 | PostgresSQL | dpcler-compose.pgsql.yml  |
 
 ### 1. Spinning Up
@@ -109,13 +110,13 @@ This dockerized environment comes with support for all three databases that Invo
 
 The setup parameters/credentials for each of the supported databases are as follows.
 
-|   | MySQL | PostgreSQL | SQLite                                    |
-|---|---|---|-------------------------------------------|
-| **DB_USER** | invoiceshelf  | invoiceshelf | Not applicable                            |
-| **DB_PASS** | invoiceshelf  | invoiceshelf | Not applicable                            |
-| **DB_NAME** | invoiceshelf  | invoiceshelf | /var/www/html/storage/app/database.sqlite |
-| **DB_HOST** | 172.18.0.1  |  172.18.0.1 | Not applicable                            |
-| **DB_PORT** | 3306  | 5432  | Not applicable                            |
+|             | MySQL        | PostgreSQL   | SQLite                                    |
+| ----------- | ------------ | ------------ | ----------------------------------------- |
+| **DB_USER** | invoiceshelf | invoiceshelf | Not applicable                            |
+| **DB_PASS** | invoiceshelf | invoiceshelf | Not applicable                            |
+| **DB_NAME** | invoiceshelf | invoiceshelf | /var/www/html/storage/app/database.sqlite |
+| **DB_HOST** | 172.18.0.1   | 172.18.0.1   | Not applicable                            |
+| **DB_PORT** | 3306         | 5432         | Not applicable                            |
 
 **Note:** The only required field for SQLite is **DB_NAME**.
 
@@ -136,11 +137,10 @@ To log into the MySQL or PostgresSQL, use the database information specified in 
 To log into the SQLite, use the following credentials:
 
 | KEY          | VALUE                        |
-|--------------|------------------------------|
+| ------------ | ---------------------------- |
 | **USERNAME** | admin                        |
 | **PASSWORD** | admin                        |
 | **DATABASE** | /storage/app/database.sqlite |
-
 
 ### 4. Mailpit (fake mail)
 
@@ -157,10 +157,8 @@ To utilize Mailpit, use the following credentials:
 | **FROM MAIL ADDR**  | your choice |
 | **FROM MAIL NAME**  | your choice |
 
-
 **URL**: http://invoiceshelf.test:8025
 
 ---
 
 If you have any questions, feel free to open issue.
-

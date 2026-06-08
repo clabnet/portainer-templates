@@ -1,1 +1,9 @@
 **/.env
+node_modules
+dist
+build
+*.log
+*.tmp
+*.bak
+.DS_Store
+.idea

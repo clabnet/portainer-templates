@@ -1,0 +1,26 @@
+{
+  "name": "portainer-templates",
+  "version": "1.0.0",
+  "description": "Docker Compose stacks for a self-hosted homelab, organized by category and served as [Portainer App Templates](https://docs.portainer.io/user/docker/templates) via a local nginx container.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"templates/**/*.yml\" \"templates/**/*.yaml\" \"*.json\" \"*.md\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clabnet/portainer-templates.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/clabnet/portainer-templates/issues"
+  },
+  "homepage": "https://github.com/clabnet/portainer-templates#readme",
+  "devDependencies": {
+    "prettier": "^3.8.3",
+    "prettier-plugin-yaml": "^1.2.0"
+  }
+}

@@ -6,7 +6,7 @@ services:
     networks:
       - horizon_network
     ports:
-      - "5216:5216"
+      - 5216:5216
     volumes:
       - myspeed_data:/myspeed/data
     environment:
@@ -14,7 +14,7 @@ services:
       - PGID=1000
       - TZ=${TZ:-Europe/Rome}
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - com.centurylinklabs.watchtower.enable=true
 
 volumes:
   myspeed_data:

@@ -14,7 +14,7 @@ services:
     env_file:
       - .env
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - com.centurylinklabs.watchtower.enable=true
 
   frontend:
     image: ghcr.io/clabnet/wendy-frontend:latest
@@ -31,4 +31,4 @@ services:
     depends_on:
       - backend
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - com.centurylinklabs.watchtower.enable=true

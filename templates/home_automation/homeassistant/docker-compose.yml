@@ -1,14 +1,14 @@
 services:
   # Homeassistant Core
   homeassistant:
-    image: ghcr.io/home-assistant/home-assistant
+    image: home-assistant/home-assistant:latest
     container_name: homeassistant
     hostname: homeassistant
     restart: unless-stopped
     networks:
       - horizon_network
     ports:
-      - "8123:8123"
+      - 8123:8123
     volumes:
       - /Volume1/public/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -17,9 +17,9 @@ services:
       - TZ=${TZ:-Europe/Rome}
     privileged: true
     labels:
-      - "com.centurylinklabs.watchtower.monitor-only=true"
+      - com.centurylinklabs.watchtower.monitor-only=true
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8123/api/api"]
+      test: [CMD, curl, -f, http://localhost:8123/api/api]
       interval: 30s
       timeout: 10s
       retries: 3
