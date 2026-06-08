@@ -1,0 +1,659 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1250" width="1600" height="1250"
+     font-family="'Segoe UI', 'SF Pro Display', system-ui, sans-serif">
+
+  <defs>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- Glow (for docker daemon hub) -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Group glow filter -->
+    <filter id="group-glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="grad-infra" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A90E2" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#4A90E2" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="grad-mon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7ED321" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#7ED321" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="grad-media" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F5A623" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#F5A623" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="grad-auto" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9013FE" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#9013FE" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="grad-db" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#FF6B6B" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="grad-tools" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#50E3C2" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#50E3C2" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="grad-webapp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B8E986" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#B8E986" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="grad-ext" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CCCCCC" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#CCCCCC" stop-opacity="0.10"/>
+    </linearGradient>
+    <linearGradient id="grad-storage" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFA500" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#FFA500" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="grad-daemon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E3A5F" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0F1F36" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="grad-title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="50%" stop-color="#1A2744"/>
+      <stop offset="100%" stop-color="#0D1B2A"/>
+    </linearGradient>
+
+    <!-- Arrowhead markers -->
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4A90E2"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7ED321"/>
+    </marker>
+    <marker id="arrow-green-rev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto">
+      <polygon points="10 0, 0 3.5, 10 7" fill="#7ED321"/>
+    </marker>
+    <marker id="arrow-grey" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#AAAAAA"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FF6B6B"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9013FE"/>
+    </marker>
+    <marker id="arrow-purple-rev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto">
+      <polygon points="10 0, 0 3.5, 10 7" fill="#9013FE"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#50E3C2"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FFA500"/>
+    </marker>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BACKGROUND                                                       -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <rect width="1600" height="1250" fill="#0F1117"/>
+
+  <!-- Subtle grid overlay -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#FFFFFF" stroke-width="0.15" stroke-opacity="0.06"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="1250" fill="url(#grid)"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TITLE BAR                                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <rect width="1600" height="44" fill="url(#grad-title)"/>
+  <rect width="1600" height="1" y="44" fill="#4A90E2" fill-opacity="0.4"/>
+  <text x="800" y="20" text-anchor="middle" fill="#E8F0FE" font-size="15" font-weight="700" letter-spacing="3.5">clabnet HOMELAB INFRASTRUCTURE</text>
+  <text x="800" y="36" text-anchor="middle" fill="#5A7BA6" font-size="10" letter-spacing="1">192.168.1.2 · horizon_network · Docker Compose</text>
+  <!-- Accent dots -->
+  <circle cx="30" cy="22" r="5" fill="#FF6B6B" fill-opacity="0.8"/>
+  <circle cx="48" cy="22" r="5" fill="#F5A623" fill-opacity="0.8"/>
+  <circle cx="66" cy="22" r="5" fill="#7ED321" fill-opacity="0.8"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- GROUP BOUNDARIES (drawn first, behind everything)               -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- External (User + NAS) group -->
+  <rect x="55" y="54" width="505" height="105" rx="12" fill="none"
+        stroke="#CCCCCC" stroke-width="1.2" stroke-opacity="0.25"/>
+  <text x="72" y="70" fill="#CCCCCC" fill-opacity="0.55" font-size="10" font-weight="600" letter-spacing="1.5">EXTERNAL NETWORK · 192.168.1.x</text>
+
+  <!-- External Services group -->
+  <rect x="1040" y="54" width="525" height="105" rx="12" fill="none"
+        stroke="#CCCCCC" stroke-width="1.2" stroke-opacity="0.25"/>
+  <text x="1057" y="70" fill="#CCCCCC" fill-opacity="0.55" font-size="10" font-weight="600" letter-spacing="1.5">EXTERNAL SERVICES</text>
+
+  <!-- Infrastructure group -->
+  <rect x="55" y="185" width="1510" height="115" rx="12" fill="none"
+        stroke="#4A90E2" stroke-width="1.2" stroke-opacity="0.3"/>
+  <text x="72" y="201" fill="#4A90E2" fill-opacity="0.65" font-size="10" font-weight="600" letter-spacing="1.5">INFRASTRUCTURE · horizon_network</text>
+
+  <!-- Monitoring group -->
+  <rect x="55" y="325" width="225" height="360" rx="12" fill="none"
+        stroke="#7ED321" stroke-width="1.2" stroke-opacity="0.3"/>
+  <text x="72" y="341" fill="#7ED321" fill-opacity="0.65" font-size="10" font-weight="600" letter-spacing="1.5">MONITORING</text>
+
+  <!-- Multimedia group -->
+  <rect x="300" y="325" width="225" height="275" rx="12" fill="none"
+        stroke="#F5A623" stroke-width="1.2" stroke-opacity="0.3"/>
+  <text x="317" y="341" fill="#F5A623" fill-opacity="0.65" font-size="10" font-weight="600" letter-spacing="1.5">MULTIMEDIA</text>
+
+  <!-- Automation group -->
+  <rect x="545" y="325" width="225" height="190" rx="12" fill="none"
+        stroke="#9013FE" stroke-width="1.2" stroke-opacity="0.3"/>
+  <text x="562" y="341" fill="#9013FE" fill-opacity="0.65" font-size="10" font-weight="600" letter-spacing="1.5">HOME AUTOMATION</text>
+
+  <!-- Database group -->
+  <rect x="790" y="325" width="225" height="105" rx="12" fill="none"
+        stroke="#FF6B6B" stroke-width="1.2" stroke-opacity="0.3"/>
+  <text x="807" y="341" fill="#FF6B6B" fill-opacity="0.65" font-size="10" font-weight="600" letter-spacing="1.5">DATABASE</text>
+
+  <!-- Tools group -->
+  <rect x="55" y="720" width="225" height="270" rx="12" fill="none"
+        stroke="#50E3C2" stroke-width="1.2" stroke-opacity="0.3"/>
+  <text x="72" y="736" fill="#50E3C2" fill-opacity="0.65" font-size="10" font-weight="600" letter-spacing="1.5">TOOLS</text>
+
+  <!-- Web Apps group -->
+  <rect x="300" y="720" width="225" height="190" rx="12" fill="none"
+        stroke="#B8E986" stroke-width="1.2" stroke-opacity="0.3"/>
+  <text x="317" y="736" fill="#B8E986" fill-opacity="0.65" font-size="10" font-weight="600" letter-spacing="1.5">WEB APPS</text>
+
+  <!-- Template Server group -->
+  <rect x="545" y="720" width="225" height="105" rx="12" fill="none"
+        stroke="#B8E986" stroke-width="1.2" stroke-opacity="0.25"/>
+  <text x="562" y="736" fill="#B8E986" fill-opacity="0.55" font-size="10" font-weight="600" letter-spacing="1.5">TEMPLATE SERVER</text>
+
+  <!-- NAS Volumes group -->
+  <rect x="300" y="1015" width="760" height="90" rx="12" fill="none"
+        stroke="#FFA500" stroke-width="1.2" stroke-opacity="0.35" stroke-dasharray="8 4"/>
+  <text x="317" y="1031" fill="#FFA500" fill-opacity="0.65" font-size="10" font-weight="600" letter-spacing="1.5">NAS VOLUMES · /Volume1/</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- CONNECTION PATHS                                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- ── User → AdGuard (DNS) ── -->
+  <path d="M 248,159 C 248,178 248,178 248,200" stroke="#4A90E2" stroke-width="2" fill="none" marker-end="url(#arrow-blue)" opacity="0.85"/>
+  <!-- User → NPM -->
+  <path d="M 308,132 C 420,132 640,175 750,200" stroke="#4A90E2" stroke-width="2" fill="none" marker-end="url(#arrow-blue)" opacity="0.85"/>
+  <!-- User → Homepage -->
+  <path d="M 378,132 C 700,132 1050,175 1235,200" stroke="#AAAAAA" stroke-width="1.5" fill="none" marker-end="url(#arrow-grey)" opacity="0.7"/>
+  <!-- User → Portainer Cloud -->
+  <path d="M 378,110 C 700,100 1050,100 1110,110" stroke="#AAAAAA" stroke-width="1.5" fill="none" marker-end="url(#arrow-grey)" opacity="0.7"/>
+
+  <!-- ── Homepage → monitoring widgets (fan out left) ── -->
+  <!-- homepage bottom = (1235, 300) -->
+  <path d="M 1235,300 C 1235,360 168,340 168,355" stroke="#AAAAAA" stroke-width="1.2" fill="none" marker-end="url(#arrow-grey)" stroke-opacity="0.55"/>
+  <path d="M 1235,300 C 1235,370 168,415 168,430" stroke="#AAAAAA" stroke-width="1.2" fill="none" marker-end="url(#arrow-grey)" stroke-opacity="0.55"/>
+  <path d="M 1235,300 C 1235,385 168,490 168,505" stroke="#AAAAAA" stroke-width="1.2" fill="none" marker-end="url(#arrow-grey)" stroke-opacity="0.55"/>
+  <path d="M 1235,300 C 1235,400 168,565 168,580" stroke="#AAAAAA" stroke-width="1.2" fill="none" marker-end="url(#arrow-grey)" stroke-opacity="0.55"/>
+  <!-- Homepage → AdGuard (horizontal, widget) -->
+  <path d="M 1150,248 C 900,248 600,248 345,248" stroke="#AAAAAA" stroke-width="1.2" fill="none" marker-end="url(#arrow-grey)" stroke-opacity="0.55"/>
+  <!-- Homepage → NPM (horizontal, widget) -->
+  <path d="M 1150,256 C 1020,256 995,256 860,256" stroke="#AAAAAA" stroke-width="1.2" fill="none" marker-end="url(#arrow-grey)" stroke-opacity="0.55"/>
+  <!-- Homepage → Immich (widget) -->
+  <path d="M 1235,300 C 1235,390 413,360 413,355" stroke="#AAAAAA" stroke-width="1.2" fill="none" marker-end="url(#arrow-grey)" stroke-opacity="0.55"/>
+
+  <!-- ── Uptime → Homepage (checks, reverse green) ── -->
+  <path d="M 225,383 C 700,350 1100,310 1150,300" stroke="#7ED321" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)" stroke-opacity="0.6" stroke-dasharray="4 3"/>
+  <!-- Uptime → HomeAssistant -->
+  <path d="M 225,400 C 400,400 490,400 545,395" stroke="#7ED321" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)" stroke-opacity="0.6" stroke-dasharray="4 3"/>
+
+  <!-- ── Tugtainer → Docker Daemon ── -->
+  <path d="M 168,680 C 168,900 750,1060 750,1075" stroke="#7ED321" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)" opacity="0.75"/>
+  <!-- Dozzle → Docker Daemon -->
+  <path d="M 168,605 C 168,870 730,1060 730,1075" stroke="#7ED321" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)" opacity="0.6"/>
+  <!-- Watchtower → Docker Daemon -->
+  <path d="M 1410,159 C 1410,900 800,1060 800,1075" stroke="#AAAAAA" stroke-width="1.5" fill="none" marker-end="url(#arrow-grey)" opacity="0.6"/>
+
+  <!-- ── MySpeed → User (tests) ── -->
+  <path d="M 168,455 C 168,250 248,200 248,159" stroke="#7ED321" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)" stroke-opacity="0.55" stroke-dasharray="4 3"/>
+
+  <!-- ── DB connections ── -->
+  <!-- Immich → Postgres -->
+  <path d="M 500,400 C 640,400 760,400 790,400" stroke="#FF6B6B" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)" opacity="0.75"/>
+  <!-- HA → Postgres -->
+  <path d="M 745,395 C 770,395 780,395 790,385" stroke="#FF6B6B" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)" opacity="0.75"/>
+  <!-- Wendy Backend → Postgres -->
+  <path d="M 413,898 C 413,970 880,980 880,950" stroke="#FF6B6B" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)" opacity="0.65"/>
+  <!-- InvoiceShelf → Postgres -->
+  <path d="M 168,808 C 168,970 880,970 880,950" stroke="#FF6B6B" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)" opacity="0.55"/>
+
+  <!-- ── HA ↔ MQTT (bidirectional) ── -->
+  <path d="M 645,515 C 645,527 645,527 645,540" stroke="#9013FE" stroke-width="1.8" fill="none"
+        marker-start="url(#arrow-purple-rev)" marker-end="url(#arrow-purple)" opacity="0.85"/>
+
+  <!-- ── WendyFE → WendyBE (API) ── -->
+  <path d="M 413,823 C 413,833 413,833 413,848" stroke="#50E3C2" stroke-width="1.5" fill="none" marker-end="url(#arrow-teal)" opacity="0.8"/>
+
+  <!-- ── InvoiceShelf → Mailpit (SMTP) ── -->
+  <path d="M 168,823 C 168,833 168,833 168,848" stroke="#50E3C2" stroke-width="1.5" fill="none" marker-end="url(#arrow-teal)" opacity="0.8"/>
+
+  <!-- ── PortainerTemplates → Portainer Cloud (serves) ── -->
+  <path d="M 657,770 C 800,740 1000,132 1175,132" stroke="#CCCCCC" stroke-width="1.2" fill="none" marker-end="url(#arrow-grey)" stroke-opacity="0.45" stroke-dasharray="5 3"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- VOLUME MOUNT LINES (dashed amber, routed via y=1000 bus)         -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- shared horizontal bus at y=1000 -->
+  <!-- adguard → vol-config -->
+  <path d="M 248,300 C 248,980 470,1000 470,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.55"/>
+  <!-- NPM → vol-config -->
+  <path d="M 750,300 C 750,980 490,1000 490,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.45"/>
+  <!-- Homepage → vol-config -->
+  <path d="M 1235,300 C 1235,990 510,1000 510,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.4"/>
+  <!-- Immich → vol-config -->
+  <path d="M 413,600 C 413,990 530,1000 530,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.5"/>
+  <!-- Jellyfin → vol-config -->
+  <path d="M 413,675 C 413,995 520,1002 520,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.45"/>
+  <!-- Mosquitto → vol-config -->
+  <path d="M 645,590 C 645,990 540,1000 540,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.45"/>
+  <!-- Immich → vol-media -->
+  <path d="M 420,600 C 420,985 790,1000 800,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.5"/>
+  <!-- Plex → vol-media -->
+  <path d="M 413,675 C 500,990 810,1000 820,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.45"/>
+  <!-- Jellyfin → vol-media -->
+  <path d="M 425,675 C 500,985 825,1000 830,1015" stroke="#FFA500" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)" stroke-dasharray="6 3" stroke-opacity="0.4"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- CONNECTION LABELS                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- DNS :53 label -->
+  <rect x="196" y="172" width="52" height="14" rx="3" fill="#0F1117" fill-opacity="0.85"/>
+  <text x="222" y="182" text-anchor="middle" fill="#4A90E2" font-size="9" font-style="italic">DNS :53</text>
+
+  <!-- HTTP/HTTPS label -->
+  <rect x="565" y="148" width="70" height="14" rx="3" fill="#0F1117" fill-opacity="0.85"/>
+  <text x="600" y="158" text-anchor="middle" fill="#4A90E2" font-size="9" font-style="italic">HTTP/HTTPS</text>
+
+  <!-- MQTT label -->
+  <rect x="618" y="522" width="38" height="14" rx="3" fill="#0F1117" fill-opacity="0.85"/>
+  <text x="637" y="532" text-anchor="middle" fill="#9013FE" font-size="9" font-style="italic">MQTT</text>
+
+  <!-- API label -->
+  <rect x="391" y="830" width="28" height="14" rx="3" fill="#0F1117" fill-opacity="0.85"/>
+  <text x="405" y="840" text-anchor="middle" fill="#50E3C2" font-size="9" font-style="italic">API</text>
+
+  <!-- SMTP label -->
+  <rect x="144" y="830" width="34" height="14" rx="3" fill="#0F1117" fill-opacity="0.85"/>
+  <text x="161" y="840" text-anchor="middle" fill="#50E3C2" font-size="9" font-style="italic">SMTP</text>
+
+  <!-- monitors label (Tugtainer → Docker) -->
+  <rect x="30" y="870" width="52" height="14" rx="3" fill="#0F1117" fill-opacity="0.85"/>
+  <text x="56" y="880" text-anchor="middle" fill="#7ED321" font-size="9" font-style="italic">monitors</text>
+
+  <!-- logs label -->
+  <rect x="35" y="810" width="32" height="14" rx="3" fill="#0F1117" fill-opacity="0.85"/>
+  <text x="51" y="820" text-anchor="middle" fill="#7ED321" font-size="9" font-style="italic">logs</text>
+
+  <!-- widget labels (small, on the right side) -->
+  <rect x="1240" y="326" width="38" height="14" rx="3" fill="#0F1117" fill-opacity="0.85"/>
+  <text x="1259" y="336" text-anchor="middle" fill="#888888" font-size="9" font-style="italic">widgets</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ZONE 1 — EXTERNAL NODES                                          -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- User / Client -->
+  <g id="node-user" transform="translate(68,75)" filter="url(#shadow)">
+    <rect width="170" height="75" rx="8" fill="url(#grad-ext)" stroke="#CCCCCC" stroke-width="1" stroke-opacity="0.45"/>
+    <text x="14" y="30" font-size="20">💻</text>
+    <text x="40" y="29" fill="#EEEEEE" font-size="13" font-weight="600">User / Client</text>
+    <rect x="40" y="35" width="85" height="17" rx="4" fill="#CCCCCC" fill-opacity="0.15"/>
+    <text x="82" y="47" text-anchor="middle" fill="#CCCCCC" font-size="9" font-weight="500">192.168.1.x</text>
+    <text x="14" y="66" fill="#777" font-size="10">Browser · DNS client</text>
+  </g>
+
+  <!-- NAS -->
+  <g id="node-nas" transform="translate(258,75)" filter="url(#shadow)">
+    <rect width="170" height="75" rx="8" fill="url(#grad-ext)" stroke="#CCCCCC" stroke-width="1" stroke-opacity="0.45"/>
+    <text x="14" y="30" font-size="20">🗄️</text>
+    <text x="40" y="29" fill="#EEEEEE" font-size="13" font-weight="600">TerraMaster NAS</text>
+    <rect x="40" y="35" width="90" height="17" rx="4" fill="#CCCCCC" fill-opacity="0.15"/>
+    <text x="85" y="47" text-anchor="middle" fill="#CCCCCC" font-size="9" font-weight="500">192.168.1.2</text>
+    <text x="14" y="66" fill="#777" font-size="10">Docker host · Volume storage</text>
+  </g>
+
+  <!-- Portainer Cloud -->
+  <g id="node-portainer-cloud" transform="translate(1055,75)" filter="url(#shadow)">
+    <rect width="185" height="75" rx="8" fill="url(#grad-ext)" stroke="#CCCCCC" stroke-width="1" stroke-opacity="0.45"/>
+    <text x="14" y="30" font-size="20">☁️</text>
+    <text x="40" y="29" fill="#EEEEEE" font-size="13" font-weight="600">Portainer Cloud</text>
+    <rect x="40" y="35" width="95" height="17" rx="4" fill="#CCCCCC" fill-opacity="0.15"/>
+    <text x="87" y="47" text-anchor="middle" fill="#CCCCCC" font-size="9" font-weight="500">Container Mgmt</text>
+    <text x="14" y="66" fill="#777" font-size="10">Remote container management</text>
+  </g>
+
+  <!-- Watchtower -->
+  <g id="node-watchtower" transform="translate(1265,75)" filter="url(#shadow)">
+    <rect width="175" height="75" rx="8" fill="url(#grad-ext)" stroke="#CCCCCC" stroke-width="1" stroke-opacity="0.45"/>
+    <text x="14" y="30" font-size="20">🔭</text>
+    <text x="40" y="29" fill="#EEEEEE" font-size="13" font-weight="600">Watchtower</text>
+    <rect x="40" y="35" width="95" height="17" rx="4" fill="#CCCCCC" fill-opacity="0.15"/>
+    <text x="87" y="47" text-anchor="middle" fill="#CCCCCC" font-size="9" font-weight="500">Image Auto-Update</text>
+    <text x="14" y="66" fill="#777" font-size="10">Auto-pulls latest images</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ZONE 2 — INFRASTRUCTURE                                          -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- AdGuard Home -->
+  <g id="node-adguard" transform="translate(153,200)" filter="url(#shadow)">
+    <rect width="190" height="80" rx="8" fill="url(#grad-infra)" stroke="#4A90E2" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="14" y="32" font-size="20">🛡️</text>
+    <text x="42" y="31" fill="#FFFFFF" font-size="13" font-weight="600">AdGuard Home</text>
+    <rect x="42" y="38" width="95" height="17" rx="4" fill="#4A90E2" fill-opacity="0.25"/>
+    <text x="89" y="50" text-anchor="middle" fill="#4A90E2" font-size="9" font-weight="600">:53 / :8090</text>
+    <text x="14" y="70" fill="#7BA8D4" font-size="10">DNS filtering · Ad blocker</text>
+  </g>
+
+  <!-- Nginx Proxy Manager -->
+  <g id="node-npm" transform="translate(560,200)" filter="url(#shadow)">
+    <rect width="190" height="80" rx="8" fill="url(#grad-infra)" stroke="#4A90E2" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="14" y="32" font-size="20">🔀</text>
+    <text x="42" y="31" fill="#FFFFFF" font-size="13" font-weight="600">Nginx Proxy Mgr</text>
+    <rect x="42" y="38" width="110" height="17" rx="4" fill="#4A90E2" fill-opacity="0.25"/>
+    <text x="97" y="50" text-anchor="middle" fill="#4A90E2" font-size="9" font-weight="600">:80 / :443 / :81</text>
+    <text x="14" y="70" fill="#7BA8D4" font-size="10">Reverse proxy · SSL termination</text>
+  </g>
+
+  <!-- Homepage Dashboard -->
+  <g id="node-homepage" transform="translate(1150,200)" filter="url(#shadow)">
+    <rect width="190" height="80" rx="8" fill="url(#grad-infra)" stroke="#4A90E2" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="14" y="32" font-size="20">🏠</text>
+    <text x="42" y="31" fill="#FFFFFF" font-size="13" font-weight="600">Homepage</text>
+    <rect x="42" y="38" width="55" height="17" rx="4" fill="#4A90E2" fill-opacity="0.25"/>
+    <text x="69" y="50" text-anchor="middle" fill="#4A90E2" font-size="9" font-weight="600">:3005</text>
+    <text x="14" y="70" fill="#7BA8D4" font-size="10">Unified service dashboard</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ZONE 3 — CORE SERVICES                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- ── Monitoring column (x=68) ── -->
+
+  <!-- Uptime Kuma -->
+  <g id="node-uptime" transform="translate(68,350)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-mon)" stroke="#7ED321" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">📡</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">Uptime Kuma</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#7ED321" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#7ED321" font-size="9" font-weight="600">:3001</text>
+    <text x="12" y="60" fill="#8DBF5A" font-size="9">Uptime &amp; service monitoring</text>
+  </g>
+
+  <!-- MySpeed -->
+  <g id="node-myspeed" transform="translate(68,430)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-mon)" stroke="#7ED321" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">⚡</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">MySpeed</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#7ED321" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#7ED321" font-size="9" font-weight="600">:5216</text>
+    <text x="12" y="60" fill="#8DBF5A" font-size="9">Network speed testing</text>
+  </g>
+
+  <!-- Dozzle -->
+  <g id="node-dozzle" transform="translate(68,510)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-mon)" stroke="#7ED321" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">📋</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">Dozzle</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#7ED321" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#7ED321" font-size="9" font-weight="600">:9999</text>
+    <text x="12" y="60" fill="#8DBF5A" font-size="9">Container log viewer</text>
+  </g>
+
+  <!-- Tugtainer -->
+  <g id="node-tugtainer" transform="translate(68,590)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-mon)" stroke="#7ED321" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">🐳</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">Tugtainer</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#7ED321" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#7ED321" font-size="9" font-weight="600">:9412</text>
+    <text x="12" y="60" fill="#8DBF5A" font-size="9">Image update monitor</text>
+  </g>
+
+  <!-- ── Multimedia column (x=313) ── -->
+
+  <!-- Immich -->
+  <g id="node-immich" transform="translate(313,350)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-media)" stroke="#F5A623" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">📷</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">Immich</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#F5A623" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#F5A623" font-size="9" font-weight="600">:2283</text>
+    <text x="12" y="60" fill="#C9882E" font-size="9">Self-hosted photo library</text>
+  </g>
+
+  <!-- Plex -->
+  <g id="node-plex" transform="translate(313,430)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-media)" stroke="#F5A623" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">🎬</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">Plex</text>
+    <rect x="36" y="33" width="60" height="15" rx="3" fill="#F5A623" fill-opacity="0.25"/>
+    <text x="66" y="44" text-anchor="middle" fill="#F5A623" font-size="9" font-weight="600">:32400</text>
+    <text x="12" y="60" fill="#C9882E" font-size="9">Media streaming server</text>
+  </g>
+
+  <!-- Jellyfin -->
+  <g id="node-jellyfin" transform="translate(313,510)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-media)" stroke="#F5A623" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">🎭</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">Jellyfin</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#F5A623" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#F5A623" font-size="9" font-weight="600">:8096</text>
+    <text x="12" y="60" fill="#C9882E" font-size="9">Open-source media server</text>
+  </g>
+
+  <!-- ── Automation column (x=558) ── -->
+
+  <!-- Home Assistant -->
+  <g id="node-homeassistant" transform="translate(558,350)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-auto)" stroke="#9013FE" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">🏡</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">Home Assistant</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#9013FE" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#B060FF" font-size="9" font-weight="600">:8123</text>
+    <text x="12" y="60" fill="#9060CC" font-size="9">Smart home automation</text>
+  </g>
+
+  <!-- Mosquitto MQTT -->
+  <g id="node-mosquitto" transform="translate(558,430)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-auto)" stroke="#9013FE" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">📨</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">Mosquitto MQTT</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#9013FE" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#B060FF" font-size="9" font-weight="600">:1883</text>
+    <text x="12" y="60" fill="#9060CC" font-size="9">MQTT message broker</text>
+  </g>
+
+  <!-- ── Database column (x=803) ── -->
+
+  <!-- PostgreSQL -->
+  <g id="node-postgres" transform="translate(803,350)" filter="url(#shadow)">
+    <rect width="185" height="70" rx="8" fill="url(#grad-db)" stroke="#FF6B6B" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="28" font-size="18">🐘</text>
+    <text x="36" y="27" fill="#FFFFFF" font-size="12" font-weight="600">PostgreSQL</text>
+    <rect x="36" y="33" width="50" height="15" rx="3" fill="#FF6B6B" fill-opacity="0.25"/>
+    <text x="61" y="44" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">:5432</text>
+    <text x="12" y="60" fill="#CC5A5A" font-size="9">Shared relational database</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ZONE 4 — TOOLS &amp; APPS                                            -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- ── Tools column (x=68) ── -->
+
+  <!-- InvoiceShelf -->
+  <g id="node-invoiceshelf" transform="translate(68,745)" filter="url(#shadow)">
+    <rect width="185" height="68" rx="8" fill="url(#grad-tools)" stroke="#50E3C2" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="27" font-size="18">🧾</text>
+    <text x="36" y="26" fill="#FFFFFF" font-size="12" font-weight="600">InvoiceShelf</text>
+    <rect x="36" y="32" width="50" height="15" rx="3" fill="#50E3C2" fill-opacity="0.25"/>
+    <text x="61" y="43" text-anchor="middle" fill="#50E3C2" font-size="9" font-weight="600">:8090</text>
+    <text x="12" y="58" fill="#3AADA0" font-size="9">Invoice &amp; billing management</text>
+  </g>
+
+  <!-- Mailpit -->
+  <g id="node-mailpit" transform="translate(68,823)" filter="url(#shadow)">
+    <rect width="185" height="68" rx="8" fill="url(#grad-tools)" stroke="#50E3C2" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="27" font-size="18">📧</text>
+    <text x="36" y="26" fill="#FFFFFF" font-size="12" font-weight="600">Mailpit</text>
+    <rect x="36" y="32" width="50" height="15" rx="3" fill="#50E3C2" fill-opacity="0.25"/>
+    <text x="61" y="43" text-anchor="middle" fill="#50E3C2" font-size="9" font-weight="600">:8025</text>
+    <text x="12" y="58" fill="#3AADA0" font-size="9">SMTP mail testing</text>
+  </g>
+
+  <!-- Dokploy -->
+  <g id="node-dokploy" transform="translate(68,901)" filter="url(#shadow)">
+    <rect width="185" height="68" rx="8" fill="url(#grad-tools)" stroke="#50E3C2" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="27" font-size="18">🚀</text>
+    <text x="36" y="26" fill="#FFFFFF" font-size="12" font-weight="600">Dokploy</text>
+    <rect x="36" y="32" width="50" height="15" rx="3" fill="#50E3C2" fill-opacity="0.25"/>
+    <text x="61" y="43" text-anchor="middle" fill="#50E3C2" font-size="9" font-weight="600">:3002</text>
+    <text x="12" y="58" fill="#3AADA0" font-size="9">App deployment platform</text>
+  </g>
+
+  <!-- ── Web Apps column (x=313) ── -->
+
+  <!-- Wendy Frontend -->
+  <g id="node-wendyfe" transform="translate(313,745)" filter="url(#shadow)">
+    <rect width="185" height="68" rx="8" fill="url(#grad-webapp)" stroke="#B8E986" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="27" font-size="18">🌐</text>
+    <text x="36" y="26" fill="#FFFFFF" font-size="12" font-weight="600">Wendy Frontend</text>
+    <rect x="36" y="32" width="50" height="15" rx="3" fill="#B8E986" fill-opacity="0.3"/>
+    <text x="61" y="43" text-anchor="middle" fill="#82B348" font-size="9" font-weight="600">:3454</text>
+    <text x="12" y="58" fill="#6A9A3A" font-size="9">Wedding app UI</text>
+  </g>
+
+  <!-- Wendy Backend -->
+  <g id="node-wendybe" transform="translate(313,823)" filter="url(#shadow)">
+    <rect width="185" height="68" rx="8" fill="url(#grad-webapp)" stroke="#B8E986" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="12" y="27" font-size="18">⚙️</text>
+    <text x="36" y="26" fill="#FFFFFF" font-size="12" font-weight="600">Wendy Backend</text>
+    <rect x="36" y="32" width="50" height="15" rx="3" fill="#B8E986" fill-opacity="0.3"/>
+    <text x="61" y="43" text-anchor="middle" fill="#82B348" font-size="9" font-weight="600">:5454</text>
+    <text x="12" y="58" fill="#6A9A3A" font-size="9">Wedding app API</text>
+  </g>
+
+  <!-- ── Template Server (x=558) ── -->
+
+  <!-- Portainer Templates -->
+  <g id="node-portainer-tmpl" transform="translate(558,745)" filter="url(#shadow)">
+    <rect width="200" height="68" rx="8" fill="url(#grad-webapp)" stroke="#B8E986" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="12" y="27" font-size="18">📑</text>
+    <text x="36" y="26" fill="#FFFFFF" font-size="12" font-weight="600">Portainer Templates</text>
+    <rect x="36" y="32" width="50" height="15" rx="3" fill="#B8E986" fill-opacity="0.3"/>
+    <text x="61" y="43" text-anchor="middle" fill="#82B348" font-size="9" font-weight="600">:8099</text>
+    <text x="12" y="58" fill="#6A9A3A" font-size="9">nginx · App template server</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ZONE 5 — NAS VOLUMES                                             -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- Volume Config -->
+  <g id="node-vol-config" transform="translate(313,1030)" filter="url(#shadow)">
+    <rect width="235" height="65" rx="8" fill="url(#grad-storage)" stroke="#FFA500" stroke-width="1" stroke-opacity="0.55"/>
+    <text x="12" y="27" font-size="18">📁</text>
+    <text x="36" y="26" fill="#FFFFFF" font-size="12" font-weight="600">/Volume1/public/</text>
+    <rect x="36" y="32" width="150" height="15" rx="3" fill="#FFA500" fill-opacity="0.2"/>
+    <text x="111" y="43" text-anchor="middle" fill="#FFA500" font-size="9" font-weight="500">config/ · adguard · nginxpm · homepage</text>
+    <text x="12" y="57" fill="#CC8400" font-size="9">immich · jellyfin · mosquitto</text>
+  </g>
+
+  <!-- Volume Media -->
+  <g id="node-vol-media" transform="translate(568,1030)" filter="url(#shadow)">
+    <rect width="220" height="65" rx="8" fill="url(#grad-storage)" stroke="#FFA500" stroke-width="1" stroke-opacity="0.55"/>
+    <text x="12" y="27" font-size="18">🎞️</text>
+    <text x="36" y="26" fill="#FFFFFF" font-size="12" font-weight="600">/Volume1/media/</text>
+    <rect x="36" y="32" width="140" height="15" rx="3" fill="#FFA500" fill-opacity="0.2"/>
+    <text x="106" y="43" text-anchor="middle" fill="#FFA500" font-size="9" font-weight="500">photos · videos · tv · movies</text>
+    <text x="12" y="57" fill="#CC8400" font-size="9">Immich · Plex · Jellyfin media</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- DOCKER DAEMON HUB                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <g id="node-docker-daemon" transform="translate(640,1115)" filter="url(#glow)">
+    <rect width="220" height="58" rx="29" fill="url(#grad-daemon)" stroke="#4A90E2" stroke-width="2" stroke-opacity="0.9"/>
+    <text x="110" y="24" text-anchor="middle" fill="#4A90E2" font-size="14" font-weight="700">🐋 Docker Daemon</text>
+    <text x="110" y="42" text-anchor="middle" fill="#3A6A9A" font-size="9">unix:///var/run/docker.sock</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- LEGEND                                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <g id="legend" transform="translate(1050,1050)">
+    <rect width="310" height="160" rx="10" fill="#131825" stroke="#2A3550" stroke-width="1"/>
+    <text x="155" y="22" text-anchor="middle" fill="#5A7BA6" font-size="10" font-weight="600" letter-spacing="2">LEGEND</text>
+    <!-- Solid blue -->
+    <line x1="20" y1="45" x2="75" y2="45" stroke="#4A90E2" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="85" y="49" fill="#CCCCCC" font-size="10">DNS / HTTP traffic</text>
+    <!-- Grey -->
+    <line x1="20" y1="72" x2="75" y2="72" stroke="#AAAAAA" stroke-width="1.5" marker-end="url(#arrow-grey)"/>
+    <text x="85" y="76" fill="#CCCCCC" font-size="10">Browser / service flow</text>
+    <!-- Green monitoring -->
+    <line x1="20" y1="99" x2="75" y2="99" stroke="#7ED321" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-green)"/>
+    <text x="85" y="103" fill="#CCCCCC" font-size="10">Monitoring check</text>
+    <!-- Red DB -->
+    <line x1="20" y1="126" x2="75" y2="126" stroke="#FF6B6B" stroke-width="1.5" marker-end="url(#arrow-red)"/>
+    <text x="85" y="130" fill="#CCCCCC" font-size="10">Database access</text>
+    <!-- Amber dashed -->
+    <line x1="20" y1="150" x2="75" y2="150" stroke="#FFA500" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#arrow-amber)"/>
+    <text x="85" y="154" fill="#CCCCCC" font-size="10">Volume mount (NAS)</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- STARTUP ORDER BADGE                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <g transform="translate(1050,870)">
+    <rect width="310" height="165" rx="10" fill="#131825" stroke="#2A3550" stroke-width="1"/>
+    <text x="155" y="22" text-anchor="middle" fill="#5A7BA6" font-size="10" font-weight="600" letter-spacing="2">STARTUP ORDER</text>
+    <text x="20" y="48" fill="#FF6B6B" font-size="10" font-weight="600">①</text>
+    <text x="36" y="48" fill="#CCCCCC" font-size="10">PostgreSQL — database layer</text>
+    <text x="20" y="70" fill="#4A90E2" font-size="10" font-weight="600">②</text>
+    <text x="36" y="70" fill="#CCCCCC" font-size="10">AdGuard — DNS filtering</text>
+    <text x="20" y="92" fill="#4A90E2" font-size="10" font-weight="600">③</text>
+    <text x="36" y="92" fill="#CCCCCC" font-size="10">Nginx PM — reverse proxy</text>
+    <text x="20" y="114" fill="#F5A623" font-size="10" font-weight="600">④</text>
+    <text x="36" y="114" fill="#CCCCCC" font-size="10">Immich · Home Assistant</text>
+    <text x="20" y="136" fill="#7ED321" font-size="10" font-weight="600">⑤</text>
+    <text x="36" y="136" fill="#CCCCCC" font-size="10">Uptime Kuma · Dozzle · Tugtainer</text>
+    <text x="20" y="155" fill="#4A90E2" font-size="10" font-weight="600">⑥</text>
+    <text x="36" y="155" fill="#CCCCCC" font-size="10">Homepage dashboard</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- HORIZON_NETWORK BADGE                                            -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <g transform="translate(1050,745)">
+    <rect width="310" height="108" rx="10" fill="#131825" stroke="#2A3550" stroke-width="1"/>
+    <text x="155" y="22" text-anchor="middle" fill="#5A7BA6" font-size="10" font-weight="600" letter-spacing="2">horizon_network</text>
+    <text x="20" y="45" fill="#778899" font-size="10">Type: Docker bridge network</text>
+    <text x="20" y="63" fill="#778899" font-size="10">DNS: 127.0.0.11:53 (embedded)</text>
+    <text x="20" y="81" fill="#778899" font-size="10">Services reach each other by name</text>
+    <text x="20" y="99" fill="#4A90E2" font-size="10">e.g. http://tugtainer:9412</text>
+  </g>
+
+</svg>
