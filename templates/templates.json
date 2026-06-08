@@ -294,9 +294,9 @@
       "ports": [
         "53:53/tcp",
         "53:53/udp",
-        "8090:80",
-        "8443:443",
-        "3000:3000"
+        "8090:80/tcp",
+        "8443:443/tcp",
+        "3000:3000/tcp"
       ],
       "volumes": [
         {"container": "/opt/adguardhome/work"},
@@ -338,9 +338,9 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "jc21/nginx-proxy-manager:latest",
       "ports": [
-        "80:80",
-        "443:443",
-        "81:81"
+        "80:80/tcp",
+        "443:443/tcp",
+        "81:81/tcp"
       ],
       "volumes": [
         {"container": "/data", "bind": "/Volume1/public/config/nginxpm/data"},
@@ -391,7 +391,7 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "postgres:16-alpine",
       "ports": [
-        "5432:5432"
+        "5432:5432/tcp"
       ],
       "volumes": [
         {"container": "/var/lib/postgresql/data"}
@@ -427,7 +427,7 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "amir20/dozzle:latest",
       "ports": [
-        "9999:8080"
+        "9999:8080/tcp"
       ],
       "volumes": [
         {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
@@ -458,7 +458,7 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "germannewsmaker/myspeed:latest",
       "ports": [
-        "5216:5216"
+        "5216:5216/tcp"
       ],
       "volumes": [
         {"container": "/myspeed/data"}
@@ -495,7 +495,7 @@
       "image": "ghcr.io/quenary/tugtainer:latest",
       "registry": "ghcr.io",
       "ports": [
-        "9412:80"
+        "9412:80/tcp"
       ],
       "volumes": [
         {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"},
@@ -527,7 +527,7 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "louislam/uptime-kuma:2",
       "ports": [
-        "3001:3001"
+        "3001:3001/tcp"
       ],
       "volumes": [
         {"container": "/app/data"},
@@ -554,7 +554,7 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "getwud/wud:latest",
       "ports": [
-        "3003:3000"
+        "3003:3000/tcp"
       ],
       "volumes": [
         {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
@@ -641,7 +641,7 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "jellyfin/jellyfin",
       "ports": [
-        "8096:8096"
+        "8096:8096/tcp"
       ],
       "volumes": [
         {"container": "/config"},
@@ -670,7 +670,7 @@
       "image": "ghcr.io/home-assistant/home-assistant:latest",
       "registry": "ghcr.io",
       "ports": [
-        "8123:8123"
+        "8123:8123/tcp"
       ],
       "volumes": [
         {"container": "/config", "bind": "/Volume1/public/config/homeassistant"},
@@ -697,8 +697,8 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "eclipse-mosquitto",
       "ports": [
-        "1883:1883",
-        "9001:9001"
+        "1883:1883/tcp",
+        "9001:9001/tcp"
       ],
       "volumes": [
         {"container": "/mosquitto/config", "bind": "/Volume1/public/config/mosquitto/config"},
@@ -725,7 +725,7 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "dokploy/dokploy:latest",
       "ports": [
-        "3002:3000"
+        "3002:3000/tcp"
       ],
       "volumes": [
         {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"},
@@ -753,7 +753,7 @@
       "image": "ghcr.io/impre-visible/invoicerr:v1.3.0-debug",
       "registry": "ghcr.io",
       "ports": [
-        "8020:80"
+        "8020:80/tcp"
       ],
       "env": [
         {
@@ -822,7 +822,7 @@
       "image": "ghcr.io/gethomepage/homepage:latest",
       "registry": "ghcr.io",
       "ports": [
-        "3005:3000"
+        "3005:3000/tcp"
       ],
       "volumes": [
         {"container": "/app/config", "bind": "/Volume1/public/config/homepage"},
