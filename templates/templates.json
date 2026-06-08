@@ -667,8 +667,8 @@
       "categories": ["Home Automation", "IoT"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
-      "image": "ghcr.io/home-assistant/home-assistant:latest",
-      "registry": "ghcr.io",
+      "image": "homeassistant/home-assistant:latest",
+      "registry": "docker.io",
       "ports": [
         "8123:8123/tcp"
       ],
