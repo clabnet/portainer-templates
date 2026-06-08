@@ -13,5 +13,7 @@ services:
       - /Volume1/public/config/homepage:/app/config
       - /Volume1/public/config/homepage/.env:/app/config/.env:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS:-192.168.1.2,localhost,homepage}
     labels:
       - com.centurylinklabs.watchtower.enable=true
