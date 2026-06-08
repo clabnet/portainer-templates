@@ -279,6 +279,568 @@
         }
       ],
       "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "AdGuard Home",
+      "name": "adguard",
+      "network": "horizon_network",
+      "description": "DNS filtering and ad blocking service with privacy protection and parental controls",
+      "categories": ["Networking", "DNS", "Security"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "adguard/adguardhome:latest",
+      "ports": [
+        "53:53/tcp",
+        "53:53/udp",
+        "8090:80",
+        "8443:443",
+        "3000:3000"
+      ],
+      "volumes": [
+        {"container": "/opt/adguardhome/work"},
+        {"container": "/opt/adguardhome/conf"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "ADGUARD_HTTP_PORT",
+          "label": "AdGuard HTTP Port",
+          "default": "8090"
+        },
+        {
+          "name": "ADGUARD_HTTPS_PORT",
+          "label": "AdGuard HTTPS Port",
+          "default": "8443"
+        },
+        {
+          "name": "ADGUARD_SETUP_PORT",
+          "label": "AdGuard Setup Port",
+          "default": "3000"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Nginx Proxy Manager",
+      "name": "nginxpm",
+      "network": "horizon_network",
+      "description": "Reverse proxy manager with SSL certificate automation, easy UI-based configuration",
+      "categories": ["Proxy", "Networking", "SSL"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "jc21/nginx-proxy-manager:latest",
+      "ports": [
+        "80:80",
+        "443:443",
+        "81:81"
+      ],
+      "volumes": [
+        {"container": "/data", "bind": "/Volume1/public/config/nginxpm/data"},
+        {"container": "/etc/letsencrypt", "bind": "/Volume1/public/config/nginxpm/letsencrypt"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "NPM_HTTP_PORT",
+          "label": "Nginx Proxy Manager HTTP Port",
+          "default": "80"
+        },
+        {
+          "name": "NPM_HTTPS_PORT",
+          "label": "Nginx Proxy Manager HTTPS Port",
+          "default": "443"
+        },
+        {
+          "name": "NPM_ADMIN_PORT",
+          "label": "Nginx Proxy Manager Admin Port",
+          "default": "81"
+        },
+        {
+          "name": "NPM_DISABLE_IPV6",
+          "label": "Disable IPv6",
+          "default": "true",
+          "select": [
+            {"text": "Yes", "value": "true"},
+            {"text": "No", "value": "false"}
+          ]
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "PostgreSQL",
+      "name": "postgres",
+      "network": "horizon_network",
+      "description": "Advanced relational database with JSON support, full-text search, and high performance",
+      "categories": ["Database", "PostgreSQL"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "postgres:16-alpine",
+      "ports": [
+        "5432:5432"
+      ],
+      "volumes": [
+        {"container": "/var/lib/postgresql/data"}
+      ],
+      "env": [
+        {
+          "name": "POSTGRES_USER",
+          "label": "PostgreSQL Username",
+          "default": "postgres"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "PostgreSQL Password",
+          "default": "changeme"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "label": "PostgreSQL Database Name",
+          "default": "postgres"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Dozzle",
+      "name": "dozzle",
+      "network": "horizon_network",
+      "description": "Real-time Docker container log viewer with web-based interface and filtering",
+      "categories": ["Monitoring", "Logs"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "amir20/dozzle:latest",
+      "ports": [
+        "9999:8080"
+      ],
+      "volumes": [
+        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
+      ],
+      "env": [
+        {
+          "name": "DOZZLE_HTTP_PORT",
+          "label": "Dozzle HTTP Port",
+          "default": "9999"
+        },
+        {
+          "name": "DOZZLE_LEVEL",
+          "label": "Log Level",
+          "default": "info"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "MySpeed",
+      "name": "myspeed",
+      "network": "horizon_network",
+      "description": "Speed test tool for monitoring network performance and latency",
+      "categories": ["Monitoring", "Network"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "germannewsmaker/myspeed:latest",
+      "ports": [
+        "5216:5216"
+      ],
+      "volumes": [
+        {"container": "/myspeed/data"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "PUID",
+          "label": "User ID",
+          "default": "1000"
+        },
+        {
+          "name": "PGID",
+          "label": "Group ID",
+          "default": "1000"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Tugtainer",
+      "name": "tugtainer",
+      "network": "horizon_network",
+      "description": "Container monitoring and update notification tool with Docker API integration",
+      "categories": ["Monitoring"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "ghcr.io/quenary/tugtainer:latest",
+      "registry": "ghcr.io",
+      "ports": [
+        "9412:80"
+      ],
+      "volumes": [
+        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"},
+        {"container": "/tugtainer"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "TUGTAINER_HTTP_PORT",
+          "label": "Tugtainer HTTP Port",
+          "default": "9412"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Uptime Kuma",
+      "name": "uptimekuma",
+      "network": "horizon_network",
+      "description": "Uptime monitoring and status page service with notifications and charts",
+      "categories": ["Monitoring", "Uptime"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "louislam/uptime-kuma:2",
+      "ports": [
+        "3001:3001"
+      ],
+      "volumes": [
+        {"container": "/app/data"},
+        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "WUD",
+      "name": "wud",
+      "network": "horizon_network",
+      "description": "What's Up Docker - Docker image update monitoring with notifications",
+      "categories": ["Monitoring", "Updates"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "getwud/wud:latest",
+      "ports": [
+        "3003:3000"
+      ],
+      "volumes": [
+        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "WUD_HTTP_PORT",
+          "label": "WUD HTTP Port",
+          "default": "3003"
+        },
+        {
+          "name": "WUD_WATCHER_LOCAL_SOCKET",
+          "label": "Docker Socket Path",
+          "default": "/var/run/docker.sock"
+        },
+        {
+          "name": "WUD_WATCHER_LOCAL_CRON",
+          "label": "Watch Cron Schedule",
+          "default": "0 * * * *"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Plex",
+      "name": "plex",
+      "network": "horizon_network",
+      "description": "Media server for movies, TV shows, music, and photos with streaming capabilities",
+      "categories": ["Media", "Streaming"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "lscr.io/linuxserver/plex:latest",
+      "registry": "lscr.io",
+      "volumes": [
+        {"container": "/config", "bind": "/Volume1/public/config/plex"},
+        {"container": "/tv", "bind": "/Volume1/public/config/plex/tvseries"},
+        {"container": "/movies", "bind": "/Volume1/public/config/plex/movies"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "PUID",
+          "label": "User ID",
+          "default": "1000"
+        },
+        {
+          "name": "PGID",
+          "label": "Group ID",
+          "default": "1000"
+        },
+        {
+          "name": "VERSION",
+          "label": "Plex Version",
+          "default": "docker"
+        },
+        {
+          "name": "PLEX_CLAIM",
+          "label": "Plex Claim Token (optional)",
+          "default": ""
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Jellyfin",
+      "name": "jellyfin",
+      "network": "horizon_network",
+      "description": "Free and open-source media server for personal entertainment streaming",
+      "categories": ["Media", "Streaming"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "jellyfin/jellyfin",
+      "ports": [
+        "8096:8096"
+      ],
+      "volumes": [
+        {"container": "/config"},
+        {"container": "/cache"},
+        {"container": "/media", "bind": "/Volume1/media"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Home Assistant",
+      "name": "homeassistant",
+      "network": "horizon_network",
+      "description": "Home automation platform for controlling smart home devices and automation",
+      "categories": ["Home Automation", "IoT"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "ghcr.io/home-assistant/home-assistant:latest",
+      "registry": "ghcr.io",
+      "ports": [
+        "8123:8123"
+      ],
+      "volumes": [
+        {"container": "/config", "bind": "/Volume1/public/config/homeassistant"},
+        {"container": "/etc/localtime", "bind": "/etc/localtime"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Mosquitto",
+      "name": "mosquitto",
+      "network": "horizon_network",
+      "description": "MQTT message broker for IoT device communication and home automation",
+      "categories": ["Home Automation", "MQTT"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "eclipse-mosquitto",
+      "ports": [
+        "1883:1883",
+        "9001:9001"
+      ],
+      "volumes": [
+        {"container": "/mosquitto/config", "bind": "/Volume1/public/config/mosquitto/config"},
+        {"container": "/mosquitto/data", "bind": "/Volume1/public/config/mosquitto/data"},
+        {"container": "/mosquitto/log", "bind": "/Volume1/public/config/mosquitto/log"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Dokploy",
+      "name": "dokploy",
+      "description": "Modern deployment platform for managing and deploying applications",
+      "categories": ["Tools", "DevOps"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "dokploy/dokploy:latest",
+      "ports": [
+        "3002:3000"
+      ],
+      "volumes": [
+        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"},
+        {"container": "/app"}
+      ],
+      "env": [
+        {
+          "name": "NODE_ENV",
+          "label": "Environment",
+          "default": "production"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Invoicerr",
+      "name": "invoicerr",
+      "network": "horizon_network",
+      "description": "Invoice generation and management application with SMTP support",
+      "categories": ["Tools", "Webapp"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "ghcr.io/impre-visible/invoicerr:v1.3.0-debug",
+      "registry": "ghcr.io",
+      "ports": [
+        "8020:80"
+      ],
+      "env": [
+        {
+          "name": "DATABASE_URL",
+          "label": "Database URL",
+          "default": "postgresql://postgres:changeme@postgresql:5432/invoicerr_db"
+        },
+        {
+          "name": "APP_URL",
+          "label": "Application URL",
+          "default": "https://invoicerr.example.com"
+        },
+        {
+          "name": "CORS_ORIGINS",
+          "label": "CORS Origins",
+          "default": "http://localhost:5173,https://invoicerr.example.com"
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP Host",
+          "default": "smtp-relay.example.com"
+        },
+        {
+          "name": "SMTP_USER",
+          "label": "SMTP Username",
+          "default": "username@example.com"
+        },
+        {
+          "name": "SMTP_FROM",
+          "label": "SMTP From Address",
+          "default": "user-from@example.com"
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP Password",
+          "default": "your_smtp_password"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP Port",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_SECURE",
+          "label": "SMTP Secure",
+          "default": "false"
+        },
+        {
+          "name": "JWT_SECRET",
+          "label": "JWT Secret",
+          "default": "your_jwt_secret"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    },
+
+    {
+      "type": 1,
+      "title": "Homepage",
+      "name": "homepage",
+      "network": "horizon_network",
+      "description": "Customizable dashboard for quick access to all homelab services",
+      "categories": ["Tools", "Dashboard"],
+      "platform": "linux",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
+      "image": "ghcr.io/gethomepage/homepage:latest",
+      "registry": "ghcr.io",
+      "ports": [
+        "3005:3000"
+      ],
+      "volumes": [
+        {"container": "/app/config", "bind": "/Volume1/public/config/homepage"},
+        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
+      ],
+      "env": [
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Rome"
+        },
+        {
+          "name": "HOMEPAGE_HTTP_PORT",
+          "label": "Homepage HTTP Port",
+          "default": "3005"
+        }
+      ],
+      "restart_policy": "unless-stopped"
     }
   ]
 }
