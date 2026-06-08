@@ -1,3 +1,9 @@
 # Ignore lock files
 package-lock.json
 yarn.lock
+
+node_modules/
+logs/
+*.log
+dist/
+
