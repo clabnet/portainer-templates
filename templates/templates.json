@@ -14,7 +14,7 @@
         "Infrastructure"
       ],
       "platform": "linux",
-      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "infrastructure",
       "repository": {
         "url": "http://github.com/clabnet/portainer-templates",
@@ -79,7 +79,7 @@
         "Data Management"
       ],
       "platform": "linux",
-      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "database",
       "repository": {
         "url": "http://192.168.1.2:8099/templates.json",
@@ -109,7 +109,7 @@
         "Analytics"
       ],
       "platform": "linux",
-      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "monitoring",
       "repository": {
         "url": "https://github.com/clabnet/portainer-templates",
@@ -146,7 +146,7 @@
         "Entertainment"
       ],
       "platform": "linux",
-      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "multimedia",
       "repository": {
         "url": "https://github.com/clabnet/portainer-templates",
@@ -188,7 +188,7 @@
         "Automation"
       ],
       "platform": "linux",
-      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "homeautomation",
       "repository": {
         "url": "https://github.com/clabnet/portainer-templates",
@@ -218,7 +218,7 @@
         "System Tools"
       ],
       "platform": "linux",
-      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "tools",
       "repository": {
         "url": "https://github.com/clabnet/portainer-templates",
@@ -242,7 +242,7 @@
       "note": "Requires external network 'horizon_network' to be created first.",
       "categories": ["WEB APP"],
       "platform": "linux",
-      "logo": "https://images.weserv.nl/?url=raw.githubusercontent.com/clabnet/portainer-templates/main/img/avatar.png&w=50",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "name": "webapp",
       "repository": {
         "url": "https://github.com/clabnet/portainer-templates",
@@ -266,7 +266,7 @@
       "description": "Event management platform backend",
       "categories": ["webapp", "backend"],
       "platform": "linux",
-      "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/solr.png",
+      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "ghcr.io/clabnet/wendy-backend:latest",
       "registry": "ghcr.io",
       "env": [
