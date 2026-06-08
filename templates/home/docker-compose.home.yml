@@ -1,3 +1,0 @@
-include:
-  - ../_shared/networks.yml
-  - ./homepage/docker-compose.yml

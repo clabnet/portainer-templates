@@ -4,9 +4,9 @@
     {
       "type": 3,
       "title": "Infrastructure",
-      "description": "Complete network infrastructure stack with AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
+      "description": "Complete homelab infrastructure stack with Homepage, AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
       "note": "Requires external network 'horizon_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
-      "categories": ["Networking", "Security", "DNS", "Proxy", "Infrastructure"],
+      "categories": ["Homepage", "Networking", "Security", "DNS", "Proxy", "Infrastructure"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "infrastructure",
@@ -838,6 +838,11 @@
           "name": "HOMEPAGE_HTTP_PORT",
           "label": "Homepage HTTP Port",
           "default": "3005"
+        },
+        {
+          "name": "HOMEPAGE_ALLOWED_HOSTS",
+          "label": "Allowed Hosts (comma-separated host:port)",
+          "default": "192.168.1.2:3005,homepage.home"
         }
       ],
       "restart_policy": "unless-stopped"

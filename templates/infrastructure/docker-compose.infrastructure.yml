@@ -2,3 +2,4 @@ include:
   - ../_shared/networks.yml
   - ./adguard/docker-compose.yml
   - ./nginxpm/docker-compose.yml
+  - ./homepage/docker-compose.yml
