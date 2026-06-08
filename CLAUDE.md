@@ -28,6 +28,36 @@ To explore the graph:
 - Query the graph: `/graphify query "<your question>"`
 - Update on commits: the post-commit hook auto-rebuilds on changes
 
+## TNAS Access
+
+| Detail | Value |
+|--------|-------|
+| IP | 192.168.1.2 |
+| SSH port | 9222 |
+| SSH user | clabnet |
+| SSH key | `~/.ssh/tnas_homelab` (on Windows: `$env:USERPROFILE\.ssh\tnas_homelab`) |
+| Docker binary | `/var/subvols/8vEbTxkKvwa/@/@apps/DockerEngine/dockerd/bin/docker` |
+| Docker is NOT in PATH | Always use full binary path |
+| portainer-templates on NAS | `/Volume1/public/config/portainer-templates/` |
+| homepage config on NAS | `/Volume1/public/config/homepage/` |
+
+### Deploy / recreate a stack on TNAS
+
+```bash
+DOCKER=/var/subvols/8vEbTxkKvwa/@/@apps/DockerEngine/dockerd/bin/docker
+cd /Volume1/public/config/portainer-templates
+$DOCKER compose -f templates/<category>/docker-compose.<category>.yml up -d
+```
+
+### PowerShell SSH helper (from Windows)
+
+```powershell
+$docker = '/var/subvols/8vEbTxkKvwa/@/@apps/DockerEngine/dockerd/bin/docker'
+ssh -p 9222 -i "$env:USERPROFILE\.ssh\tnas_homelab" clabnet@192.168.1.2 "$docker <command>"
+```
+
+> **Note**: Use PowerShell variable interpolation (`$docker = '...'`) — do NOT escape `$` in the SSH string or use `export` inside the remote command, as both cause the command to hang or fail.
+
 ## Conventions
 
 ### JSON Templates (templates/templates.json)
