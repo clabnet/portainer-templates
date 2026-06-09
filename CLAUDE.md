@@ -6,6 +6,7 @@
 
 ### Key Files
 
+- **homeassistant/docs/accesso-esterno-dns-companion.md** — Runbook HA: discovery LAN, TLS Companion, Cloudflare DDNS, NPM, Tunnel (repo: `../homeassistant/docs/`, TNAS: `/Volume1/public/config/homeassistant/docs/`)
 - **templates/templates.json** — Portainer UI template definitions (8 stack templates + 16 individual container templates as of e58c4f8)
 - **templates/** — Docker Compose files organized by category (infrastructure, database, monitoring, multimedia, home_automation, tools, webapp)
 - **stack files** — `docker-compose.*.yml` files that aggregate services via `include:` directives

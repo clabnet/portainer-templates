@@ -59,13 +59,19 @@ All containers share the external `horizon_network` bridge network, declared onc
 
 ## Network Architecture
 
-See [NETWORK_DIAGRAM.md](NETWORK_DIAGRAM.md) for a comprehensive visualization of the homelab network, including:
+See [NETWORK_DIAGRAM.md](templates/NETWORK_DIAGRAM.md) for a comprehensive visualization of the homelab network, including:
 
 - Service topology and connections
 - Data flow patterns
 - Port assignments
 - Security layers
 - Scaling considerations
+
+### Home Assistant — accesso esterno e DNS
+
+Runbook completo (discovery Companion, certificati, Cloudflare DDNS, NPM):  
+[homeassistant/docs/accesso-esterno-dns-companion.md](../homeassistant/docs/accesso-esterno-dns-companion.md)  
+(sul TNAS: `/Volume1/public/config/homeassistant/docs/accesso-esterno-dns-companion.md`)
 
 ---
 

@@ -6,6 +6,9 @@ A complete infrastructure setup with optimized Docker Compose configuration incl
 - **Homepage** - Centralized dashboard for all services
 - **Nginx Proxy Manager** - Reverse proxy with SSL/TLS management
 
+Per esporre Home Assistant all'esterno (DNS dinamico, certificati Let's Encrypt, app Companion):  
+[Accesso esterno, DNS e App Companion](../../../homeassistant/docs/accesso-esterno-dns-companion.md)
+
 ## Quick Start
 
 1. Copy example environment file:
