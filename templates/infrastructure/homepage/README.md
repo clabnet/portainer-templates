@@ -4,20 +4,14 @@ Homepage is a self-hosted dashboard that displays widgets for all your services.
 
 ## Quick Start
 
-1. Copy the example configuration file to the NAS config directory:
+1. Set up environment variables (copy and customize to the NAS config location):
 
    ```bash
-   cp services.example.yaml /Volume1/public/config/homepage/config/services.yaml
-   ```
-
-2. Set up environment variables (copy and customize):
-
-   ```bash
-   cp .env.example .env
+   cp .env.example /Volume1/public/config/homepage/.env
    # Edit .env with your actual service URLs and API keys
    ```
 
-3. Redeploy the homepage service:
+2. Redeploy the homepage service:
    ```bash
    docker compose -f templates/infrastructure/docker-compose.infrastructure.yml up -d homepage
    ```
