@@ -6,7 +6,14 @@
       "title": "Infrastructure",
       "description": "Complete homelab infrastructure stack with Homepage, AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
       "note": "Requires external network 'horizon_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
-      "categories": ["Homepage", "Networking", "Security", "DNS", "Proxy", "Infrastructure"],
+      "categories": [
+        "Homepage",
+        "Networking",
+        "Security",
+        "DNS",
+        "Proxy",
+        "Infrastructure"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "infrastructure",
@@ -58,13 +65,19 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 3,
       "title": "Database",
       "description": "Database infrastructure stack with PostgreSQL, MySQL, Redis, and database administration tools for application data storage and management",
       "note": "Requires external network 'horizon_network' to be created first. Provides multiple database engines and management interfaces for application backends.",
-      "categories": ["Database", "Storage", "PostgreSQL", "MySQL", "Redis", "Data Management"],
+      "categories": [
+        "Database",
+        "Storage",
+        "PostgreSQL",
+        "MySQL",
+        "Redis",
+        "Data Management"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "database",
@@ -82,13 +95,18 @@
       ],
       "restart_policy": "always"
     },
-
     {
       "type": 3,
       "title": "Monitoring",
       "description": "Comprehensive monitoring stack with Prometheus, Grafana, Node Exporter, and Dozzle for metrics collection, visualization, and real-time log monitoring",
       "note": "Requires external network 'horizon_network' to be created first. Includes system metrics monitoring and Docker container log viewing.",
-      "categories": ["Monitoring", "Metrics", "Logs", "Observability", "Analytics"],
+      "categories": [
+        "Monitoring",
+        "Metrics",
+        "Logs",
+        "Observability",
+        "Analytics"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "monitoring",
@@ -112,13 +130,19 @@
       ],
       "restart_policy": "always"
     },
-
     {
       "type": 3,
       "title": "Multimedia",
       "description": "Complete multimedia management stack featuring Immich for photo/video management, Jellyfin media server, and supporting services with PostgreSQL database",
       "note": "Requires external network 'horizon_network' to be created first. Includes photo backup, media streaming, and content organization tools.",
-      "categories": ["Media", "Photos", "Videos", "Streaming", "Multimedia", "Entertainment"],
+      "categories": [
+        "Media",
+        "Photos",
+        "Videos",
+        "Streaming",
+        "Multimedia",
+        "Entertainment"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "multimedia",
@@ -148,13 +172,18 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 3,
       "title": "Home Automation",
       "description": "Home Assistant Core deployment for comprehensive smart home automation, device integration, and IoT management",
       "note": "Provides local control of smart home devices with support for hundreds of integrations. Access via web interface for configuration and automation setup.",
-      "categories": ["Home Automation", "IoT", "Smart Home", "Assistant", "Automation"],
+      "categories": [
+        "Home Automation",
+        "IoT",
+        "Smart Home",
+        "Assistant",
+        "Automation"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "homeautomation",
@@ -172,13 +201,18 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 3,
       "title": "Tools",
       "description": "Essential utility tools collection including file managers, system utilities, network tools, and development aids for homelab administration",
       "note": "Requires external network 'horizon_network' to be created first. Provides various administrative and utility services for homelab management.",
-      "categories": ["Tools", "Utilities", "Administration", "File Management", "System Tools"],
+      "categories": [
+        "Tools",
+        "Utilities",
+        "Administration",
+        "File Management",
+        "System Tools"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "tools",
@@ -196,13 +230,14 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 3,
       "title": "Web applications",
       "description": "Frontend and backend components",
       "note": "Requires external network 'horizon_network' to be created first.",
-      "categories": ["WEB APP"],
+      "categories": [
+        "WEB APP"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "webapp",
@@ -219,14 +254,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "WENDY backend",
       "name": "wendy-backend",
       "network": "horizon_network",
       "description": "Event management platform backend",
-      "categories": ["webapp", "backend"],
+      "categories": [
+        "webapp",
+        "backend"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "ghcr.io/clabnet/wendy-backend:latest",
@@ -280,14 +317,17 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "AdGuard Home",
       "name": "adguard",
       "network": "horizon_network",
       "description": "DNS filtering and ad blocking service with privacy protection and parental controls",
-      "categories": ["Networking", "DNS", "Security"],
+      "categories": [
+        "Networking",
+        "DNS",
+        "Security"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "adguard/adguardhome:latest",
@@ -299,8 +339,12 @@
         "3000:3000/tcp"
       ],
       "volumes": [
-        {"container": "/opt/adguardhome/work"},
-        {"container": "/opt/adguardhome/conf"}
+        {
+          "container": "/opt/adguardhome/work"
+        },
+        {
+          "container": "/opt/adguardhome/conf"
+        }
       ],
       "env": [
         {
@@ -326,14 +370,17 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Nginx Proxy Manager",
       "name": "nginxpm",
       "network": "horizon_network",
       "description": "Reverse proxy manager with SSL certificate automation, easy UI-based configuration",
-      "categories": ["Proxy", "Networking", "SSL"],
+      "categories": [
+        "Proxy",
+        "Networking",
+        "SSL"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "jc21/nginx-proxy-manager:latest",
@@ -343,8 +390,14 @@
         "81:81/tcp"
       ],
       "volumes": [
-        {"container": "/data", "bind": "/Volume1/public/config/nginxpm/data"},
-        {"container": "/etc/letsencrypt", "bind": "/Volume1/public/config/nginxpm/letsencrypt"}
+        {
+          "container": "/data",
+          "bind": "/Volume1/public/config/nginxpm/data"
+        },
+        {
+          "container": "/etc/letsencrypt",
+          "bind": "/Volume1/public/config/nginxpm/letsencrypt"
+        }
       ],
       "env": [
         {
@@ -372,21 +425,29 @@
           "label": "Disable IPv6",
           "default": "true",
           "select": [
-            {"text": "Yes", "value": "true"},
-            {"text": "No", "value": "false"}
+            {
+              "text": "Yes",
+              "value": "true"
+            },
+            {
+              "text": "No",
+              "value": "false"
+            }
           ]
         }
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "PostgreSQL",
       "name": "postgres",
       "network": "horizon_network",
       "description": "Advanced relational database with JSON support, full-text search, and high performance",
-      "categories": ["Database", "PostgreSQL"],
+      "categories": [
+        "Database",
+        "PostgreSQL"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "postgres:16-alpine",
@@ -394,7 +455,9 @@
         "5432:5432/tcp"
       ],
       "volumes": [
-        {"container": "/var/lib/postgresql/data"}
+        {
+          "container": "/var/lib/postgresql/data"
+        }
       ],
       "env": [
         {
@@ -415,14 +478,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Dozzle",
       "name": "dozzle",
       "network": "horizon_network",
       "description": "Real-time Docker container log viewer with web-based interface and filtering",
-      "categories": ["Monitoring", "Logs"],
+      "categories": [
+        "Monitoring",
+        "Logs"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "amir20/dozzle:latest",
@@ -430,7 +495,10 @@
         "9999:8080/tcp"
       ],
       "volumes": [
-        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
+        {
+          "container": "/var/run/docker.sock",
+          "bind": "/var/run/docker.sock"
+        }
       ],
       "env": [
         {
@@ -446,14 +514,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "MySpeed",
       "name": "myspeed",
       "network": "horizon_network",
       "description": "Speed test tool for monitoring network performance and latency",
-      "categories": ["Monitoring", "Network"],
+      "categories": [
+        "Monitoring",
+        "Network"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "germannewsmaker/myspeed:latest",
@@ -461,7 +531,9 @@
         "5216:5216/tcp"
       ],
       "volumes": [
-        {"container": "/myspeed/data"}
+        {
+          "container": "/myspeed/data"
+        }
       ],
       "env": [
         {
@@ -482,14 +554,15 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Tugtainer",
       "name": "tugtainer",
       "network": "horizon_network",
       "description": "Container monitoring and update notification tool with Docker API integration",
-      "categories": ["Monitoring"],
+      "categories": [
+        "Monitoring"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "ghcr.io/quenary/tugtainer:latest",
@@ -498,8 +571,13 @@
         "9412:80/tcp"
       ],
       "volumes": [
-        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"},
-        {"container": "/tugtainer"}
+        {
+          "container": "/var/run/docker.sock",
+          "bind": "/var/run/docker.sock"
+        },
+        {
+          "container": "/tugtainer"
+        }
       ],
       "env": [
         {
@@ -511,18 +589,25 @@
           "name": "TUGTAINER_HTTP_PORT",
           "label": "Tugtainer HTTP Port",
           "default": "9412"
+        },
+        {
+          "name": "ENABLE_PUBLIC_API",
+          "label": "Enable Public API",
+          "default": "true"
         }
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Uptime Kuma",
       "name": "uptimekuma",
       "network": "horizon_network",
       "description": "Uptime monitoring and status page service with notifications and charts",
-      "categories": ["Monitoring", "Uptime"],
+      "categories": [
+        "Monitoring",
+        "Uptime"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "louislam/uptime-kuma:2",
@@ -530,8 +615,13 @@
         "3001:3001/tcp"
       ],
       "volumes": [
-        {"container": "/app/data"},
-        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
+        {
+          "container": "/app/data"
+        },
+        {
+          "container": "/var/run/docker.sock",
+          "bind": "/var/run/docker.sock"
+        }
       ],
       "env": [
         {
@@ -542,14 +632,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "WUD",
       "name": "wud",
       "network": "horizon_network",
       "description": "What's Up Docker - Docker image update monitoring with notifications",
-      "categories": ["Monitoring", "Updates"],
+      "categories": [
+        "Monitoring",
+        "Updates"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "getwud/wud:latest",
@@ -557,7 +649,10 @@
         "3003:3000/tcp"
       ],
       "volumes": [
-        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
+        {
+          "container": "/var/run/docker.sock",
+          "bind": "/var/run/docker.sock"
+        }
       ],
       "env": [
         {
@@ -583,22 +678,33 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Plex",
       "name": "plex",
       "network": "horizon_network",
       "description": "Media server for movies, TV shows, music, and photos with streaming capabilities",
-      "categories": ["Media", "Streaming"],
+      "categories": [
+        "Media",
+        "Streaming"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "lscr.io/linuxserver/plex:latest",
       "registry": "lscr.io",
       "volumes": [
-        {"container": "/config", "bind": "/Volume1/public/config/plex"},
-        {"container": "/tv", "bind": "/Volume1/public/config/plex/tvseries"},
-        {"container": "/movies", "bind": "/Volume1/public/config/plex/movies"}
+        {
+          "container": "/config",
+          "bind": "/Volume1/public/config/plex"
+        },
+        {
+          "container": "/tv",
+          "bind": "/Volume1/public/config/plex/tvseries"
+        },
+        {
+          "container": "/movies",
+          "bind": "/Volume1/public/config/plex/movies"
+        }
       ],
       "env": [
         {
@@ -629,14 +735,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Jellyfin",
       "name": "jellyfin",
       "network": "horizon_network",
       "description": "Free and open-source media server for personal entertainment streaming",
-      "categories": ["Media", "Streaming"],
+      "categories": [
+        "Media",
+        "Streaming"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "jellyfin/jellyfin",
@@ -644,9 +752,16 @@
         "8096:8096/tcp"
       ],
       "volumes": [
-        {"container": "/config"},
-        {"container": "/cache"},
-        {"container": "/media", "bind": "/Volume1/media"}
+        {
+          "container": "/config"
+        },
+        {
+          "container": "/cache"
+        },
+        {
+          "container": "/media",
+          "bind": "/Volume1/media"
+        }
       ],
       "env": [
         {
@@ -657,14 +772,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Home Assistant",
       "name": "homeassistant",
       "network": "horizon_network",
       "description": "Home automation platform for controlling smart home devices and automation",
-      "categories": ["Home Automation", "IoT"],
+      "categories": [
+        "Home Automation",
+        "IoT"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "homeassistant/home-assistant:latest",
@@ -673,8 +790,14 @@
         "8123:8123/tcp"
       ],
       "volumes": [
-        {"container": "/config", "bind": "/Volume1/public/config/homeassistant"},
-        {"container": "/etc/localtime", "bind": "/etc/localtime"}
+        {
+          "container": "/config",
+          "bind": "/Volume1/public/config/homeassistant"
+        },
+        {
+          "container": "/etc/localtime",
+          "bind": "/etc/localtime"
+        }
       ],
       "env": [
         {
@@ -685,14 +808,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Mosquitto",
       "name": "mosquitto",
       "network": "horizon_network",
       "description": "MQTT message broker for IoT device communication and home automation",
-      "categories": ["Home Automation", "MQTT"],
+      "categories": [
+        "Home Automation",
+        "MQTT"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "eclipse-mosquitto",
@@ -701,9 +826,18 @@
         "9001:9001/tcp"
       ],
       "volumes": [
-        {"container": "/mosquitto/config", "bind": "/Volume1/public/config/mosquitto/config"},
-        {"container": "/mosquitto/data", "bind": "/Volume1/public/config/mosquitto/data"},
-        {"container": "/mosquitto/log", "bind": "/Volume1/public/config/mosquitto/log"}
+        {
+          "container": "/mosquitto/config",
+          "bind": "/Volume1/public/config/mosquitto/config"
+        },
+        {
+          "container": "/mosquitto/data",
+          "bind": "/Volume1/public/config/mosquitto/data"
+        },
+        {
+          "container": "/mosquitto/log",
+          "bind": "/Volume1/public/config/mosquitto/log"
+        }
       ],
       "env": [
         {
@@ -714,13 +848,15 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Dokploy",
       "name": "dokploy",
       "description": "Modern deployment platform for managing and deploying applications",
-      "categories": ["Tools", "DevOps"],
+      "categories": [
+        "Tools",
+        "DevOps"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "dokploy/dokploy:latest",
@@ -728,8 +864,13 @@
         "3002:3000/tcp"
       ],
       "volumes": [
-        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"},
-        {"container": "/app"}
+        {
+          "container": "/var/run/docker.sock",
+          "bind": "/var/run/docker.sock"
+        },
+        {
+          "container": "/app"
+        }
       ],
       "env": [
         {
@@ -740,14 +881,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Invoicerr",
       "name": "invoicerr",
       "network": "horizon_network",
       "description": "Invoice generation and management application with SMTP support",
-      "categories": ["Tools", "Webapp"],
+      "categories": [
+        "Tools",
+        "Webapp"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "ghcr.io/impre-visible/invoicerr:v1.3.0-debug",
@@ -809,14 +952,16 @@
       ],
       "restart_policy": "unless-stopped"
     },
-
     {
       "type": 1,
       "title": "Homepage",
       "name": "homepage",
       "network": "horizon_network",
       "description": "Customizable dashboard for quick access to all homelab services",
-      "categories": ["Tools", "Dashboard"],
+      "categories": [
+        "Tools",
+        "Dashboard"
+      ],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
       "image": "ghcr.io/gethomepage/homepage:latest",
@@ -825,8 +970,14 @@
         "3005:3000/tcp"
       ],
       "volumes": [
-        {"container": "/app/config", "bind": "/Volume1/public/config/homepage"},
-        {"container": "/var/run/docker.sock", "bind": "/var/run/docker.sock"}
+        {
+          "container": "/app/config",
+          "bind": "/Volume1/public/config/homepage"
+        },
+        {
+          "container": "/var/run/docker.sock",
+          "bind": "/var/run/docker.sock"
+        }
       ],
       "env": [
         {
