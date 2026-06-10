@@ -14,10 +14,10 @@ services:
     environment:
       - DOZZLE_LEVEL=info
     healthcheck:
-      test: [CMD, curl, -f, http://localhost:8080/health]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      test: ["CMD", "/dozzle", "healthcheck"]
+      interval: 3s
+      timeout: 30s
+      retries: 5
       start_period: 30s
     labels:
       - com.centurylinklabs.watchtower.enable=true
