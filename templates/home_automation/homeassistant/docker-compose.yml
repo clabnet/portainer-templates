@@ -6,10 +6,6 @@ services:
     hostname: homeassistant
     restart: unless-stopped
     network_mode: host
-    # networks:
-    #   - horizon_network
-    # ports:
-    #   - 8123:8123
     volumes:
       - /Volume1/public/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
