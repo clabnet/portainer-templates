@@ -16,5 +16,11 @@ services:
       - /etc/localtime:/etc/localtime:ro
     # environment:
     #   <<: *env
+    healthcheck:
+      test: [CMD-SHELL, mosquitto_sub -h localhost -t '$$SYS/#' -C 1 -i healthcheck -W 3 || exit 1]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     labels:
       - com.centurylinklabs.watchtower.monitor-only=true

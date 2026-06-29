@@ -81,6 +81,11 @@ services:
       # Uncomment the DB_STORAGE_TYPE: 'HDD' var if your database isn't stored on SSDs
       DB_STORAGE_TYPE: HDD
     shm_size: 128mb
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${DB_USERNAME}" -d "$${DB_DATABASE_NAME}"']
+      interval: 10s
+      timeout: 10s
+      retries: 10
 
 volumes:
   # Media uploads - most important data

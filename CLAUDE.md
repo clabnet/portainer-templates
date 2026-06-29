@@ -1,46 +1,101 @@
-# Claude Code Context for portainer-templates
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-**portainer-templates** is a collection of Docker Compose templates and individual service definitions for a homelab deployment platform using Portainer. The project includes stack templates (multi-service deployments) and individual container templates for standalone service deployment.
+**portainer-templates** is a collection of Docker Compose templates for a self-hosted homelab, organized by category and served as [Portainer App Templates](https://docs.portainer.io/user/docker/templates) via a local nginx container. It includes stack templates (multi-service category deployments) and individual container templates for standalone deployment.
 
-### Key Files
+## Architecture
 
-- **homeassistant/docs/accesso-esterno-dns-companion.md** — Runbook HA: discovery LAN, TLS Companion, Cloudflare DDNS, NPM, Tunnel (repo: `../homeassistant/docs/`, TNAS: `/Volume1/public/config/homeassistant/docs/`)
-- **templates/templates.json** — Portainer UI template definitions (8 stack templates + 16 individual container templates as of e58c4f8)
-- **templates/** — Docker Compose files organized by category (infrastructure, database, monitoring, multimedia, home_automation, tools, webapp)
-- **stack files** — `docker-compose.*.yml` files that aggregate services via `include:` directives
+```
+portainer-templates/
+├── docker-compose.yml          ← template server (nginx, port 8099)
+├── Dockerfile                  ← nginx:alpine serving templates/ as static files
+├── Format-YmlFiles.ps1         ← YAML normalizer (CRLF/whitespace/indentation)
+└── templates/
+    ├── templates.json          ← Portainer App Templates definition (stacks + individual containers)
+    ├── _shared/networks.yml    ← horizon_network, single source of truth
+    └── <category>/
+        ├── docker-compose.<category>.yml   ← aggregator, includes per-service files
+        └── <service>/docker-compose.yml
+```
 
-### Recent Work
+Each category (`database`, `home_automation`, `infrastructure`, `monitoring`, `multimedia`, `tools`, `webapp`) has an aggregator compose file that `include:`s the individual service files plus `../_shared/networks.yml`. The aggregator is the deployment entry point for that category. All services share the external `horizon_network` bridge network.
 
-- Added 15 new individual service templates (type:1) for standalone deployment (commit e58c4f8)
-- Services include: AdGuard Home, Nginx Proxy Manager, PostgreSQL, Dozzle, Uptime Kuma, Home Assistant, Mosquitto, Plex, Jellyfin, Dokploy, Invoicerr, Homepage, and others
+A service can be present in a category but **disabled**: its `include:` line is commented out in the aggregator rather than deleted (e.g. jellyfin, dokploy, invoicerr, cateringcare, wud as of this writing — check the aggregator file for current state).
 
-## Knowledge Graph
+See [README.md](README.md) for the full live directory tree and per-category service/port tables, and [templates/NETWORK_DIAGRAM.md](templates/NETWORK_DIAGRAM.md) for network topology and data-flow diagrams.
 
-A graphify knowledge graph exists at `graphify-out/graph.json`. The graph includes:
-- Service definitions and their relationships
-- Docker Compose structure and shared patterns
-- Portainer template schema and configuration
+## Common Commands
 
-To explore the graph:
-- View interactive HTML: `graphify-out/graph.html` (open in browser)
-- Read audit report: `graphify-out/GRAPH_REPORT.md`
-- Query the graph: `/graphify query "<your question>"`
-- Update on commits: the post-commit hook auto-rebuilds on changes
+```bash
+# One-time prerequisite
+docker network create horizon_network
+
+# Run the template server
+docker compose up -d --build
+curl http://localhost:8099/templates.json   # verify
+
+# Deploy a category stack
+docker compose -f templates/<category>/docker-compose.<category>.yml up -d
+```
+
+```powershell
+# Format YAML (prettier — JSON/MD/YAML)
+npm run format
+
+# Format YAML (CRLF→LF, trailing whitespace, trailing newline; also halves
+# nginxpm's indentation from 4-space to 2-space as a one-off normalization)
+.\Format-YmlFiles.ps1 -WhatIf   # dry run
+.\Format-YmlFiles.ps1           # apply
+```
+
+To enable a disabled service: uncomment its `include:` line in the category's aggregator file, then redeploy that category stack.
+
+## templates/templates.json Conventions
+
+Each service template entry (`type: 1` = individual container, `type: 3` = stack) includes:
+
+- `type`: 1 for individual container, 3 for a multi-service stack
+- `image`: Docker image with tag
+- `registry`: Only for non-Docker Hub (ghcr.io, lscr.io)
+- `ports`: Array of "host:container" or "host:container/proto"
+- `volumes`: Named volumes (just `container`) or bind mounts (`container` + `bind`)
+- `env`: Environment variables with defaults
+- `categories`: For Portainer UI filtering
+- `logo`: CB avatar (consistent across all)
+- `network`: `"horizon_network"` for services joining it; omit for standalone (e.g., Dokploy)
+
+## Docker Compose Service Conventions
+
+From `templates/infrastructure/README.md`, applied across the repo:
+
+- **Key order** in service definitions: `image`, `container_name`, `hostname`, `restart`, `networks`, `ports`, `volumes`, `environment`, `labels`.
+- **Healthchecks**: 30s interval, 10s timeout, 3 retries, 30-40s start period, where applicable.
+
+## Naming Conventions
+
+- **Service names** (`name` field in templates.json): lowercase, no underscores (e.g., `adguard`, `nginxpm`, `uptimekuma`)
+- **File paths**: relative paths from repo root
+- **Volumes**: bind mounts use `/Volume1/public/config/{service}/...` NAS paths for consistency
+
+## Cross-Repo Docs
+
+Home Assistant external access (LAN discovery, TLS Companion, Cloudflare DDNS, NPM, Tunnel) is documented outside this repo: `../homeassistant/docs/accesso-esterno-dns-companion.md` (on TNAS: `/Volume1/public/config/homeassistant/docs/`).
 
 ## TNAS Access
 
-| Detail | Value |
-|--------|-------|
-| IP | 192.168.1.2 |
-| SSH port | 9222 |
-| SSH user | clabnet |
-| SSH key | `~/.ssh/tnas_homelab` (on Windows: `$env:USERPROFILE\.ssh\tnas_homelab`) |
-| Docker binary | `/var/subvols/8vEbTxkKvwa/@/@apps/DockerEngine/dockerd/bin/docker` |
-| Docker is NOT in PATH | Always use full binary path |
-| portainer-templates on NAS | `/Volume1/public/config/portainer-templates/` |
-| homepage config on NAS | `/Volume1/public/config/homepage/` |
+| Detail                     | Value                                                                    |
+| -------------------------- | ------------------------------------------------------------------------ |
+| IP                         | 192.168.1.2                                                              |
+| SSH port                   | 9222                                                                     |
+| SSH user                   | clabnet                                                                  |
+| SSH key                    | `~/.ssh/tnas_homelab` (on Windows: `$env:USERPROFILE\.ssh\tnas_homelab`) |
+| Docker binary              | `/var/subvols/8vEbTxkKvwa/@/@apps/DockerEngine/dockerd/bin/docker`       |
+| Docker is NOT in PATH      | Always use full binary path                                              |
+| portainer-templates on NAS | `/Volume1/public/config/portainer-templates/`                            |
+| homepage config on NAS     | `/Volume1/public/config/homepage/`                                       |
 
 ### Deploy / recreate a stack on TNAS
 
@@ -59,31 +114,10 @@ ssh -p 9222 -i "$env:USERPROFILE\.ssh\tnas_homelab" clabnet@192.168.1.2 "$docker
 
 > **Note**: Use PowerShell variable interpolation (`$docker = '...'`) — do NOT escape `$` in the SSH string or use `export` inside the remote command, as both cause the command to hang or fail.
 
-## Conventions
-
-### JSON Templates (templates/templates.json)
-
-Each service template entry (type:1) includes:
-- `type`: 1 for individual container
-- `image`: Docker image with tag
-- `registry`: Only for non-Docker Hub (ghcr.io, lscr.io)
-- `ports`: Array of "host:container" or "host:container/proto"
-- `volumes`: Named volumes (just `container`) or bind mounts (`container` + `bind`)
-- `env`: Environment variables with defaults
-- `categories`: For Portainer UI filtering
-- `logo`: CB avatar (consistent across all)
-- `network`: "horizon_network" for services joining it; omit for standalone (e.g., Dokploy)
-
-### Naming
-
-- **Service names (name field)**: lowercase, no underscores (e.g., `adguard`, `nginxpm`, `uptimekuma`)
-- **File paths**: use relative paths from repo root
-- **Volumes**: bind mounts use `/Volume1/public/config/{service}/...` NAS paths for consistency
-
 ## Adding New Services
 
-1. Create compose file in appropriate `templates/{category}/{service}/docker-compose.yml`
-2. Add type:1 entry to `templates/templates.json` following existing patterns
-3. Include all required fields: image, ports, volumes, env, categories, restart_policy
-4. Commit — the post-commit hook will rebuild the knowledge graph automatically
-5. Query the graph if you need to understand relationships: `/graphify query "How does X integrate with Y?"`
+1. Create the compose file at `templates/{category}/{service}/docker-compose.yml`, following the key-order and healthcheck conventions above.
+2. Add an `include:` line for it in `templates/{category}/docker-compose.{category}.yml`.
+3. Add a `.env.example` if the service needs configuration.
+4. Add a `type: 1` entry to `templates/templates.json` following existing patterns.
+5. Run `npm run format` and/or `.\Format-YmlFiles.ps1` before committing.
