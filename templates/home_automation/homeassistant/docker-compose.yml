@@ -1,7 +1,7 @@
 services:
   # Homeassistant Core
   homeassistant:
-    image: home-assistant/home-assistant:latest
+    image: homeassistant/home-assistant:latest
     container_name: homeassistant
     hostname: homeassistant
     restart: unless-stopped
