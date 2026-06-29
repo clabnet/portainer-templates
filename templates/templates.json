@@ -4,8 +4,8 @@
     {
       "type": 3,
       "title": "Infrastructure",
-      "description": "Complete homelab infrastructure stack with Homepage, AdGuard Home for DNS filtering and ad blocking, plus Nginx Proxy Manager for reverse proxy management with SSL certificates",
-      "note": "Requires external network 'horizon_network' to be created first. AdGuard Home will be accessible on port 3000 for initial setup, then port 80. Nginx Proxy Manager admin interface on port 81.",
+      "description": "Infrastructure stack with Homepage dashboard, AdGuard Home for DNS-level ad blocking and filtering, and Nginx Proxy Manager for reverse proxy with SSL management",
+      "note": "Uses external network 'horizon_network'. Homepage dashboard on port 3005. AdGuard Home blocks ads at DNS level with web interface on port 8090 and setup wizard on port 3000. Nginx Proxy Manager provides reverse proxy on ports 80/443 with admin UI on port 81.",
       "categories": [
         "Homepage",
         "Networking",
@@ -68,8 +68,8 @@
     {
       "type": 3,
       "title": "Database",
-      "description": "Database infrastructure stack with PostgreSQL, MySQL, Redis, and database administration tools for application data storage and management",
-      "note": "Requires external network 'horizon_network' to be created first. Provides multiple database engines and management interfaces for application backends.",
+      "description": "PostgreSQL database service with health checks and watchtower monitoring on port 5432",
+      "note": "Uses external network 'horizon_network'. PostgreSQL 16.13 with configurable user/password/database via POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB environment variables.",
       "categories": [
         "Database",
         "Storage",
@@ -98,8 +98,8 @@
     {
       "type": 3,
       "title": "Monitoring",
-      "description": "Comprehensive monitoring stack with Prometheus, Grafana, Node Exporter, and Dozzle for metrics collection, visualization, and real-time log monitoring",
-      "note": "Requires external network 'horizon_network' to be created first. Includes system metrics monitoring and Docker container log viewing.",
+      "description": "Monitoring stack with Uptime Kuma for service monitoring (port 3001), MySpeed for network speed testing (port 5216), Dozzle for real-time Docker logs (port 9999), and Tugtainer for container update notifications (port 9412)",
+      "note": "Uses external network 'horizon_network'. Includes uptime monitoring via Uptime Kuma web interface, speed testing via MySpeed, live container logs via Dozzle, and automatic update notifications via Tugtainer.",
       "categories": [
         "Monitoring",
         "Metrics",
@@ -133,8 +133,8 @@
     {
       "type": 3,
       "title": "Multimedia",
-      "description": "Complete multimedia management stack featuring Immich for photo/video management, Jellyfin media server, and supporting services with PostgreSQL database",
-      "note": "Requires external network 'horizon_network' to be created first. Includes photo backup, media streaming, and content organization tools.",
+      "description": "Multimedia stack centered on Immich photo management with PostgreSQL database and Redis cache",
+      "note": "Uses external network 'horizon_network'. Immich provides photo/video backup and management on port 2283 with machine learning capabilities. Includes dedicated PostgreSQL database and Redis for caching.",
       "categories": [
         "Media",
         "Photos",
@@ -175,8 +175,8 @@
     {
       "type": 3,
       "title": "Home Automation",
-      "description": "Home Assistant Core deployment for comprehensive smart home automation, device integration, and IoT management",
-      "note": "Provides local control of smart home devices with support for hundreds of integrations. Access via web interface for configuration and automation setup.",
+      "description": "Home automation stack with Home Assistant for smart home control and Mosquitto MQTT broker for device communication",
+      "note": "Uses external network 'horizon_network'. Home Assistant runs on host network mode (port 8123) for device discovery. Mosquitto MQTT broker on ports 1883/9001 for IoT messaging.",
       "categories": [
         "Home Automation",
         "IoT",
@@ -204,8 +204,8 @@
     {
       "type": 3,
       "title": "Tools",
-      "description": "Essential utility tools collection including file managers, system utilities, network tools, and development aids for homelab administration",
-      "note": "Requires external network 'horizon_network' to be created first. Provides various administrative and utility services for homelab management.",
+      "description": "Tools stack with InvoiceShelf invoice management application and MailPit SMTP testing server",
+      "note": "Uses external network 'horizon_network'. InvoiceShelf provides invoice generation and management on port 8090. MailPit mail testing server on port 8025 for SMTP/email testing.",
       "categories": [
         "Tools",
         "Utilities",
@@ -233,8 +233,8 @@
     {
       "type": 3,
       "title": "Web applications",
-      "description": "Frontend and backend components",
-      "note": "Requires external network 'horizon_network' to be created first.",
+      "description": "Web applications stack with Wendy event management platform (backend on port 5454, frontend on port 3454)",
+      "note": "Uses external network 'horizon_network'. Wendy provides event management backend and frontend services.",
       "categories": [
         "WEB APP"
       ],
@@ -259,7 +259,7 @@
       "title": "WENDY backend",
       "name": "wendy-backend",
       "network": "horizon_network",
-      "description": "Event management platform backend",
+      "description": "Event management platform with PostgreSQL backend on port 5454 and Nginx frontend on port 3454",
       "categories": [
         "webapp",
         "backend"
@@ -322,7 +322,7 @@
       "title": "AdGuard Home",
       "name": "adguard",
       "network": "horizon_network",
-      "description": "DNS filtering and ad blocking service with privacy protection and parental controls",
+      "description": "DNS-level ad blocking and filtering with web interface (port 8090) and setup wizard (port 3000)",
       "categories": [
         "Networking",
         "DNS",
@@ -375,7 +375,7 @@
       "title": "Nginx Proxy Manager",
       "name": "nginxpm",
       "network": "horizon_network",
-      "description": "Reverse proxy manager with SSL certificate automation, easy UI-based configuration",
+      "description": "Reverse proxy manager with SSL certificate automation and admin UI on port 81",
       "categories": [
         "Proxy",
         "Networking",
@@ -400,11 +400,6 @@
         }
       ],
       "env": [
-        {
-          "name": "TZ",
-          "label": "Timezone",
-          "default": "Europe/Rome"
-        },
         {
           "name": "NPM_HTTP_PORT",
           "label": "Nginx Proxy Manager HTTP Port",
@@ -443,7 +438,7 @@
       "title": "PostgreSQL",
       "name": "postgres",
       "network": "horizon_network",
-      "description": "Advanced relational database with JSON support, full-text search, and high performance",
+      "description": "PostgreSQL 16.13 database server on port 5432 with configurable credentials and watchtower monitoring",
       "categories": [
         "Database",
         "PostgreSQL"
@@ -483,7 +478,7 @@
       "title": "Dozzle",
       "name": "dozzle",
       "network": "horizon_network",
-      "description": "Real-time Docker container log viewer with web-based interface and filtering",
+      "description": "Real-time Docker container log viewer with web interface on port 9999",
       "categories": [
         "Monitoring",
         "Logs"
@@ -519,7 +514,7 @@
       "title": "MySpeed",
       "name": "myspeed",
       "network": "horizon_network",
-      "description": "Speed test tool for monitoring network performance and latency",
+      "description": "Network speed test monitoring tool on port 5216",
       "categories": [
         "Monitoring",
         "Network"
@@ -559,7 +554,7 @@
       "title": "Tugtainer",
       "name": "tugtainer",
       "network": "horizon_network",
-      "description": "Container monitoring and update notification tool with Docker API integration",
+      "description": "Container update monitoring and notification service on port 9412",
       "categories": [
         "Monitoring"
       ],
@@ -603,7 +598,7 @@
       "title": "Uptime Kuma",
       "name": "uptimekuma",
       "network": "horizon_network",
-      "description": "Uptime monitoring and status page service with notifications and charts",
+      "description": "Uptime monitoring and status page on port 3001 with Docker socket integration",
       "categories": [
         "Monitoring",
         "Uptime"
@@ -683,7 +678,7 @@
       "title": "Plex",
       "name": "plex",
       "network": "horizon_network",
-      "description": "Media server for movies, TV shows, music, and photos with streaming capabilities",
+      "description": "Media server via host network mode (port 32400) with TV/Movie libraries mounted from /Volume1/public/config/plex",
       "categories": [
         "Media",
         "Streaming"
@@ -740,7 +735,7 @@
       "title": "Jellyfin",
       "name": "jellyfin",
       "network": "horizon_network",
-      "description": "Free and open-source media server for personal entertainment streaming",
+      "description": "Media streaming server on port 8096 with media library from /Volume1/media and optional config override",
       "categories": [
         "Media",
         "Streaming"
@@ -777,7 +772,7 @@
       "title": "Home Assistant",
       "name": "homeassistant",
       "network": "horizon_network",
-      "description": "Home automation platform for controlling smart home devices and automation",
+      "description": "Smart home automation on port 8123 via host network mode for device discovery",
       "categories": [
         "Home Automation",
         "IoT"
@@ -813,7 +808,7 @@
       "title": "Mosquitto",
       "name": "mosquitto",
       "network": "horizon_network",
-      "description": "MQTT message broker for IoT device communication and home automation",
+      "description": "MQTT broker on ports 1883/9001 for IoT messaging with persistent configuration storage",
       "categories": [
         "Home Automation",
         "MQTT"
@@ -852,7 +847,7 @@
       "type": 1,
       "title": "Dokploy",
       "name": "dokploy",
-      "description": "Modern deployment platform for managing and deploying applications",
+      "description": "Modern application deployment platform on port 3002 with Docker socket integration",
       "categories": [
         "Tools",
         "DevOps"
@@ -886,7 +881,7 @@
       "title": "Invoicerr",
       "name": "invoicerr",
       "network": "horizon_network",
-      "description": "Invoice generation and management application with SMTP support",
+      "description": "Invoice management application on port 8020 with SMTP email support and PostgreSQL database integration",
       "categories": [
         "Tools",
         "Webapp"
@@ -957,7 +952,7 @@
       "title": "Homepage",
       "name": "homepage",
       "network": "horizon_network",
-      "description": "Customizable dashboard for quick access to all homelab services",
+      "description": "Customizable homelab dashboard on port 3005 with Docker socket integration for service monitoring",
       "categories": [
         "Tools",
         "Dashboard"
