@@ -24,9 +24,6 @@ services:
       - /Volume1/public/config/immich:/config
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - IMMICH_SERVER_URL=${IMMICH_SERVER_URL}
-      - IMMICH_WEB_URL=${IMMICH_WEB_URL}
-      - IMMICH_EXTERNAL_DOMAIN=${IMMICH_EXTERNAL_DOMAIN}
       - IMMICH_CONFIG_FILE=/config/config.json
       - DB_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgresql:5432/${DB_DATABASE_NAME}
     depends_on:

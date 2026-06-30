@@ -116,3 +116,8 @@ All services include standardized healthchecks with:
 - Minimal container privileges
 - Secure network isolation (horizon_network)
 - Environment-based configuration (no hardcoded credentials)
+
+### Troubleshooting
+
+- [adguard/reset-setup.md](adguard/reset-setup.md) - AdGuard setup wizard doesn't appear
+- [adguard/dns-troubleshooting.md](adguard/dns-troubleshooting.md) - `.home` domains return NXDOMAIN in the browser
