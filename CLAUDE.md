@@ -65,7 +65,7 @@ Each service template entry (`type: 1` = individual container, `type: 3` = stack
 - `env`: Environment variables with defaults
 - `categories`: For Portainer UI filtering
 - `logo`: CB avatar (consistent across all)
-- `network`: `"horizon_network"` for services joining it; omit for standalone (e.g., Dokploy)
+- `network`: `"horizon_network"` for services joining it; omit for standalone deployments not on the shared network
 
 ## Docker Compose Service Conventions
 
@@ -83,6 +83,8 @@ From `templates/infrastructure/README.md`, applied across the repo:
 ## Cross-Repo Docs
 
 Home Assistant external access (LAN discovery, TLS Companion, Cloudflare DDNS, NPM, Tunnel) is documented outside this repo: `../homeassistant/docs/accesso-esterno-dns-companion.md` (on TNAS: `/Volume1/public/config/homeassistant/docs/`).
+
+The Homepage dashboard's **live config is a separate git repo**: `T:\homepage` (on TNAS: `/Volume1/public/config/homepage/`), not part of this repo. `templates/infrastructure/homepage/.env.example` here is the reference template for that repo's `.env`; `templates/infrastructure/homepage/README.md` documents the widget setup. Changes to `services.yaml`/`widgets.yaml`/etc. happen in the `homepage` repo, not here.
 
 ## TNAS Access
 
