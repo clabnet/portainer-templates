@@ -38,8 +38,7 @@ portainer-templates/
     ├── multimedia/
     │   ├── docker-compose.multimedia.yml
     │   ├── immich/
-    │   ├── jellyfin/               ← disabled
-    │   └── plex/
+    │   └── jellyfin/               ← disabled
     ├── tools/
     │   ├── docker-compose.tools.yml
     │   ├── dokploy/                ← disabled
@@ -159,10 +158,10 @@ docker compose -f templates/monitoring/docker-compose.monitoring.yml up -d
 
 ### Multimedia
 
-| Service | Port  | Description               |
-| ------- | ----- | ------------------------- |
-| Immich  | 2283  | Self-hosted photo library |
-| Plex    | 32400 | Media server              |
+| Service  | Port | Description                       |
+| -------- | ---- | ---------------------------------- |
+| Immich   | 2283 | Self-hosted photo library          |
+| Jellyfin | 8096 | Media server (disabled by default) |
 
 ```bash
 docker compose -f templates/multimedia/docker-compose.multimedia.yml up -d

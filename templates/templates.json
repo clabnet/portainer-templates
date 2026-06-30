@@ -675,63 +675,6 @@
     },
     {
       "type": 1,
-      "title": "Plex",
-      "name": "plex",
-      "network": "horizon_network",
-      "description": "Media server via host network mode (port 32400) with TV/Movie libraries mounted from /Volume1/public/config/plex",
-      "categories": [
-        "Media",
-        "Streaming"
-      ],
-      "platform": "linux",
-      "logo": "https://ui-avatars.com/api/?name=CB&background=ff0000&color=fff&size=50",
-      "image": "lscr.io/linuxserver/plex:latest",
-      "registry": "lscr.io",
-      "volumes": [
-        {
-          "container": "/config",
-          "bind": "/Volume1/public/config/plex"
-        },
-        {
-          "container": "/tv",
-          "bind": "/Volume1/public/config/plex/tvseries"
-        },
-        {
-          "container": "/movies",
-          "bind": "/Volume1/public/config/plex/movies"
-        }
-      ],
-      "env": [
-        {
-          "name": "TZ",
-          "label": "Timezone",
-          "default": "Europe/Rome"
-        },
-        {
-          "name": "PUID",
-          "label": "User ID",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "Group ID",
-          "default": "1000"
-        },
-        {
-          "name": "VERSION",
-          "label": "Plex Version",
-          "default": "docker"
-        },
-        {
-          "name": "PLEX_CLAIM",
-          "label": "Plex Claim Token (optional)",
-          "default": ""
-        }
-      ],
-      "restart_policy": "unless-stopped"
-    },
-    {
-      "type": 1,
       "title": "Jellyfin",
       "name": "jellyfin",
       "network": "horizon_network",

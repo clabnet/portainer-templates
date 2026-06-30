@@ -26,7 +26,6 @@ graph TB
 
             subgraph "Multimedia"
                 IMMICH["📷 Immich<br/>port 2283"]
-                PLEX["🎬 Plex<br/>port 32400"]
                 JELLYFIN["📺 Jellyfin<br/>port 8096"]
             end
 
@@ -106,7 +105,6 @@ graph TB
     MOSQUITTO -.->|config| VOL_CONFIG
 
     IMMICH -.->|photos| VOL_MEDIA
-    PLEX -.->|media| VOL_MEDIA
     JELLYFIN -.->|media| VOL_MEDIA
 
     %% Connections - Templates
@@ -132,7 +130,7 @@ graph TB
 
     class ADGUARD,NPM,HOMEPAGE infrastructure
     class UPTIME,MYSPEED,DOZZLE,TUGTAINER monitoring
-    class IMMICH,PLEX,JELLYFIN multimedia
+    class IMMICH,JELLYFIN multimedia
     class HA,MQTT automation
     class POSTGRES database
     class INVOICESHELF,MAILPIT,DOKPLOY tools
@@ -232,7 +230,6 @@ NAS Volumes
 | Home Assistant      | 8123  | TCP     | Smart home           |
 | Mosquitto           | 1883  | TCP     | MQTT broker          |
 | Immich              | 2283  | TCP     | Photo library        |
-| Plex                | 32400 | TCP     | Media server         |
 | Jellyfin            | 8096  | TCP     | Media server         |
 | Dozzle              | 9999  | TCP     | Log viewer           |
 | Tugtainer           | 9412  | TCP     | Image monitor        |
