@@ -33,6 +33,46 @@ curl -s http://192.168.1.2:2283/api/server/config
 # {"maintenanceMode":true}  -> still in maintenance mode
 ```
 
+## Don't use the built-in "restore from backup" against the shared Postgres instance
+
+Immich's maintenance-mode restore (`select_database_restore` / `restore_database`) is built for
+the official single-tenant deployment, where Immich owns its own dedicated Postgres container.
+It does **not** work against this repo's shared `postgresql` instance:
+
+- The backup is a `pg_dump --clean` style dump that includes `DROP ROLE postgres` /
+  `CREATE ROLE postgres` statements, which fail (harmlessly) since the shared instance already
+  has its own `postgres` superuser.
+- More seriously, the restore script's `\connect` step appears to **change the live `postgres`
+  role's password** to whatever was embedded in the old dump before failing on a mismatched
+  password — even though the restore itself never completes. This breaks Postgres auth for
+  every consumer of the shared instance, not just Immich.
+- After that, the `immich` database itself was found dropped, leaving `immich-server` unable to
+  start at all (`PostgresError: database "immich" does not exist`).
+
+If this happens, recovery is two `psql` commands on the TNAS (local socket auth on the
+`postgresql` container bypasses the broken password):
+
+```bash
+DOCKER=/var/subvols/8vEbTxkKvwa/@/@apps/DockerEngine/dockerd/bin/docker
+$DOCKER exec postgresql psql -U postgres -c "ALTER ROLE postgres WITH PASSWORD 'changeme';"
+$DOCKER exec postgresql psql -U postgres -c "CREATE DATABASE immich;"
+```
+
+(`changeme` must match `DB_PASSWORD` in `.env` / `POSTGRES_PASSWORD` in
+`templates/database/postgresql/.env`.) Then recreate `immich_server` so it reconnects with a
+working password. This resets Immich to a **fresh install** (`isInitialized:false`) — you'll go
+through the normal first-admin sign-up again.
+
+The original media files (uploads, thumbnails, the old `.sql.gz` backups) are untouched on disk
+— only the database/library index is lost. To recover photos from before the reset, use
+Immich's "scan library" / external library feature to re-index the orphaned files in the
+`upload` volume rather than trying the built-in restore again.
+
+If you ever need a real point-in-time restore on this setup, do it manually: load the dump into
+a throwaway database on the same Postgres instance with `pg_restore --no-owner --no-privileges
+--dbname=<temp>`, inspect/extract what you need, rather than letting Immich's restore feature
+touch roles on the shared instance.
+
 ## Removed env vars
 
 `IMMICH_SERVER_URL`, `IMMICH_WEB_URL`, `IMMICH_EXTERNAL_DOMAIN` were leftovers from the old
