@@ -19,7 +19,7 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     healthcheck:
-      test: [CMD, curl, -f, http://localhost/api]
+      test: [CMD, curl, -f, http://localhost:81/api]
       interval: 30s
       timeout: 10s
       retries: 3
