@@ -33,7 +33,7 @@ docker run -d \
   portainer/portainer-ce:sts
 ```
 
-Open the console at **https://192.168.1.2:9443**, then use *Get Started* to set up a **Local Environment**.
+Open the console at **https://192.168.1.2:9443**, then use _Get Started_ to set up a **Local Environment**.
 
 ### Why `/Volume1/public:/Volume1/public:ro` is required
 
@@ -51,7 +51,7 @@ Mounting `/Volume1/public` read-only into the Portainer container gives its comp
 
 ## Upgrade Portainer
 
-1. **Backup first**: Portainer UI → *Settings* → *General* → *Backup configuration* → *Download*.
+1. **Backup first**: Portainer UI → _Settings_ → _General_ → _Backup configuration_ → _Download_.
 2. SSH into the TNAS (see [TNAS Access](CLAUDE.md#tnas-access)) and run:
 
    ```bash

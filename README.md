@@ -110,9 +110,9 @@ http://<nas-ip>:8099/templates.json
 
 ### Database
 
-| Service    | Port | Description                                 |
-| ---------- | ---- | ------------------------------------------- |
-| PostgreSQL | 5432 | Relational database, shared by other stacks |
+| Service    | Port | Description                                                                           |
+| ---------- | ---- | ------------------------------------------------------------------------------------- |
+| PostgreSQL | 5433 | Relational database, shared by other stacks (5432 is the NAS's own native PostgreSQL) |
 
 ```bash
 docker compose -f templates/database/docker-compose.database.yml up -d
@@ -158,7 +158,7 @@ docker compose -f templates/monitoring/docker-compose.monitoring.yml up -d
 
 ### Multimedia
 
-| Service  | Port | Description                       |
+| Service  | Port | Description                        |
 | -------- | ---- | ---------------------------------- |
 | Immich   | 2283 | Self-hosted photo library          |
 | Jellyfin | 8096 | Media server (disabled by default) |

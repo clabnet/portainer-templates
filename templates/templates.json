@@ -68,8 +68,8 @@
     {
       "type": 3,
       "title": "Database",
-      "description": "PostgreSQL database service with health checks and watchtower monitoring on port 5432",
-      "note": "Uses external network 'horizon_network'. PostgreSQL 16.13 with configurable user/password/database via POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB environment variables.",
+      "description": "PostgreSQL database service with health checks and watchtower monitoring on port 5433",
+      "note": "Uses external network 'horizon_network'. PostgreSQL 16.13 with configurable user/password/database via POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB environment variables. Host port defaults to 5433 (5432 is taken by the NAS's own native PostgreSQL instance), override with POSTGRES_PORT.",
       "categories": [
         "Database",
         "Storage",
@@ -91,6 +91,12 @@
           "label": "Timezone",
           "description": "Set your local timezone for database timestamps and scheduling (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
           "default": "Europe/Rome"
+        },
+        {
+          "name": "POSTGRES_PORT",
+          "label": "PostgreSQL Host Port",
+          "description": "Host port for PostgreSQL. Defaults to 5433 because 5432 is taken by the NAS's own native PostgreSQL instance.",
+          "default": "5433"
         }
       ],
       "restart_policy": "always"
