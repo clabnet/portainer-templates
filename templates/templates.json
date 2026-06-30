@@ -82,8 +82,8 @@
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
       "name": "database",
       "repository": {
-        "url": "http://192.168.1.2:8099/templates.json",
-        "stackfile": "database/docker-compose.database.yml"
+        "url": "https://github.com/clabnet/portainer-templates",
+        "stackfile": "templates/database/docker-compose.database.yml"
       },
       "env": [
         {
