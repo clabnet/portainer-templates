@@ -163,7 +163,11 @@ docker compose -f templates/monitoring/docker-compose.monitoring.yml up -d
 | Immich   | 2283 | Self-hosted photo library          |
 | Jellyfin | 8096 | Media server (disabled by default) |
 
+Immich uses the shared PostgreSQL instance from the [Database](#database) stack rather than its own. Deploy that stack first and create the `immich` database on it before starting Multimedia:
+
 ```bash
+docker compose -f templates/database/docker-compose.database.yml up -d
+docker exec -it postgresql psql -U postgres -c "CREATE DATABASE immich;"
 docker compose -f templates/multimedia/docker-compose.multimedia.yml up -d
 ```
 
