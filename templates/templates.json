@@ -937,7 +937,7 @@
         {
           "name": "HOMEPAGE_ALLOWED_HOSTS",
           "label": "Allowed Hosts (comma-separated host:port)",
-          "default": "192.168.1.2:3005,homepage.home"
+          "default": "192.168.1.2:3005,homepage.home, homelab.home"
         }
       ],
       "restart_policy": "unless-stopped"
