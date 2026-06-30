@@ -79,6 +79,7 @@ Runbook completo (discovery Companion, certificati, Cloudflare DDNS, NPM):
 
 - Docker Engine with Compose v2
 - The `horizon_network` external network must exist before any stack is deployed
+- Portainer CE itself must be installed and configured — see [PORTAINER.md](PORTAINER.md) for install, upgrade, and the required `/Volume1/public` bind mount
 
 ```bash
 docker network create horizon_network

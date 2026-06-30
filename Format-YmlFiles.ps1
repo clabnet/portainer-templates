@@ -1,5 +1,14 @@
 param([switch]$WhatIf)
 
+function Get-GCD([int]$a, [int]$b) {
+    while ($b -ne 0) {
+        $t = $b
+        $b = $a % $b
+        $a = $t
+    }
+    return $a
+}
+
 $root    = $PSScriptRoot
 $enc     = New-Object System.Text.UTF8Encoding($false)
 $files   = Get-ChildItem -Recurse -Filter "*.yml" $root |
@@ -20,14 +29,21 @@ foreach ($f in $files) {
 
     $ops = [System.Collections.Generic.List[string]]::new()
 
-    # nginxpm only: halve leading indentation (4-space -> 2-space)
-    if ($f.FullName -like "*nginxpm*") {
-        $ops.Add("4space->2space")
-        $lines = $lines | ForEach-Object {
-            if ($_ -match '^( +)') {
-                $n = $Matches[1].Length
-                (' ' * [int]($n / 2)) + $_.Substring($n)
-            } else { $_ }
+    # normalize indentation to 2-space: detect the file's actual indent unit
+    # (GCD of indented-line lengths) and rescale, rather than blindly halving
+    # — this keeps the operation idempotent regardless of starting indent size
+    $indents = $lines | Where-Object { $_ -match '^( +)\S' } | ForEach-Object { $Matches[1].Length }
+    if ($indents.Count -gt 0) {
+        $unit = $indents[0]
+        foreach ($i in $indents) { $unit = Get-GCD $unit $i }
+        if ($unit -gt 2) {
+            $ops.Add("${unit}space->2space")
+            $lines = $lines | ForEach-Object {
+                if ($_ -match '^( +)') {
+                    $n = $Matches[1].Length
+                    (' ' * [int]($n / $unit * 2)) + $_.Substring($n)
+                } else { $_ }
+            }
         }
     }
 
