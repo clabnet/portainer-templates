@@ -3,7 +3,7 @@ services:
     image: ghcr.io/immich-app/postgres:16-vectorchord0.5.3
     container_name: postgresql
     hostname: postgresql
-    restart: on-failure:5
+    restart: unless-stopped
     networks:
       - horizon_network
     ports:
