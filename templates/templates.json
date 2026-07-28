@@ -83,6 +83,18 @@
           "label": "PostgreSQL Host Port",
           "description": "Host port for PostgreSQL. Defaults to 5433 because 5432 is taken by the NAS's own native PostgreSQL instance.",
           "default": "5433"
+        },
+        {
+          "name": "POSTGRES_USER",
+          "label": "PostgreSQL Username",
+          "description": "Superuser for the shared PostgreSQL instance. Other stacks (Immich, InvoiceShelf, ...) default to this same username to connect.",
+          "default": "postgres"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "PostgreSQL Password",
+          "description": "Superuser password for the shared PostgreSQL instance. Other stacks (Immich, InvoiceShelf, ...) default to this same password to connect - change it here and in those stacks together.",
+          "default": "changeme"
         }
       ],
       "restart_policy": "always"
@@ -120,7 +132,7 @@
       "type": 3,
       "title": "Multimedia",
       "description": "Multimedia stack centered on Immich photo management, using the shared PostgreSQL database and Redis cache",
-      "note": "Uses external network 'horizon_network'. Immich provides photo/video backup and management on port 2283 with machine learning capabilities. Uses the shared PostgreSQL instance from the Database stack (deploy that first and create the 'immich' database) plus its own Redis for caching.",
+      "note": "Uses external network 'horizon_network'. Immich provides photo/video backup and management on port 2283 with machine learning capabilities. Uses the shared PostgreSQL and Redis instances from the Database stack (deploy that first and create the 'immich' database) - Redis DB index 0 is reserved for Immich.",
       "categories": ["Media", "Photos", "Videos", "Streaming", "Multimedia", "Entertainment"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
@@ -172,7 +184,7 @@
       "type": 3,
       "title": "Tools",
       "description": "Tools stack with InvoiceShelf invoice management application and MailPit SMTP testing server",
-      "note": "Uses external network 'horizon_network'. InvoiceShelf provides invoice generation and management on port 8090. MailPit mail testing server on port 8025 for SMTP/email testing.",
+      "note": "Uses external network 'horizon_network'. InvoiceShelf provides invoice generation and management on port 8090, using the shared PostgreSQL instance from the Database stack (deploy that first and create the 'invoiceshelfdb' database). MailPit mail testing server on port 8025 for SMTP/email testing.",
       "categories": ["Tools", "Utilities", "Administration", "File Management", "System Tools"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",
@@ -187,6 +199,24 @@
           "label": "Timezone",
           "description": "Set your local timezone for proper time-based functionality (e.g., Europe/Rome, America/New_York, Asia/Tokyo)",
           "default": "Europe/Rome"
+        },
+        {
+          "name": "APP_KEY",
+          "label": "InvoiceShelf App Key",
+          "description": "Generate with: openssl rand -base64 32 (prefix with base64:)",
+          "default": "base64:changeme"
+        },
+        {
+          "name": "DB_USERNAME",
+          "label": "PostgreSQL Database Username",
+          "description": "Username on the shared PostgreSQL instance (Database stack) used by InvoiceShelf",
+          "default": "postgres"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "label": "PostgreSQL Database Password",
+          "description": "Password for the shared PostgreSQL instance (must match the Database stack's POSTGRES_PASSWORD)",
+          "default": "changeme"
         }
       ],
       "restart_policy": "unless-stopped"

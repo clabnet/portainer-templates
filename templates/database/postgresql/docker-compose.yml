@@ -12,7 +12,7 @@ services:
       - /Volume1/public/config/postgresql:/var/lib/postgresql/data:rw
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
       - POSTGRES_DB=${POSTGRES_DB:-postgres}
     env_file:
       - path: /Volume1/public/config/postgresql/.env

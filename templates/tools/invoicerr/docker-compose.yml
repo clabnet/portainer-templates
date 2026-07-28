@@ -8,33 +8,13 @@ services:
     ports:
       - 8020:80
     environment:
-      - DATABASE_URL=${DATABASE_URL}
-
-      - APP_URL=${APP_URL}
-      - CORS_ORIGINS=${CORS_ORIGINS}
-
       # Required for email features
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_FROM=${SMTP_FROM}
-      - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_SECURE=${SMTP_SECURE:-false}
 
-      # # OIDC Configuration (example for Authentik)
-      # - OIDC_ISSUER=${OIDC_ISSUER}
-      # - OIDC_AUTHORIZATION_ENDPOINT=${OIDC_AUTHORIZATION_ENDPOINT}
-      # - OIDC_TOKEN_ENDPOINT=${OIDC_TOKEN_ENDPOINT}
-      # - OIDC_USERINFO_ENDPOINT=${OIDC_USERINFO_ENDPOINT}
-      # - OIDC_TOKEN_REVOKE_ENDPOINT=${OIDC_TOKEN_REVOKE_ENDPOINT}
-      # - OIDC_END_SESSION_ENDPOINT=${OIDC_END_SESSION_ENDPOINT}
-      # - OIDC_JWKS_URI=${OIDC_JWKS_URI}
-      # - OIDC_CALLBACK_URL=${OIDC_CALLBACK_URL}
-      # - OIDC_CLIENT_ID=${OIDC_CLIENT_ID}
-      # - OIDC_CLIENT_SECRET=${OIDC_CLIENT_SECRET}
-      # - VITE_OIDC_ENDPOINT=${VITE_OIDC_ENDPOINT}
-
-      - JWT_SECRET=${JWT_SECRET}
+      # OIDC Configuration (example for Authentik), and DATABASE_URL, APP_URL,
+      # CORS_ORIGINS, SMTP_HOST/USER/FROM/PASSWORD, JWT_SECRET - all provided
+      # via env_file below, not interpolated here (no compose-side default).
     env_file:
       - path: /Volume1/public/config/invoicerr/.env
         required: false
