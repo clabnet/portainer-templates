@@ -146,7 +146,7 @@ docker compose -f templates/infrastructure/docker-compose.infrastructure.yml up 
 | Service    | Port | Description                      |
 | ---------- | ---- | -------------------------------- |
 | UptimeKuma | 3001 | Uptime & availability monitoring |
-| MySpeed    | 8080 | Scheduled internet speed tests   |
+| MySpeed    | 5216 | Scheduled internet speed tests   |
 | Dozzle     | 9999 | Real-time Docker log viewer      |
 | Tugtainer  | 9412 | Docker image update monitor      |
 

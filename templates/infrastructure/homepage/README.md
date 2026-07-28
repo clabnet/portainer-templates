@@ -139,3 +139,21 @@ Tugtainer replaces the deprecated "What's Up Docker" (WUD) service for monitorin
 - Verify service is running: `docker ps`
 - Check network connectivity: `docker exec homepage ping service-name`
 - Verify URL in environment variables
+
+**"Host validation failed" error (e.g. accessing via `homepage.homelab`):**
+
+Homepage validates the incoming `Host` header against `HOMEPAGE_ALLOWED_HOSTS`. Symptom in `docker logs homepage`:
+
+```
+error: Host validation failed for: homepage.homelab. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+```
+
+Fix:
+
+1. Add the missing host to `HOMEPAGE_ALLOWED_HOSTS` in `/Volume1/public/config/homepage/.env` on the NAS (comma-separated list, e.g. `192.168.1.2:3005,homepage.homelab`).
+2. `env_file` values are only read when the container is created — a plain `docker restart homepage` is **not** enough, the container must be recreated. This stack is deployed via Portainer (stack `infrastructure`, compose path `/data/compose/7/templates/infrastructure/docker-compose.infrastructure.yml` on the NAS), so redeploy from **Portainer UI → Stacks → infrastructure → Update the stack** (pull/redeploy).
+3. If working directly on the NAS instead, recreate manually:
+   ```bash
+   docker compose -f /data/compose/7/templates/infrastructure/docker-compose.infrastructure.yml up -d --force-recreate homepage
+   ```
+4. Verify: `docker logs homepage --tail 20` should show no further `Host validation failed` entries.

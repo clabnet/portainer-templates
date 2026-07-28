@@ -49,6 +49,63 @@ Mounting `/Volume1/public` read-only into the Portainer container gives its comp
 
 ---
 
+## Troubleshooting: `env_file` values missing from a container (e.g. Homepage `HOMEPAGE_ALLOWED_HOSTS`)
+
+**Symptom**: a service that uses an absolute-path `env_file:` (like [templates/infrastructure/homepage/docker-compose.yml](templates/infrastructure/homepage/docker-compose.yml)) is running, but variables from that `.env` are missing at runtime — e.g. Homepage logs show:
+
+```
+error: Host validation failed for: <host>. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+```
+
+**Root cause**: this happens when the Portainer container itself is missing the `-v /Volume1/public:/Volume1/public:ro` bind mount (see [Why it's required](#why-volume1publicvolume1publicro-is-required) above). `env_file: { required: false }` fails silently, so the container gets created without those variables — no error surfaces in Portainer's UI.
+
+**Diagnosis**:
+
+```bash
+DOCKER=/var/subvols/8vEbTxkKvwa/@/@apps/DockerEngine/dockerd/bin/docker
+
+# does Portainer have the /Volume1/public mount?
+$DOCKER inspect portainer --format '{{json .Mounts}}'
+
+# does the running service container actually have the env var?
+$DOCKER inspect homepage --format '{{range .Config.Env}}{{println .}}{{end}}' | grep ALLOWED
+```
+
+If the Portainer mount is missing, re-running the stack from the UI ("Update the stack") or even `docker restart homepage` will **not** fix it — `env_file` is only resolved at container creation, and it's resolved from Portainer's own filesystem view, not the NAS host's.
+
+**Fix**: recreate the Portainer container with the correct mount (see [Upgrade Portainer](#upgrade-portainer) below — same procedure, just adding the missing `-v`), then force-recreate the affected service:
+
+```bash
+DOCKER=/var/subvols/8vEbTxkKvwa/@/@apps/DockerEngine/dockerd/bin/docker
+
+$DOCKER stop portainer
+$DOCKER rename portainer portainer_old   # keep as rollback
+
+$DOCKER run -d \
+  --name portainer \
+  --restart=always \
+  --network horizon_network \
+  -p 8000:8000 \
+  -p 9443:9443 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v portainer_data:/data \
+  -v /Volume1/public:/Volume1/public:ro \
+  portainer/portainer-ce:<same-tag-as-portainer_old>
+
+# find Portainer's stored compose path (note: /data inside the container maps to
+# portainer_data's real host path, not literally /data on the NAS filesystem):
+$DOCKER inspect portainer --format '{{json .Mounts}}'   # find portainer_data Source
+# then, from that Source/compose/<stack-id>/<path-to>/docker-compose.<category>.yml:
+$DOCKER compose -f docker-compose.<category>.yml up -d --force-recreate <service>
+
+# verify, then clean up
+$DOCKER inspect <service> --format '{{range .Config.Env}}{{println .}}{{end}}'
+$DOCKER logs <service> --tail 20
+$DOCKER rm portainer_old
+```
+
+---
+
 ## Upgrade Portainer
 
 1. **Backup first**: Portainer UI → _Settings_ → _General_ → _Backup configuration_ → _Download_.
