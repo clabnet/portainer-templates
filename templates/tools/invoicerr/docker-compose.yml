@@ -35,6 +35,9 @@ services:
       # - VITE_OIDC_ENDPOINT=${VITE_OIDC_ENDPOINT}
 
       - JWT_SECRET=${JWT_SECRET}
+    env_file:
+      - path: /Volume1/public/config/invoicerr/.env
+        required: false
     healthcheck:
       test: [CMD, wget, --no-verbose, --tries=1, --spider, http://localhost:80/]
       interval: 30s

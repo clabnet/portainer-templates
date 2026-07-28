@@ -10,12 +10,12 @@ services:
       - ${TUGTAINER_HTTP_PORT:-9412}:80
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - tugtainer_data:/tugtainer
+      - /Volume1/public/config/tugtainer:/tugtainer
     environment:
       TZ: Europe/Rome
       ENABLE_PUBLIC_API: true
     env_file:
-      - path: ./.env
+      - path: /Volume1/public/config/tugtainer/.env
         required: false
     healthcheck:
       test: [CMD, curl, -f, http://localhost:80/]
@@ -23,7 +23,3 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-
-volumes:
-  tugtainer_data:
-    name: tugtainer_data

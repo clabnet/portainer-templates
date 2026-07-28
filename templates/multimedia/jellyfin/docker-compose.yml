@@ -9,13 +9,14 @@ services:
     ports:
       - 8096:8096
     volumes:
-      - ./logs/:/config/log/
-      - jellyfin_config:/config
-      - jellyfin_cache:/cache
+      - /Volume1/public/config/jellyfin/config:/config
+      - /Volume1/public/config/jellyfin/cache:/cache
       - /Volume1/media:/media
-      - /Volume1/public/config/jellyfin/config.json:/jellyfin/jellyfin-web/config.json
     environment:
       - TZ=${TZ:-Europe/Rome}
+    env_file:
+      - path: /Volume1/public/config/jellyfin/.env
+        required: false
     user: 1002:1002
     healthcheck:
       test: [CMD, curl, -f, http://localhost:8096/health]
@@ -30,9 +31,3 @@ services:
         max-file: "10"
     labels:
       - com.centurylinklabs.watchtower.enable=true
-
-volumes:
-  jellyfin_config:
-    name: jellyfin_config
-  jellyfin_cache:
-    name: jellyfin_cache

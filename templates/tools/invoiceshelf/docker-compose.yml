@@ -6,7 +6,7 @@ services:
     ports:
       - 8090:8080
     volumes:
-      - invoiceshelf-storage:/var/www/html/storage
+      - /Volume1/public/config/invoiceshelf/storage:/var/www/html/storage
     environment:
       PHP_TZ: ${PHP_TZ:-Europe/Rome}
       TIMEZONE: ${TIMEZONE:-Europe/Rome}
@@ -27,6 +27,9 @@ services:
       SESSION_DOMAIN: ${SESSION_DOMAIN:-localhost}
       SANCTUM_STATEFUL_DOMAINS: ${SANCTUM_STATEFUL_DOMAINS:-localhost:8090}
       STARTUP_DELAY: ${STARTUP_DELAY:-10}
+    env_file:
+      - path: /Volume1/public/config/invoiceshelf/.env
+        required: false
     depends_on:
       - mail
     healthcheck:
@@ -44,7 +47,7 @@ services:
       - 8025:8025
       - 1025:1025
     volumes:
-      - ./data:/data
+      - /Volume1/public/config/invoiceshelf/mailpit:/data
     environment:
       MP_MAX_MESSAGES: 5000
       MP_DATABASE: /data/mailpit.db
@@ -61,6 +64,3 @@ networks:
   default:
     name: horizon_network
     external: true
-
-volumes:
-  invoiceshelf-storage:

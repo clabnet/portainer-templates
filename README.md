@@ -195,16 +195,26 @@ docker compose -f templates/webapp/docker-compose.yml up -d
 
 ## Configuration
 
-Copy `.env.example` files before first use:
+Every service reads its config and secrets from the NAS, not from a repo-local `.env`. Each compose file references:
 
-```bash
-cp templates/webapp/wendy/.env.example templates/webapp/wendy/.env
-cp templates/webapp/cateringcare/.env.example templates/webapp/cateringcare/.env
+```yaml
+env_file:
+  - path: /Volume1/public/config/{service}/.env
+    required: false
 ```
 
-The root `.env` holds shared credentials (PostgreSQL, JWT secrets, Permit.io API key). Do not commit real values — the file is gitignored.
+To configure a service, copy its `.env.example` to the NAS path and edit it there:
 
-Port defaults are set via environment variables in each service file (e.g. `${HOMEPAGE_HTTP_PORT:-3005}`). Override by setting the variable in the relevant `.env`.
+```bash
+cp templates/webapp/wendy/.env.example /Volume1/public/config/wendy/.env
+cp templates/webapp/cateringcare/.env.example /Volume1/public/config/cateringcare/.env
+```
+
+`.env.example` stays in the repo as reference/defaults only — it is never read automatically by compose. Real `.env` files live exclusively on the NAS (`\\TNAS\public\config\{service}\.env` from Windows), so they're editable from outside the container and never risk being committed.
+
+Similarly, persistent config/data for every service lives at `/Volume1/public/config/{service}` (bind mount), not in opaque named Docker volumes — see [templates/infrastructure/README.md](templates/infrastructure/README.md) for the convention. Media libraries (`/Volume1/media`) are a separate tree, out of scope for this convention.
+
+Port defaults are set via environment variables in each service file (e.g. `${HOMEPAGE_HTTP_PORT:-3005}`). Override by setting the variable in the relevant NAS `.env`.
 
 ---
 

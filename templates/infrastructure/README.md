@@ -50,7 +50,7 @@ HOMEPAGE_VAR_NPM_URL=http://192.168.1.2:81
 # ... see .env.example for complete list
 ```
 
-Copy `.env.example` and customize with your actual values.
+Copy `.env.example` to `/Volume1/public/config/{service}/.env` on the NAS and customize with your actual values — see root [README.md](../../README.md#configuration).
 
 ### Homepage Dashboard Configuration
 
@@ -78,10 +78,13 @@ See [Homepage README](homepage/README.md) for complete setup instructions.
 
 ### Volumes
 
-All services use named volumes for persistent data:
+Every service across this repo binds its persistent config/data to `/Volume1/public/config/{service}` on the NAS (not opaque named Docker volumes), so it's editable from outside the container:
 
-- `adguard_work` - AdGuard working directory
-- `adguard_conf` - AdGuard configuration
+- AdGuard: `/Volume1/public/config/adguard/work`, `/Volume1/public/config/adguard/conf`
+- Homepage: `/Volume1/public/config/homepage`
+- Nginx Proxy Manager: `/Volume1/public/config/nginxpm/data`, `/Volume1/public/config/nginxpm/letsencrypt`
+
+Media libraries (`/Volume1/media`) are a separate tree and not part of this convention.
 
 ## Service Configuration
 

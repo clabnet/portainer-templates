@@ -9,11 +9,14 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - uptimekuma_data:/app/data
+      - /Volume1/public/config/uptimekuma:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=${TZ:-Europe/Rome}
       - UMASK=0022 # Set your file permissions manually
+    env_file:
+      - path: /Volume1/public/config/uptimekuma/.env
+        required: false
     healthcheck:
       test: [CMD, curl, -f, http://localhost:3001]
       interval: 30s
@@ -27,7 +30,3 @@ services:
         max-file: "3"
     labels:
       - com.centurylinklabs.watchtower.enable=true
-
-volumes:
-  uptimekuma_data:
-    name: uptimekuma_data

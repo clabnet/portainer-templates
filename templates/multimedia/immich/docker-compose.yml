@@ -26,6 +26,9 @@ services:
     environment:
       - IMMICH_CONFIG_FILE=/config/config.json
       - DB_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgresql:5432/${DB_DATABASE_NAME}
+    env_file:
+      - path: /Volume1/public/config/immich/.env
+        required: false
     depends_on:
       - redis
     healthcheck:
@@ -45,7 +48,7 @@ services:
     networks:
       - horizon_network
     volumes:
-      - immich-model-cache:/cache
+      - /Volume1/public/config/immich/model-cache:/cache
     healthcheck:
       disable: false
     labels:
@@ -58,7 +61,7 @@ services:
     networks:
       - horizon_network
     volumes:
-      - immich-redis-data:/data
+      - /Volume1/public/config/immich/redis:/data
     healthcheck:
       test: redis-cli ping || exit 1
 
@@ -66,11 +69,3 @@ volumes:
   # Media uploads - most important data
   immich-uploads:
     name: immich_uploads
-
-  # ML model cache - can be recreated but saves time
-  immich-model-cache:
-    name: immich_model_cache
-
-  # Redis data - sessions and cache
-  immich-redis-data:
-    name: immich_redis_data
