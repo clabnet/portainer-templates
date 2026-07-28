@@ -14,8 +14,8 @@ services:
       - ${ADGUARD_HTTPS_PORT:-8443}:443/tcp
       - ${ADGUARD_SETUP_PORT:-3000}:3000/tcp
     volumes:
-      - adguard_work:/opt/adguardhome/work
-      - adguard_conf:/opt/adguardhome/conf
+      - /Volume1/public/config/adguard/work:/opt/adguardhome/work
+      - /Volume1/public/config/adguard/conf:/opt/adguardhome/conf
     environment:
       - TZ=${TZ:-Europe/Rome}
     cap_add:
@@ -28,9 +28,3 @@ services:
       start_period: 40s
     labels:
       - com.centurylinklabs.watchtower.monitor-only=true
-
-volumes:
-  adguard_work:
-    name: adguard_work
-  adguard_conf:
-    name: adguard_conf

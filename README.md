@@ -68,8 +68,8 @@ See [NETWORK_DIAGRAM.md](templates/NETWORK_DIAGRAM.md) for a comprehensive visua
 
 ### Home Assistant — accesso esterno e DNS
 
-Runbook completo (discovery Companion, certificati, Cloudflare DDNS, NPM):  
-[homeassistant/docs/accesso-esterno-dns-companion.md](../homeassistant/docs/accesso-esterno-dns-companion.md)  
+Runbook completo (discovery Companion, certificati, Cloudflare DDNS, NPM):
+[homeassistant/docs/accesso-esterno-dns-companion.md](../homeassistant/docs/accesso-esterno-dns-companion.md)
 (sul TNAS: `/Volume1/public/config/homeassistant/docs/accesso-esterno-dns-companion.md`)
 
 ---
@@ -101,7 +101,7 @@ curl http://localhost:8099/templates.json
 Register the URL in Portainer under **Settings → App Templates**:
 
 ```
-http://<nas-ip>:8099/templates.json
+http://<this-local-ip>:8099/templates.json
 ```
 
 ---
