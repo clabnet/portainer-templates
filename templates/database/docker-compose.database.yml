@@ -1,3 +1,4 @@
 include:
   - ../_shared/networks.yml
   - ./postgresql/docker-compose.yml
+  - ./redis/docker-compose.yml

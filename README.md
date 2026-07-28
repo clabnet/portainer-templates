@@ -110,9 +110,10 @@ http://<this-local-ip>:8099/templates.json
 
 ### Database
 
-| Service    | Port | Description                                                                           |
-| ---------- | ---- | ------------------------------------------------------------------------------------- |
-| PostgreSQL | 5433 | Relational database, shared by other stacks (5432 is the NAS's own native PostgreSQL) |
+| Service    | Port | Description                                                                                                                                    |
+| ---------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| PostgreSQL | 5433 | Relational database, shared by other stacks (5432 is the NAS's own native PostgreSQL)                                                          |
+| Redis      | 6379 | Shared cache/session store — each consumer uses its own DB index (see [redis/docker-compose.yml](templates/database/redis/docker-compose.yml)) |
 
 ```bash
 docker compose -f templates/database/docker-compose.database.yml up -d
@@ -163,7 +164,7 @@ docker compose -f templates/monitoring/docker-compose.monitoring.yml up -d
 | Immich   | 2283 | Self-hosted photo library          |
 | Jellyfin | 8096 | Media server (disabled by default) |
 
-Immich uses the shared PostgreSQL instance from the [Database](#database) stack rather than its own. Deploy that stack first and create the `immich` database on it before starting Multimedia:
+Immich uses the shared PostgreSQL and Redis instances from the [Database](#database) stack rather than its own. Deploy that stack first and create the `immich` database on it before starting Multimedia:
 
 ```bash
 docker compose -f templates/database/docker-compose.database.yml up -d

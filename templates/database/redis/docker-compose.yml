@@ -1,0 +1,22 @@
+# Shared Redis instance for services that need caching/session storage.
+# Each consuming service MUST use its own DB index (0-15) to avoid key
+# collisions - do not share a DB index across services. Assigned indexes:
+#   0 - immich
+services:
+  redis:
+    image: docker.io/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571
+    container_name: redis
+    hostname: redis
+    restart: unless-stopped
+    networks:
+      - horizon_network
+    volumes:
+      - /Volume1/public/config/redis:/data
+    healthcheck:
+      test: redis-cli ping || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    labels:
+      - com.centurylinklabs.watchtower.monitor-only=true

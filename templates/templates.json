@@ -61,8 +61,8 @@
     {
       "type": 3,
       "title": "Database",
-      "description": "PostgreSQL 16 database service (with vectorchord/pgvector extensions for Immich) and health checks on port 5433",
-      "note": "Uses external network 'horizon_network'. PostgreSQL 16 (ghcr.io/immich-app/postgres image, bundling the vectorchord/pgvector extensions so Immich's smart search can use this instance) with configurable user/password/database via POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB environment variables. Host port defaults to 5433 (5432 is taken by the NAS's own native PostgreSQL instance), override with POSTGRES_PORT.",
+      "description": "PostgreSQL 16 database service (with vectorchord/pgvector extensions for Immich) and shared Redis instance for caching, used by other stacks",
+      "note": "Uses external network 'horizon_network'. PostgreSQL 16 (ghcr.io/immich-app/postgres image, bundling the vectorchord/pgvector extensions so Immich's smart search can use this instance) with configurable user/password/database via POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB environment variables. Host port defaults to 5433 (5432 is taken by the NAS's own native PostgreSQL instance), override with POSTGRES_PORT. Also includes a shared Redis (Valkey) instance - each consuming service must use its own DB index to avoid key collisions.",
       "categories": ["Database", "Storage", "PostgreSQL", "MySQL", "Redis", "Data Management"],
       "platform": "linux",
       "logo": "https://ui-avatars.com/api/?name=CB&background=22c55e&color=fff&size=50",

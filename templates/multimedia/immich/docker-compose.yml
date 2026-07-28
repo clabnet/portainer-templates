@@ -26,11 +26,11 @@ services:
     environment:
       - IMMICH_CONFIG_FILE=/config/config.json
       - DB_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgresql:5432/${DB_DATABASE_NAME:-immich}
+      - REDIS_HOSTNAME=redis
+      - REDIS_DBINDEX=0
     env_file:
       - path: /Volume1/public/config/immich/.env
         required: false
-    depends_on:
-      - redis
     healthcheck:
       disable: false
     labels:
@@ -53,17 +53,6 @@ services:
       disable: false
     labels:
       - com.centurylinklabs.watchtower.enable=true
-
-  redis:
-    image: docker.io/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571
-    container_name: immich_redis
-    restart: unless-stopped
-    networks:
-      - horizon_network
-    volumes:
-      - /Volume1/public/config/immich/redis:/data
-    healthcheck:
-      test: redis-cli ping || exit 1
 
 volumes:
   # Media uploads - most important data
