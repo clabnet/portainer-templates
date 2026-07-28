@@ -9,7 +9,7 @@ services:
     ports:
       - ${POSTGRES_PORT:-5433}:5432
     volumes:
-      - /Volume1/public/config/postgresql:/var/lib/postgresql/data:rw
+      - /Volume1/public/config/postgresql/data:/var/lib/postgresql/data:rw
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
