@@ -25,7 +25,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     environment:
       - IMMICH_CONFIG_FILE=/config/config.json
-      - DB_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgresql:5432/${DB_DATABASE_NAME}
+      - DB_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgresql:5432/${DB_DATABASE_NAME:-immich}
     env_file:
       - path: /Volume1/public/config/immich/.env
         required: false

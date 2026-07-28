@@ -141,12 +141,6 @@
           "label": "PostgreSQL Database Password",
           "description": "Password for the shared PostgreSQL instance (must match the Database stack's POSTGRES_PASSWORD)",
           "default": "changeme"
-        },
-        {
-          "name": "DB_DATABASE_NAME",
-          "label": "Database Name",
-          "description": "Name of the database on the shared PostgreSQL instance for Immich - must be created beforehand",
-          "default": "immich"
         }
       ],
       "restart_policy": "unless-stopped"
